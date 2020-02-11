@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import Register from './Components/Register/index';
-/* import Header from 'Components/Header/index' */
+import Registrering from './Components/Registrering/Registrering';
+import Navigeringsbar from './Components/Navigeringsbar/Navigeringsbar';
 
 function App() {
   return (
     <div className="App">
-      {/* <Header/> */}
-      <Register/>
+      <Navigeringsbar/>
+      <Registrering />
     </div>
   );
 }
