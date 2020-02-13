@@ -73,10 +73,10 @@ class Form extends Component {
         if (target.type !== 'textarea') {
             //regexp patterns
             const patterns = {
-                name: /[A-Z][a-zA-Z][^#&<>"~;$^%{}?]{0,100}$/, //stor bokstav som første bokstav i hvert navn
+                name: /[A-Z][a-zA-Z][^#&<>\"~;$^%{}?]{0,100}$/, //stor bokstav som første bokstav i hvert navn
                 phone: /^\d{8,10}$/,
                 areacode: /^\d{4}$/,
-                email: /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+.)+[^<>()[\].,;:\s@"]{2,})$/i
+                email: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
                 //regexp med unicode support, siden vi er i norge og kan bruke ø æ å
             };
             //oppdater valideringene
@@ -114,7 +114,7 @@ class Form extends Component {
                         type="number" name="areacode" value={this.state.areacode} onChange={this.handleInputChange} max="9999" placeholder="1234"/>
                 <label>Kommentar</label>
                 <textarea name="comment" value={this.state.comment} onChange={this.handleInputChange} ></textarea>
-                <button className={"button"} type="submit">Send inn!</button>
+                <button className={"button"} type="submit">Send inn C:</button>
             </form>
             <p className="error">{this.state.submited? 'En eller flere av feltene har en feil': ' '}</p>
         </div>
