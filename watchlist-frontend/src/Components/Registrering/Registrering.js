@@ -7,14 +7,17 @@ class Registrering extends Component {
   constructor() {
     super();
     this.state = {
-        name: '',
-        nameValid: false,
+        firstName: '',
+        nameNameValid: false,
+        lastName: '',
+        lastNameValid: false,
         email: '',
         emailValid: false,
         password: '',
         passwordValid:false,
         repeatPassword: '',
         repeatPasswordValid:false,
+        isPasswordEqual:false,
         submited: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,8 +27,9 @@ class Registrering extends Component {
 
   handleSubmit(event) {
     // er input valid?
-    if (this.state.nameValid && this.state.emailValid && this.state.phoneValid && this.state.areacode) {
-
+    if (this.state.firstNameValid && this.state.lastNameValid && this.state.emailValid && this.state.passwordValid 
+      && this.state.repeatPasswordValid && this.state.isPasswordEqual) {
+      console.log("success")
     }
     else {
         console.log("Failed");
@@ -50,7 +54,6 @@ class Registrering extends Component {
     const patterns = {
       lastName: /[A-Z][a-zA-Z]{1,100}$/, //stor bokstav som første bokstav i hvert navn
       firstName:  /[A-Z][a-zA-Z]{1,100}$/, // /[A-Z]$/,
-      password:   /\S{2,100}$/,
       email: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
       //regexp med unicode support, siden vi er i norge og kan bruke ø æ å
@@ -62,10 +65,25 @@ class Registrering extends Component {
   }
 
   handlePasswordInputChange(event){
-    //this.setState({[this.state.repeatPasswordValid]: (event.target.password.value === event.target.repeatPassword.value)});
-    //console.log([repeatPasswordValid])
-    if (this.state.repeatPasswordValid){
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
 
+    const patterns = {
+      password:   /\S{2,100}$/,
+      repeatPassword: /\S{2,100}$/,
+    }
+
+    if( name == "password"){
+      this.setState({password: value})
+      this.setState({passwordValid : patterns["password"].test(value)},
+      () => this.setState({isPasswordEqual: (this.state.password == this.state.repeatPassword)}))
+    
+    }
+    else{
+      this.setState({repeatPassword: value})
+      this.setState({repeatPasswordValid : patterns["repeatPassword"].test(value)},
+      () => this.setState({isPasswordEqual: (this.state.password == this.state.repeatPassword)}))
     }
   }
 
