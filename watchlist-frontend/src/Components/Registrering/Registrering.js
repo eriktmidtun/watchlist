@@ -20,11 +20,9 @@ class Registrering extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePasswordInputChange = this.handlePasswordInputChange.bind(this)
-
   }
 
   handleSubmit(event) {
-
     // er input valid?
     if (this.state.nameValid && this.state.emailValid && this.state.phoneValid && this.state.areacode) {
 

@@ -2,12 +2,15 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Logo from './Logo';
 /* import NavDropdown from 'react-bootstrap/NavDropdown'; */
 
 const Navigeringsbar = () => {
   return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
-        <Navbar.Brand href="#home">Watchlist</Navbar.Brand>
+        <Navbar.Brand href="#home">
+        <Logo/>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
