@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
-import {Card, Button, Form } from 'react-bootstrap/';
+import {Card, Button, Form, Row, Col, Container } from 'react-bootstrap/';
+import { Link } from 'react-router-dom';
 
 
 class Registrering extends Component {
@@ -150,7 +151,9 @@ class Registrering extends Component {
           Registrer
         </Button>
       </Form>
-      <a style={{textAlign: 'right', marginTop: '0.5em'}}href="#loginn">Allerede en konto? Log inn</a>
+      <Link to="/loginn">
+        <p style={{textAlign: 'right', marginTop: '0.5em'}}>Allerede en konto? Log inn</p>
+      </Link>
       </Card>
       );
     }

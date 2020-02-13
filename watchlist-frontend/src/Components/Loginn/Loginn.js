@@ -1,6 +1,7 @@
 
 import React from 'react';
 import {Card, Button, Form } from 'react-bootstrap/';
+import { Link } from 'react-router-dom';
 
 const Loginn = () => {
   return (
@@ -19,7 +20,9 @@ const Loginn = () => {
         Log inn
       </Button>
     </Form>
-    <a style={{textAlign: 'right', marginTop: '0.5em'}}href="#registrering">Mangler du konto? Registrering</a>
+    <Link to="/registrering" style={{textAlign: 'right', marginTop: '0.5em'}}>
+        Mangler du konto? Registrering
+    </Link>
     </Card>
   );
 };
