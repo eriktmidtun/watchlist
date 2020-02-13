@@ -1,13 +1,11 @@
 
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import {Card, Button, Form } from 'react-bootstrap/';
 
 const Registrering = () => {
   return (
-    <Container bg="primary" text="white" className="text-center p-3">
-        Registrering
+    <Card style={{ margin: '2em', padding: '2em'}}>
+      <Card.Title style={{textAlign: 'center', fontSize: '2em'}}>Registrering</Card.Title>
         <Form>
       <Form.Group controlId="formName">
         <Form.Label>Fornavn</Form.Label>
@@ -29,11 +27,12 @@ const Registrering = () => {
         <Form.Label>Gjenta passord</Form.Label>
         <Form.Control type="password" placeholder="Passord" />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" block>
         Registrer
       </Button>
     </Form>
-    </Container>
+    <a style={{textAlign: 'right', marginTop: '0.5em'}}href="#loginn">Allerede en konto? Log inn</a>
+    </Card>
   );
 };
 

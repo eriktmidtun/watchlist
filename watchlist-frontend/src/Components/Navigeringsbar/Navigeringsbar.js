@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 
 const Navigeringsbar = () => {
   return (
-      <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark" stricky="top">
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
         <Navbar.Brand href="#home">Watchlist</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
