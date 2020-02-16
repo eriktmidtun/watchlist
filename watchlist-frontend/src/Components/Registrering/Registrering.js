@@ -64,6 +64,13 @@ class Registrering extends Component {
     console.log({[name + 'Valid']: patterns[name].test(value)})
 
   }
+   addUser(){
+     
+
+
+   }
+
+
 
   handlePasswordInputChange(event){
     const target = event.target;
