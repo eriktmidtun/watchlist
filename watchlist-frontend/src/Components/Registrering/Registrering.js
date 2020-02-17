@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
-import {Card, Button, Form, Row, Col, Container } from 'react-bootstrap/';
-import { Link } from 'react-router-dom';
+import {Card, Button, Form } from 'react-bootstrap/';
 
 
 class Registrering extends Component {
@@ -14,6 +13,7 @@ class Registrering extends Component {
         lastNameValid: false,
         email: '',
         emailValid: false,
+        isEmailUsed: false,
         password: '',
         passwordValid:false,
         repeatPassword: '',
@@ -24,13 +24,52 @@ class Registrering extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePasswordInputChange = this.handlePasswordInputChange.bind(this)
+
   }
 
+
+  addAccount(){
+    // JSON fetch
+
+    const handleErrors = (response) => {
+      if(!response.ok){
+        throw Error(response.statusText)
+      }
+      return response
+    }
+
+    var req =    {
+      "username":"example1",
+      "email":"example1@domene.com",
+      "password":"ExAmPlE",
+      "first_name":"example",
+      "last_name":"example",
+     }
+
+    fetch(`http://localhost:8000/api/auth/register`, {method:'POST', mode:'cors',
+  headers:{"Content-Type":"application/json"}, body:JSON.stringify(req)})
+      .then(handleErrors)
+      .then(res => res.json())
+      .then(json => console.log(json))
+      .catch(error => this.setState({isEmailUsed: true}))
+
+  }
+
+
   handleSubmit(event) {
+
     // er input valid?
     if (this.state.firstNameValid && this.state.lastNameValid && this.state.emailValid && this.state.passwordValid 
-      && this.state.repeatPasswordValid && this.state.isPasswordEqual) {
+      && this.state.repeatPasswordValid && this.state.isPasswordEqual && !this.state.isEmailUsed) {
       console.log("success")
+      this.addAccount()
+      if (!this.state.isEmailUsed){
+          console.log("email used")
+
+      }
+
+      
+      
     }
     else {
         console.log("Failed");
@@ -64,11 +103,8 @@ class Registrering extends Component {
     console.log({[name + 'Valid']: patterns[name].test(value)})
 
   }
-   addUser(){
-     
+   
 
-
-   }
 
 
 
@@ -82,20 +118,21 @@ class Registrering extends Component {
       repeatPassword: /\S{2,100}$/,
     }
 
-    if( name == "password"){
+    if( name === "password"){
       this.setState({password: value})
       this.setState({passwordValid : patterns["password"].test(value)},
-      () => this.setState({isPasswordEqual: (this.state.password == this.state.repeatPassword)}))
+      () => this.setState({isPasswordEqual: (this.state.password === this.state.repeatPassword)}))
     
     }
     else{
       this.setState({repeatPassword: value})
       this.setState({repeatPasswordValid : patterns["repeatPassword"].test(value)},
-      () => this.setState({isPasswordEqual: (this.state.password == this.state.repeatPassword)}))
+      () => this.setState({isPasswordEqual: (this.state.password === this.state.repeatPassword)}))
     }
   }
 
   handleClassNames(input) {}
+
 
   render() {
     return (
@@ -133,6 +170,7 @@ class Registrering extends Component {
             onChange={this.handleInputChange}
             
           />
+          <Form.Control.Feedback></Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Passord</Form.Label>
@@ -158,9 +196,7 @@ class Registrering extends Component {
           Registrer
         </Button>
       </Form>
-      <Link to="/loginn">
-        <p style={{textAlign: 'right', marginTop: '0.5em'}}>Allerede en konto? Log inn</p>
-      </Link>
+      <a style={{textAlign: 'right', marginTop: '0.5em'}}href="#loginn">Allerede en konto? Log inn</a>
       </Card>
       );
     }
