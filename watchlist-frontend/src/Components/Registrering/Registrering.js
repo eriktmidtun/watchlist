@@ -5,12 +5,12 @@ import {Card, Button, Form } from 'react-bootstrap/';
 
 class Registrering extends Component {
   constructor() {
-    super();
+    super(); 
     this.state = {
-        firstName: '',
-        nameNameValid: false,
-        lastName: '',
-        lastNameValid: false,
+        first_name: '',
+        first_nameValid: false,
+        last_name: '',
+        last_nameValid: false,
         email: '',
         emailValid: false,
         isEmailUsed: false,
@@ -20,6 +20,9 @@ class Registrering extends Component {
         repeatPasswordValid:false,
         isPasswordEqual:false,
         submited: false,
+        error: {
+
+        }
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,19 +42,19 @@ class Registrering extends Component {
     }
 
     var req =    {
-      "username":"example1",
-      "email":"example1@domene.com",
-      "password":"ExAmPlE",
-      "first_name":"example",
-      "last_name":"example",
+      "username":this.state.email,
+      "email":this.state.email,
+      "password":this.state.password,
+      "first_name":this.state.first_name,
+      "last_name":this.state.last_name,
      }
 
     fetch(`http://localhost:8000/api/auth/register`, {method:'POST', mode:'cors',
   headers:{"Content-Type":"application/json"}, body:JSON.stringify(req)})
       .then(handleErrors)
-      .then(res => res.json())
+      .then(res => console.log(res.text()))
       .then(json => console.log(json))
-      .catch(error => this.setState({isEmailUsed: true}))
+      .catch(jsonError => this.setState({error: jsonError}, () => console.log()))
 
   }
 
@@ -59,7 +62,7 @@ class Registrering extends Component {
   handleSubmit(event) {
 
     // er input valid?
-    if (this.state.firstNameValid && this.state.lastNameValid && this.state.emailValid && this.state.passwordValid 
+    if (this.state.first_nameValid && this.state.last_nameValid && this.state.emailValid && this.state.passwordValid 
       && this.state.repeatPasswordValid && this.state.isPasswordEqual && !this.state.isEmailUsed) {
       console.log("success")
       this.addAccount()
@@ -67,8 +70,6 @@ class Registrering extends Component {
           console.log("email used")
 
       }
-
-      
       
     }
     else {
@@ -92,8 +93,8 @@ class Registrering extends Component {
 
 
     const patterns = {
-      lastName: /[A-Z][a-zA-Z]{1,100}$/, //stor bokstav som første bokstav i hvert navn
-      firstName:  /[A-Z][a-zA-Z]{1,100}$/, // /[A-Z]$/,
+      last_name: /[A-Z][a-zA-Z]{1,100}$/, //stor bokstav som første bokstav i hvert navn
+      first_name:  /[A-Z][a-zA-Z]{1,100}$/, // /[A-Z]$/,
       email: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
       //regexp med unicode support, siden vi er i norge og kan bruke ø æ å
@@ -138,15 +139,16 @@ class Registrering extends Component {
     return (
       <Card style={{ margin: '2em', padding: '2em'}}>
         <Card.Title style={{textAlign: 'center', fontSize: '2em'}}>Registrering</Card.Title>
-          <Form onSubmit={this.handleSubmit}>
+          <Form noValidate onSubmit={this.handleSubmit}>
         <Form.Group controlId="formName">
           <Form.Label>Fornavn</Form.Label>
           <Form.Control
             required
             type="text"
-            name="firstName"
+            name="first_name"
             placeholder="Skriv inn fornavn"
             onChange={this.handleInputChange}
+            isInvalid = {(!this.state.first_name && this.state.first_name.length > 0)}
             />
           <Form.Control.Feedback></Form.Control.Feedback>
         </Form.Group>
@@ -155,9 +157,10 @@ class Registrering extends Component {
           <Form.Control 
             required  
             type="text"
-            name="lastName"
+            name="last_name"
             placeholder="Skriv inn etternavn"
             onChange={this.handleInputChange}
+            isInvalid = {(!this.state.last_name && this.state.last_name.length > 0)}
           />
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
@@ -168,9 +171,9 @@ class Registrering extends Component {
             name="email" 
             placeholder="Skriv inn epost"
             onChange={this.handleInputChange}
-            
-          />
-          <Form.Control.Feedback></Form.Control.Feedback>
+            isInvalid = {(!this.state.emailValid && this.state.email.length > 0) || this.state.error.hasOwnProperty('email')}         
+         />
+          <Form.Control.Feedback type="invalid">Email ugyldig eller i bruk</Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Passord</Form.Label>
@@ -180,6 +183,7 @@ class Registrering extends Component {
             name="password" 
             placeholder="Passord" 
             onChange={this.handlePasswordInputChange}
+            isInvalid = {(!this.state.password && this.state.password.length > 0)}
           />
         </Form.Group>
         <Form.Group controlId="formBasicPassword2">
@@ -190,6 +194,7 @@ class Registrering extends Component {
             name="repeatPassword" 
             placeholder="Passord"
             onChange={this.handlePasswordInputChange}
+            isInvalid = {(!this.state.repeatPassword && this.state.repeatPassword.length > 0)}
           />
         </Form.Group>
         <Button variant="primary" type="submit" block>
