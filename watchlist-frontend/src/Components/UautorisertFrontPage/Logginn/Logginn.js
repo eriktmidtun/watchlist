@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, Button, Form } from 'react-bootstrap/';
 import { Link } from 'react-router-dom';
 
-const Loginn = () => {
+const Logginn = () => {
   return (
     <Card style={{ margin: '2em', padding: '2em'}}>
       <Card.Title style={{textAlign: 'center', fontSize: '2em'}}>Log inn</Card.Title>
@@ -25,4 +25,4 @@ const Loginn = () => {
   );
 };
 
-export default Loginn;
+export default Logginn;

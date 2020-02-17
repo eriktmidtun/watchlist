@@ -1,6 +1,6 @@
 import React from 'react';
 import Registrering from '../UautorisertFrontPage/Registrering/Registrering';
-import Loginn from '../UautorisertFrontPage/Loginn/Loginn';
+import Logginn from './Logginn/Logginn';
 import Informasjon from '../UautorisertFrontPage/Informasjon/Informasjon';
 import { Row, Col } from 'react-bootstrap';
 import {
@@ -18,7 +18,7 @@ const UautorisertFrontPage = () => {
         <Switch> {/* gjør at bare en av componentene blir rendret, basert på linken. */}
             <Route path="/" exact component={Registrering} /> {/* midlertidig path for testing av registreringskjema, må sette opp redirects senere */}
             <Route path="/registrering"  component={Registrering} />
-            <Route path="/loginn" component={Loginn} />
+            <Route path="/logginn" component={Logginn} />
         </Switch>
         </Col>
     </Row>

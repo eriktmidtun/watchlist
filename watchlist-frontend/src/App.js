@@ -20,7 +20,7 @@ function App() {
     <Router>
       <div className="App">
         <Navigeringsbar/>
-        <Container style={{ minHeight: "100%", marginBottom:"-200px"}}>
+        <Container style={{ minHeight: "100%"}}>
           {/* <FrontPage /> */}
           <UautorisertFrontPage />
         </Container>
