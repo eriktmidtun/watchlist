@@ -36,7 +36,8 @@ class Registrering extends Component {
 
     const handleErrors = (response) => {
       if(!response.ok){
-        throw Error(response.statusText)
+        console.log(response.json())
+        throw Error(response)
       }
       return response
     }
@@ -51,10 +52,19 @@ class Registrering extends Component {
 
     fetch(`http://localhost:8000/api/auth/register`, {method:'POST', mode:'cors',
   headers:{"Content-Type":"application/json"}, body:JSON.stringify(req)})
-      .then(handleErrors)
-      .then(res => console.log(res.text()))
-      .then(json => console.log(json))
-      .catch(jsonError => this.setState({error: jsonError}, () => console.log()))
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        if (response.status === 400){
+          this.setState({isEmailUsed: true})
+          throw new Error('Email in use'); 
+        }
+        else {
+          throw new Error('Something went wrong ...');
+      }
+    })
+      .catch(jsonError => this.setState({error: jsonError}, () => console.log(jsonError)))
 
   }
 
@@ -82,6 +92,7 @@ class Registrering extends Component {
   }
 
   handleInputChange(event) {
+    this.setState({isEmailUsed:false})
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -148,9 +159,9 @@ class Registrering extends Component {
             name="first_name"
             placeholder="Skriv inn fornavn"
             onChange={this.handleInputChange}
-            isInvalid = {(!this.state.first_name && this.state.first_name.length > 0)}
+            isInvalid = {(!this.state.first_nameValid && this.state.first_name.length > 0)}
             />
-          <Form.Control.Feedback></Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Navn ugyldig. Skriv på formen John</Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Etternavn</Form.Label>
@@ -160,8 +171,9 @@ class Registrering extends Component {
             name="last_name"
             placeholder="Skriv inn etternavn"
             onChange={this.handleInputChange}
-            isInvalid = {(!this.state.last_name && this.state.last_name.length > 0)}
+            isInvalid = {(!this.state.last_nameValid && this.state.last_name.length > 0)}
           />
+          <Form.Control.Feedback type="invalid">Navn ugyldig. Skriv på formen Doe</Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Epost</Form.Label>
@@ -171,7 +183,7 @@ class Registrering extends Component {
             name="email" 
             placeholder="Skriv inn epost"
             onChange={this.handleInputChange}
-            isInvalid = {(!this.state.emailValid && this.state.email.length > 0) || this.state.error.hasOwnProperty('email')}         
+            isInvalid = {(!this.state.emailValid && this.state.email.length > 0) || this.state.isEmailUsed}         
          />
           <Form.Control.Feedback type="invalid">Email ugyldig eller i bruk</Form.Control.Feedback>
         </Form.Group>
@@ -183,8 +195,9 @@ class Registrering extends Component {
             name="password" 
             placeholder="Passord" 
             onChange={this.handlePasswordInputChange}
-            isInvalid = {(!this.state.password && this.state.password.length > 0)}
+            isInvalid = {(!this.state.passwordValid && this.state.password.length > 0)}
           />
+        <Form.Control.Feedback type="invalid">Passord for kort</Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formBasicPassword2">
           <Form.Label>Gjenta passord</Form.Label>
@@ -194,8 +207,9 @@ class Registrering extends Component {
             name="repeatPassword" 
             placeholder="Passord"
             onChange={this.handlePasswordInputChange}
-            isInvalid = {(!this.state.repeatPassword && this.state.repeatPassword.length > 0)}
+            isInvalid = {(!this.state.isPasswordEqual && this.state.repeatPassword.length > 0)}
           />
+          <Form.Control.Feedback type="invalid">Passordene er ikke identiske</Form.Control.Feedback>
         </Form.Group>
         <Button variant="primary" type="submit" block>
           Registrer
