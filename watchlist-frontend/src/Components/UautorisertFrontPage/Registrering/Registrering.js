@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import {Card, Button, Form } from 'react-bootstrap/';
+import { Link } from 'react-router-dom';
 
 
 class Registrering extends Component {
@@ -34,13 +35,13 @@ class Registrering extends Component {
   addAccount(){
     // JSON fetch
 
-    const handleErrors = (response) => {
+    /* const handleErrors = (response) => {
       if(!response.ok){
         console.log(response.json())
         throw Error(response)
       }
       return response
-    }
+    } */
 
     var req =    {
       "username":this.state.email,
@@ -101,25 +102,18 @@ class Registrering extends Component {
       [name]: value,
 
     });
-
-
+    // regexp på hvordan input kan være
     const patterns = {
       last_name: /[A-Z][a-zA-Z]{1,100}$/, //stor bokstav som første bokstav i hvert navn
       first_name:  /[A-Z][a-zA-Z]{1,100}$/, // /[A-Z]$/,
       email: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-
-      //regexp med unicode support, siden vi er i norge og kan bruke ø æ å
     };
-    //console.log(patterns[name])
+
     this.setState({[name + 'Valid']: patterns[name].test(value)});
     console.log({[name + 'Valid']: patterns[name].test(value)})
 
   }
    
-
-
-
-
   handlePasswordInputChange(event){
     const target = event.target;
     const value = target.value;
@@ -143,9 +137,6 @@ class Registrering extends Component {
     }
   }
 
-  handleClassNames(input) {}
-
-
   render() {
     return (
       <Card style={{ margin: '2em', padding: '2em'}}>
@@ -157,7 +148,7 @@ class Registrering extends Component {
             required
             type="text"
             name="first_name"
-            placeholder="Skriv inn fornavn"
+            placeholder="'John'"
             onChange={this.handleInputChange}
             isInvalid = {(!this.state.first_nameValid && this.state.first_name.length > 0)}
             />
@@ -169,7 +160,7 @@ class Registrering extends Component {
             required  
             type="text"
             name="last_name"
-            placeholder="Skriv inn etternavn"
+            placeholder="'Doe'"
             onChange={this.handleInputChange}
             isInvalid = {(!this.state.last_nameValid && this.state.last_name.length > 0)}
           />
@@ -181,7 +172,7 @@ class Registrering extends Component {
             required
             type="email"
             name="email" 
-            placeholder="Skriv inn epost"
+            placeholder="navn@domene.com"
             onChange={this.handleInputChange}
             isInvalid = {(!this.state.emailValid && this.state.email.length > 0) || this.state.isEmailUsed}         
          />
@@ -215,7 +206,8 @@ class Registrering extends Component {
           Registrer
         </Button>
       </Form>
-      <a style={{textAlign: 'right', marginTop: '0.5em'}}href="#loginn">Allerede en konto? Log inn</a>
+      <p style={{textAlign: 'right', marginTop: '0.5em'}}>Allerede en konto?
+      <Link to="/loginn"> Log inn</Link></p>
       </Card>
       );
     }

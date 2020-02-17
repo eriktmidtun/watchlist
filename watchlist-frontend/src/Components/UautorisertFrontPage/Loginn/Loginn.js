@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {Card, Button, Form } from 'react-bootstrap/';
 import { Link } from 'react-router-dom';
@@ -20,13 +19,10 @@ const Loginn = () => {
         Log inn
       </Button>
     </Form>
-    <Link to="/registrering" style={{textAlign: 'right', marginTop: '0.5em'}}>
-        Mangler du konto? Registrering
-    </Link>
+    <p style={{textAlign: 'right', marginTop: '0.5em'}}>Mangler du konto?
+      <Link to="/registrering"> Registrering</Link></p>
     </Card>
   );
 };
 
 export default Loginn;
-
-
