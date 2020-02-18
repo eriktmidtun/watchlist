@@ -4,14 +4,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Logo from './Logo';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 /* import NavDropdown from 'react-bootstrap/NavDropdown'; */
 
 const Navigeringsbar = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top" style={{height: '60px'}}  >
       <LinkContainer to="/">
-        <Navbar.Brand>
-          <Logo/>
+        <Navbar.Brand >
+            <Logo/>
         </Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -25,7 +26,7 @@ const Navigeringsbar = () => {
         </LinkContainer>
         <LinkContainer to="/loginn">
           <Nav.Link eventKey={2}>
-            Log inn
+            Logg inn
           </Nav.Link>
         </LinkContainer>
         </Nav>

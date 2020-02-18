@@ -207,7 +207,7 @@ class Registrering extends Component {
         </Button>
       </Form>
       <p style={{textAlign: 'right', marginTop: '0.5em'}}>Allerede en konto?
-      <Link to="/logginn"> Log inn</Link></p>
+      <Link to="/logginn"> Logg inn</Link></p>
       </Card>
       );
     }
