@@ -5,10 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Logo from './Logo';
 import SearchBar from './SearchBar'
 import { LinkContainer } from 'react-router-bootstrap';
-<<<<<<< Updated upstream
-=======
 import { Col, Row, Container, FormControl, InputGroup, Button } from 'react-bootstrap';
->>>>>>> Stashed changes
 /* import NavDropdown from 'react-bootstrap/NavDropdown'; */
 
 const Navigeringsbar = () => {
