@@ -4,7 +4,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Logo from './Logo';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Col, Row } from 'react-bootstrap';
 /* import NavDropdown from 'react-bootstrap/NavDropdown'; */
 
 const Navigeringsbar = () => {
@@ -24,7 +23,7 @@ const Navigeringsbar = () => {
         <LinkContainer to="/registrering">
           <Nav.Link >Registrering</Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/loginn">
+        <LinkContainer to="/logginn">
           <Nav.Link eventKey={2}>
             Logg inn
           </Nav.Link>

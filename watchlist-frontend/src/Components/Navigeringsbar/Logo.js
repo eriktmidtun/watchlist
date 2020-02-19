@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../logo.svg'
-import "./Logo.css"
-import { Card, Container, Row, Image, Col } from 'react-bootstrap';
+/* import "./Logo.css" */
+import { Container, Row, Image, Col } from 'react-bootstrap';
 
 const Logo = () => {
     return (
