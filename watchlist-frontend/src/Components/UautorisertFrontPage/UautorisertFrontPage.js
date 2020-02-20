@@ -16,7 +16,7 @@ const UautorisertFrontPage = () => {
         </Col>
         <Col xs={{ order: 1 ,span: "12"}} lg={{ order: 2, span:"6"}}>
         <Switch> {/* gjør at bare en av componentene blir rendret, basert på linken. */}
-            <Route path="/" exact component={Registrering} /> {/* midlertidig path for testing av registreringskjema, må sette opp redirects senere */}
+            {/* <Route path="/" exact component={Registrering} />  midlertidig path for testing av registreringskjema, må sette opp redirects senere */}
             <Route path="/registrering"  component={Registrering} />
             <Route path="/logginn" component={Logginn} />
         </Switch>
