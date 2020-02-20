@@ -19,13 +19,12 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navigeringsbar/>
-        <Container style={{ minHeight: "100%"}}>
+        <Navigeringsbar/> 
+        <Container >
           {/* <FrontPage /> */}
           <UautorisertFrontPage />
-        </Container>
-        {/* <div style={{height:"200px"}}></div>
-        <Footer/> */}
+          </Container>
+        <Footer/> 
       </div>
     </Router>
   );
