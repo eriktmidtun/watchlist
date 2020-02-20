@@ -1,6 +1,16 @@
-import auth from './auth'; // added
+import { combineReducers } from "redux";
+import auth from "./auth";
+import { LOGOUT_SUCCESS } from "../actions/types";
 
-export default combineReducers({
-  form: formReducer,
-  auth // added
+const appReducer = combineReducers({
+  auth
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === LOGOUT_SUCCESS) {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+
+export default rootReducer;
