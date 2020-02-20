@@ -35,14 +35,6 @@ class Registrering extends Component {
   addAccount(){
     // JSON fetch
 
-    /* const handleErrors = (response) => {
-      if(!response.ok){
-        console.log(response.json())
-        throw Error(response)
-      }
-      return response
-    } */
-
     var req =    {
       "username":this.state.email,
       "email":this.state.email,

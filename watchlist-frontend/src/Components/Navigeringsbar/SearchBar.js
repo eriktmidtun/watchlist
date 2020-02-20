@@ -3,7 +3,7 @@ import { Button, Container, Row, InputGroup, Col, FormControl } from 'react-boot
 
 const SearchBar = () => {
     return(
-        <InputGroup style={{width: "40%", marginLeft: "1%"}} >
+        <InputGroup style={{width: "40%", marginLeft: "6%"}} >
             <FormControl placeholder="Søk etter filmer og serier" />
             <Button variant="primary" >Søk</Button>
         </InputGroup>
