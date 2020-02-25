@@ -6,9 +6,25 @@ import Logo from './Logo';
 import DropdownButton from './DropdownButton'
 import SearchBar from './SearchBar'
 import { LinkContainer } from 'react-router-bootstrap';
-import { ButtonGroup, Dropdown, Button, Container, FormControl, InputGroup} from 'react-bootstrap';
+import { ButtonGroup, Dropdown, Button, Container, FormControl, Form, InputGroup} from 'react-bootstrap';
 /* import NavDropdown from 'react-bootstrap/NavDropdown'; */
 
+const NavBarAut = () => {
+  return (
+    <Navbar  bg="dark" variant="dark"  style={{height: '70px'}}  >
+      <Navbar.Brand href="#home"><Logo/></Navbar.Brand>
+       
+        
+            <SearchBar />
+            
+              <DropdownButton/>
+            
+
+    </Navbar>
+  );
+};
+
+/*
 const NavBarAut = () => {
   return (
     <Navbar 
@@ -26,7 +42,7 @@ const NavBarAut = () => {
     </Navbar>
   );
 };
-
+*/
 export default NavBarAut;
 
 
