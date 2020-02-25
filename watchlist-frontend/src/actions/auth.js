@@ -1,4 +1,4 @@
-import axios from 'axios';
+/* import axios from 'axios'; */
 /* import { stopSubmit } from 'redux-form'; */
 
 import {
@@ -17,10 +17,15 @@ export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   try {
-    const res = await axios.get('/api/auth/user', tokenConfig(getState));
+    const config = tokenConfig(getState);
+    const res =  await fetch(`http://localhost:8000/api/auth/user`, {
+      method: "GET",
+      mode: "cors",
+      config
+    });
     dispatch({
       type: USER_LOADED,
-      payload: res.data
+      payload: res.json
     });
   } catch (err) {
     dispatch({
@@ -31,12 +36,6 @@ export const loadUser = () => async (dispatch, getState) => {
 
 // REGISTER USER
 export const register = ({ username, email, password, first_name, last_name }) => async dispatch => {
-  // Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
 
   // Request Body
   const body = JSON.stringify({ username, email, password, first_name, last_name });
@@ -68,7 +67,6 @@ export const login = ({ username, password }) => async dispatch => {
   const body = JSON.stringify({ username, password });
 
   try {
-
     const res = await fetch(`http://localhost:8000/api/auth/login`, {
       method: "POST",
       mode: "cors",
@@ -91,7 +89,16 @@ export const login = ({ username, password }) => async dispatch => {
 
 // LOGOUT USER
 export const logout = () => async (dispatch, getState) => {
-  await axios.post('/api/auth/logout', null, tokenConfig(getState));
+
+  const config = tokenConfig(getState);
+
+  await fetch(`http://localhost:8000/api/auth/logout`, {
+    method: "POST",
+    mode: "cors",
+    config,
+    body : null
+  })
+
   dispatch({
     type: LOGOUT_SUCCESS
   });
