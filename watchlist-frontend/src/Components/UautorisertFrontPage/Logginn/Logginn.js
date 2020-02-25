@@ -18,19 +18,26 @@ class Logginn extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   eventHandler(event) {
-    const value = event.target.value;
-    const name = event.target.name;
-    //console.log(name,value);
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    /* console.log(name,value); */
     this.setState({
       [name]: value
     });
   }
-  onSubmit() {
+  onSubmit(event) {
+    
     const formValues = {
       username: this.state.username,
-      password: this.state.password
-    }
-    this.props.login(formValues)
+      password: this.state.password,
+    };
+    /* console.log("formvalue" + formValues); */
+    this.props.login(formValues);
+
+    /* console.log(this.props.isAuthenticated); */
+    event.preventDefault();
   }
   render() {
     if (this.props.isAuthenticated) {
@@ -44,11 +51,11 @@ class Logginn extends Component {
         <Form noValidate onSubmit={this.onSubmit}>
           <Form.Group controlId="formName">
             <Form.Label>Fornavn</Form.Label>
-            <Form.Control type="username" placeholder="navn@domene.com" onChange={this.eventHandler} />
+            <Form.Control type="username" name="username" placeholder="navn@domene.com" onChange={this.eventHandler} />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Passord</Form.Label>
-            <Form.Control type="password" placeholder="Passord" onChange={this.eventHandler} />
+            <Form.Control type="password" name="password" placeholder="Passord" onChange={this.eventHandler} />
           </Form.Group>
           <Button variant="primary" type="submit" block>
             Log inn

@@ -30,7 +30,7 @@ export const loadUser = () => async (dispatch, getState) => {
 };
 
 // REGISTER USER
-export const register = ({ username, email, password }) => async dispatch => {
+export const register = ({ username, email, password, first_name, last_name }) => async dispatch => {
   // Headers
   const config = {
     headers: {
@@ -39,13 +39,18 @@ export const register = ({ username, email, password }) => async dispatch => {
   };
 
   // Request Body
-  const body = JSON.stringify({ username, email, password });
+  const body = JSON.stringify({ username, email, password, first_name, last_name });
 
   try {
-    const res = await axios.post('/api/auth/register', body, config);
+    const res = await fetch(`http://localhost:8000/api/auth/register`, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: body
+    });
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data
+      payload: res.json
     });
   } catch (err) {
     dispatch({
@@ -57,23 +62,26 @@ export const register = ({ username, email, password }) => async dispatch => {
 
 // LOGIN USER
 export const login = ({ username, password }) => async dispatch => {
-  // Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
 
   // Request Body
+ /*  console.log("username " + username + " password " + password); */
   const body = JSON.stringify({ username, password });
 
   try {
-    const res = await axios.post('/api/auth/login', body, config);
+
+    const res = await fetch(`http://localhost:8000/api/auth/login`, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: body
+    });
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data
+      payload: res.json
     });
+    
   } catch (err) {
+    console.log(err.json);
     dispatch({
       type: LOGIN_FAIL
     });
@@ -87,7 +95,7 @@ export const logout = () => async (dispatch, getState) => {
   dispatch({
     type: LOGOUT_SUCCESS
   });
-};
+};  
 
 // helper function
 export const tokenConfig = getState => {
