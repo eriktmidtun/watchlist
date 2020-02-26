@@ -15,6 +15,7 @@ import {
 // LOAD USER
 export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
+  console.log("load user");
 
   try {
     const config = tokenConfig(getState);
@@ -23,11 +24,18 @@ export const loadUser = () => async (dispatch, getState) => {
       mode: "cors",
       config
     });
+    if(!res.ok){
+      throw Error(res.json())
+    }
+    const data = await res.json();
     dispatch({
       type: USER_LOADED,
-      payload: res.json
+      payload: data
     });
+    console.log("User-loaded")
+
   } catch (err) {
+    console.log("error", err)
     dispatch({
       type: AUTH_ERROR
     });
@@ -36,7 +44,7 @@ export const loadUser = () => async (dispatch, getState) => {
 
 // REGISTER USER
 export const register = ({ username, email, password, first_name, last_name }) => async dispatch => {
-
+  console.log("register user");
   // Request Body
   const body = JSON.stringify({ username, email, password, first_name, last_name });
 
@@ -47,11 +55,14 @@ export const register = ({ username, email, password, first_name, last_name }) =
       headers: { "Content-Type": "application/json" },
       body: body
     });
+    const data = await res.json();
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.json
+      payload: data
     });
+    console.log("Register_succes")
   } catch (err) {
+    console.log("error", err)
     dispatch({
       type: REGISTER_FAIL
     });
@@ -61,7 +72,7 @@ export const register = ({ username, email, password, first_name, last_name }) =
 
 // LOGIN USER
 export const login = ({ username, password }) => async dispatch => {
-
+  console.log("logginn user");
   // Request Body
  /*  console.log("username " + username + " password " + password); */
   const body = JSON.stringify({ username, password });
@@ -73,13 +84,15 @@ export const login = ({ username, password }) => async dispatch => {
       headers: { "Content-Type": "application/json" },
       body: body
     });
+    console.log("response");
+    const data = await res.json();
+    await console.log(data);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.json
+      payload: data
     });
     
   } catch (err) {
-    console.log(err.json);
     dispatch({
       type: LOGIN_FAIL
     });
@@ -89,7 +102,7 @@ export const login = ({ username, password }) => async dispatch => {
 
 // LOGOUT USER
 export const logout = () => async (dispatch, getState) => {
-
+  console.log("logout user");
   const config = tokenConfig(getState);
 
   await fetch(`http://localhost:8000/api/auth/logout`, {
@@ -97,7 +110,7 @@ export const logout = () => async (dispatch, getState) => {
     mode: "cors",
     config,
     body : null
-  })
+  });
 
   dispatch({
     type: LOGOUT_SUCCESS
@@ -106,6 +119,7 @@ export const logout = () => async (dispatch, getState) => {
 
 // helper function
 export const tokenConfig = getState => {
+  console.log("get token");
   // Get token
   const token = getState().auth.token;
 

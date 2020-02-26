@@ -1,6 +1,14 @@
 import React, { Component } from "react";
+
+/* styling */
 import { Card, Button, Form } from "react-bootstrap/";
-import { Link } from "react-router-dom";
+
+/* Routing */
+import { Link, Redirect } from "react-router-dom";
+
+/* Redux */
+import { connect } from "react-redux";
+import { register } from "../../../actions/auth";
 
 class Registrering extends Component {
   constructor() {
@@ -26,8 +34,8 @@ class Registrering extends Component {
     this.handlePasswordInputChange = this.handlePasswordInputChange.bind(this);
   }
 
+  /* Kan flyttes inn i action auth */
   addAccount() {
-    // JSON fetch
     
     var req = {
       username: this.state.email,
@@ -134,6 +142,9 @@ class Registrering extends Component {
   }
 
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/" />;
+    }
     return (
       <Card style={{ margin: "2em", padding: "2em" }}>
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
@@ -192,7 +203,6 @@ class Registrering extends Component {
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Passord</Form.Label>
             <Form.Control
-              t
               required
               type="password"
               name="password"
@@ -236,4 +246,10 @@ class Registrering extends Component {
   }
 }
 
-export default Registrering;
+
+/* Hvikle props vi vil ha fra redux store */
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, null)(Registrering);

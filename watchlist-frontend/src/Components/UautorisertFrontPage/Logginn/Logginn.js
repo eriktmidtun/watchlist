@@ -45,6 +45,7 @@ class Logginn extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
+      console.log("logget inn")
       return <Redirect to="/" />;
     }
     return (
