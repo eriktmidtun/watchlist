@@ -69,7 +69,7 @@ Kommer mer senere...
 ### Server Backend:
 ssh root@138.68.107.119
 
-start virtual environment
+. venv/bin/activate
 
 python manage.py runserver 138.68.107.119:8000
 
