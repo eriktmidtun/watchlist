@@ -17,8 +17,10 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
+  console.log("state before",state, action);
   switch (action.type) {
     case USER_LOADING:
+      console.log("USER_LOADING")
       return {
         ...state,
         isLoading: true

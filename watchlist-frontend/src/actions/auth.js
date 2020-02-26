@@ -18,13 +18,19 @@ export const loadUser = () => async (dispatch, getState) => {
   console.log("load user");
 
   try {
-    const config = tokenConfig(getState);
+    const token = tokenConfig(getState);
+    console.log(token);
     const res =  await fetch(`http://localhost:8000/api/auth/user`, {
       method: "GET",
       mode: "cors",
-      config
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": "Token " + token
+      },
+      body: null,
     });
-    if(!res.ok){
+    console.log("res.ok",res)
+    if(res.status != 200){
       throw Error(res.json())
     }
     const data = await res.json();
@@ -32,10 +38,10 @@ export const loadUser = () => async (dispatch, getState) => {
       type: USER_LOADED,
       payload: data
     });
-    console.log("User-loaded")
+    console.log("User-loaded");
 
   } catch (err) {
-    console.log("error", err)
+    console.log("error", err);
     dispatch({
       type: AUTH_ERROR
     });
@@ -103,12 +109,15 @@ export const login = ({ username, password }) => async dispatch => {
 // LOGOUT USER
 export const logout = () => async (dispatch, getState) => {
   console.log("logout user");
-  const config = tokenConfig(getState);
+  const token = tokenConfig(getState);
 
   await fetch(`http://localhost:8000/api/auth/logout`, {
     method: "POST",
     mode: "cors",
-    config,
+    headers: { 
+      "Content-Type": "application/json",
+      "Authorization": "Token " + token
+    },
     body : null
   });
 
@@ -122,7 +131,7 @@ export const tokenConfig = getState => {
   console.log("get token");
   // Get token
   const token = getState().auth.token;
-
+  console.log("token", token)
   // Headers
   const config = {
     headers: {
@@ -133,6 +142,7 @@ export const tokenConfig = getState => {
   if (token) {
     config.headers['Authorization'] = `Token ${token}`;
   }
+  console.log("config", config)
 
-  return config;
+  return token;
 };
