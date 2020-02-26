@@ -1,23 +1,5 @@
 .App {
-  position: absolute;
-  top: 0;
-  bottom:0;
-  left:0;
-  right:0;
-  width:500px;
-  height: 550px;
-  margin:auto;
-  background-color: white;
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-
-.App-link {
-  color: #09d3ac;
+  margin:0;
 }
 
 @media only screen and (max-width: 500px) {
