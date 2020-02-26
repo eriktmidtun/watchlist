@@ -75,7 +75,7 @@ python manage.py runserver 138.68.107.119:8000
 
 passord: vgTRUyXstunLtLJa628d6BuGtVLzzwD4kVgYB9MVrj7xfm7zoEdy4ioQWgaqgZGGetCYR24XJsFP2GyfbrVXcuzmFy2NXQqw4wjCuZRr32PgdpRzRevRf43EKCg3fXnK
 
-Logge inne på 138.68.107.119:8000/admin/:
+Logge inne på 138.68.107.119/admin/:
 
 Brukernavn: admin
 
