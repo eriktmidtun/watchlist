@@ -15,9 +15,6 @@ import { LinkContainer } from 'react-router-bootstrap';
              <Logo/>
             </LinkContainer>
           </Col>
-          <Col className="justify-content-sm-center">
-            Her kommer logo til TheMovieDB om vi skal bruke deres API!
-          </Col>
         </Row>
         </Container>   
       </footer>
