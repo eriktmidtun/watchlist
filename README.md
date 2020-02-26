@@ -60,6 +60,8 @@ Kommer mer senere...
  
  passord: dgwUDQbYTnDBXJGff2H6R5UnzxgTLDgbkBM6ssy4qrTnF5T6m
  
+ naviger til watchlist-frontend
+ 
  git pull origin master
  
  npm run-script build
