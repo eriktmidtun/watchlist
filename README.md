@@ -57,10 +57,13 @@ Kommer mer senere...
 
 ### Server Frontend:
  ssh root@207.154.225.88
+ 
  passord: dgwUDQbYTnDBXJGff2H6R5UnzxgTLDgbkBM6ssy4qrTnF5T6m
  
  git pull origin master
+ 
  npm run-script build
+ 
  serve -s build
 
 
