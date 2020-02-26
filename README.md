@@ -67,7 +67,7 @@ Kommer mer senere...
  serve -s -l 80 build
 
 ### Server Backend:
-ssh root@138.68.107.119:8000
+ssh root@138.68.107.119
 
 passord: vgTRUyXstunLtLJa628d6BuGtVLzzwD4kVgYB9MVrj7xfm7zoEdy4ioQWgaqgZGGetCYR24XJsFP2GyfbrVXcuzmFy2NXQqw4wjCuZRr32PgdpRzRevRf43EKCg3fXnK
 
