@@ -66,4 +66,16 @@ Kommer mer senere...
  
  serve -s -l 80 build
 
+### Server Backend:
+ssh root@138.68.107.119:8000
+
+passord: vgTRUyXstunLtLJa628d6BuGtVLzzwD4kVgYB9MVrj7xfm7zoEdy4ioQWgaqgZGGetCYR24XJsFP2GyfbrVXcuzmFy2NXQqw4wjCuZRr32PgdpRzRevRf43EKCg3fXnK
+
+Logge inne på 138.68.107.119:8000/admin/:
+
+Brukernavn: admin
+
+Passord: Y4wfitPqqYq7keSNVM7CUKQeE4nHMNqbNTqvNG4vGsK7zABw3UmgVRwxu2nxTuiwWLD9P3BJx9Pqo6fyrNc8fRnwDp8zEj4T4uK4fzx3tfnjBkdECD3dkwpZWVhm5ouj
+
+
 
