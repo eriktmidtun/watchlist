@@ -64,6 +64,6 @@ Kommer mer senere...
  
  npm run-script build
  
- serve -s build
+ serve -s -l 80 build
 
 
