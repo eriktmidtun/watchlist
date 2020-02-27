@@ -10,6 +10,26 @@ import { ButtonGroup, Dropdown, Button, Container, FormControl, InputGroup} from
 /* import NavDropdown from 'react-bootstrap/NavDropdown'; */
 
 const NavBarAut = () => {
+  
+  const isAuthenticated = true
+
+  const unauthorizedLinks = () =>{
+    return(
+      <Nav className="ml-auto">
+        <LinkContainer to="/logginn">
+        <Nav.Link eventKey={2}>
+          Logg inn
+        </Nav.Link>
+        </LinkContainer>
+        <LinkContainer to="/registrering">
+        <Nav.Link>
+          Registrering
+        </Nav.Link>
+        </LinkContainer>
+      </Nav>
+    )
+  };
+
   return (
     <Navbar 
     collapseOnSelect expand="lg" 
@@ -18,16 +38,15 @@ const NavBarAut = () => {
     sticky="top" 
     style={{height: '60px'}} >
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-            <Logo/>
-            <SearchBar />
-            <DropdownButton/>
-      </Navbar.Collapse>
+        <Logo/>
+        {isAuthenticated ?
+          <Navbar.Collapse id="responsive-navbar-nav">
+              <SearchBar/>
+              <DropdownButton/>
+          </Navbar.Collapse>
+          : unauthorizedLinks()}
     </Navbar>
   );
 };
 
 export default NavBarAut;
-
-
-

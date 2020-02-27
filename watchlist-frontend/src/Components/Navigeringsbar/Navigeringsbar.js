@@ -9,7 +9,8 @@ import { Col, Row, Container, FormControl, InputGroup, Button } from 'react-boot
 /* import NavDropdown from 'react-bootstrap/NavDropdown'; */
 
 const Navigeringsbar = () => {
-  return (
+
+    return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top" style={{height: '60px'}}  >
       <LinkContainer to="/">
         <Navbar.Brand >
