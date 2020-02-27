@@ -5,7 +5,7 @@ import { Navbar } from 'react-bootstrap';
 
 const Logo = () => {
     return (  
-        <Navbar.Brand href="/">
+        <Navbar.Brand>
         <img
           alt=""
           src={logo}
@@ -22,11 +22,3 @@ const Logo = () => {
 };
 
 export default Logo;
-
-/*
-<div style={{width: "500px"}}> 
-            <Image src={logo} style={{ height: '40px', marginRight: '5px'}} />
-            <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet" /> 
-            <h3 class="serif" style={{marginRight: '25px', marginTop: '0px'}} > WatchList</h3>
-        </div>
-        */

@@ -3,16 +3,14 @@ import Container from "react-bootstrap/Container";
 import { Row, Col } from "react-bootstrap";
 import "./styles.css";
 
+import DBlogo from "./DBlogo";
+
 function Footer() {
   return (
     <footer className="footer">
       <Container>
-        <Row>
-          <Col className="justify-content-sm-center">
-            <LinkContainer to="/">
-             <Logo/>
-            </LinkContainer>
-          </Col>
+        <Row className="justify-content-sm-center">
+          <DBlogo />
         </Row>
       </Container>
     </footer>

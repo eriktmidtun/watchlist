@@ -1,51 +1,49 @@
+import React, { Component } from "react";
 
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Logo from './Logo';
-import SearchBar from './SearchBar'
-import { LinkContainer } from 'react-router-bootstrap';
-import { Col, Row, Container, FormControl, InputGroup, Button } from 'react-bootstrap';
-/* import NavDropdown from 'react-bootstrap/NavDropdown'; */
+/* Komponenter */
+import Logo from "./Logo";
+import SearchBar from "./SearchBar";
+import DropdownButton from "./DropdownButton";
 
-const Navigeringsbar = () => {
+/* Bootstrap styling */
+import {
+  Col,
+  Row,
+  Button,
+  Nav,
+  Navbar,
+  ButtonGroup,
+  Dropdown,
+  Container,
+  FormControl,
+  Form,
+  InputGroup
+} from "react-bootstrap";
 
-    return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top" style={{height: '60px'}}  >
-      <LinkContainer to="/">
-        <Navbar.Brand >
-            <Logo/>
-        </Navbar.Brand>
-      </LinkContainer>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
-          <Container style={{width: '476px'}} >
-            <InputGroup >         
-              <FormControl md="12"/>
-              <Button variant="primary" >Søk</Button>
-            </InputGroup>
-          </Container>
-        </Nav>
-        <Nav>
-        <LinkContainer to="/registrering">
-          <Nav.Link >Registrering</Nav.Link>
-        </LinkContainer>
-        <LinkContainer to="/logginn">
-          <Nav.Link eventKey={2}>
-            Logg inn
-          </Nav.Link>
-        </LinkContainer>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  );
-};
+/* Routing */
+import { LinkContainer } from "react-router-bootstrap";
+
+/* Redux */
+import { connect } from "react-redux";
+import { logout } from "../../actions/auth";
 
 class Navigeringsbar extends Component {
   render() {
-    const  {user, isAuthenticated } = this.props.auth;
-    
+    const { user, isAuthenticated } = this.props.auth;
+
+    const unauthorizedLinks = () => {
+      return (
+        <Nav className="ml-auto">
+          <LinkContainer to="/logginn">
+            <Nav.Link eventKey={2}>Logg inn</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/registrering">
+            <Nav.Link>Registrering</Nav.Link>
+          </LinkContainer>
+        </Nav>
+      );
+    };
+    user? console.log(user.username): console.log("no user")
     return (
       <Navbar
         collapseOnSelect
@@ -54,25 +52,19 @@ class Navigeringsbar extends Component {
         variant="dark"
         sticky="top"
         style={{ height: "60px" }}
-        onMouseEnter={() => console.log("navbar",user, isAuthenticated)} //for testing av redirects
+        onMouseEnter={() => console.log("navbar", user, isAuthenticated)} //for testing av redirects
       >
-        <LinkContainer to="/">
-          <Navbar.Brand>
-            <Logo />
-          </Navbar.Brand>
-        </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">{/*  searchbar om logged inn } */}</Nav>
-          <Nav>
-            <LinkContainer to="/registrering">
-              <Nav.Link>Registrering</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/logginn">
-              <Nav.Link eventKey={2}>Logg inn</Nav.Link>
-            </LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
+        <Logo />
+        {isAuthenticated ? (
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <SearchBar />
+            {console.log(user)}
+            <DropdownButton name={user} func={this.props.logout} />
+          </Navbar.Collapse>
+        ) : (
+          unauthorizedLinks()
+        )}
       </Navbar>
     );
   }
@@ -83,4 +75,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { logout })(Navigeringsbar);
-

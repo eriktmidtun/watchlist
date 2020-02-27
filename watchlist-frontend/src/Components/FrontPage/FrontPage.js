@@ -3,11 +3,10 @@ import { Row, Col, Card } from "react-bootstrap";
 
 /* Redux */
 import { connect } from "react-redux";
-import { logout } from "../../actions/auth";
 
 class FrontPage extends Component {
   render() {
-    const  {user, isAuthenticated } = this.props.auth;
+    const  {user} = this.props.auth;
     console.log(user)
     return (
       <Row className="justify-content-center">
@@ -16,8 +15,8 @@ class FrontPage extends Component {
             <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
               Forside
             </Card.Title>
-            <p>Du er logget inn som {user? user.username: "BLANK"} og authicated = {isAuthenticated} </p>
-            <button onClick={this.props.logout}>Logg ut</button>
+            <p>Du er logget inn som <b>{user? user.username: "INGEN"} </b></p>
+            <p>Her kommer feed</p>
           </Card>
         </Col>
       </Row>
@@ -29,4 +28,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { logout })(FrontPage);
+export default connect(mapStateToProps, null)(FrontPage);
