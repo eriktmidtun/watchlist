@@ -30,10 +30,10 @@ export const loadUser = () => async (dispatch, getState) => {
       body: null,
     });
     console.log("res.ok",res)
-    if(res.status != 200){
-      throw Error(res.json())
-    }
     const data = await res.json();
+    if(res.status !== 200){
+      throw Error(data)
+    }
     dispatch({
       type: USER_LOADED,
       payload: data
@@ -92,6 +92,9 @@ export const login = ({ username, password }) => async dispatch => {
     });
     console.log("response");
     const data = await res.json();
+    if(res.status !== 200){
+      throw Error(res);
+    }
     await console.log(data);
     dispatch({
       type: LOGIN_SUCCESS,
@@ -102,7 +105,7 @@ export const login = ({ username, password }) => async dispatch => {
     dispatch({
       type: LOGIN_FAIL
     });
-   /*  dispatch(stopSubmit('loginForm', err.response.data)); */
+   /* dispatch('loginForm', err.response.data);  */
   }
 };
 
