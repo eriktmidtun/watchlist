@@ -9,7 +9,9 @@ function Footer() {
       <Container>
         <Row>
           <Col className="justify-content-sm-center">
-            Her kommer logo til TheMovieDB om vi skal bruke deres API!
+            <LinkContainer to="/">
+             <Logo/>
+            </LinkContainer>
           </Col>
         </Row>
       </Container>
