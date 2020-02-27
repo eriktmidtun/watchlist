@@ -66,7 +66,9 @@ Kommer mer senere...
  
  npm run-script build
  
- serve -s -l 80 build
+ serve -s -l 80 build 
+ 
+ Legg til & etter kommandoen for å spawne en egen prosess. Bruk sudo lsof -i :80 for å finne prosess id som bruker port 80, og kill PID for å avslutte prosessen. 
 
 ### Server Backend:
 ssh root@138.68.107.119
