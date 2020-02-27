@@ -48,7 +48,7 @@ class Navigeringsbar extends Component {
         {isAuthenticated ? (
           <Navbar.Collapse id="responsive-navbar-nav">
             <SearchBar />
-            <DropdownButton name={user} func={this.props.logout} />
+            <DropdownButton name={user} logout={this.props.logout} />
           </Navbar.Collapse>
         ) : (
           unauthorizedLinks()
