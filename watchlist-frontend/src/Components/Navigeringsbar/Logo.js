@@ -12,7 +12,7 @@ const Logo = () => {
                     </Col>
                     <Col>
                         <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet" /> 
-                        <h3 class="serif" style={{marginRight: '25px', marginTop: '0px'}} > WatchList</h3>
+                        <h3 className="serif" style={{marginRight: '25px', marginTop: '0px'}} > WatchList</h3>
                     </Col>
                 </Row>
             </Container>

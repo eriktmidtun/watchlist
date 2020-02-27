@@ -5,6 +5,8 @@ import Informasjon from "../UautorisertFrontPage/Informasjon/Informasjon";
 
 /* Styling */
 import { Row, Col } from "react-bootstrap";
+
+/* Routing */
 import { Route } from "react-router-dom";
 
 const UautorisertFrontPage = ({ component: Component, ...rest }) => {
