@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+
+/* Styling */
 import { Row, Col, Card } from "react-bootstrap";
 
 /* Redux */
@@ -7,7 +9,6 @@ import { connect } from "react-redux";
 class FrontPage extends Component {
   render() {
     const  {user} = this.props.auth;
-    console.log(user)
     return (
       <Row className="justify-content-center">
         <Col xs={{ span: "12" }}>

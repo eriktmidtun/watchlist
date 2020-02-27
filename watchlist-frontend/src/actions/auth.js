@@ -1,5 +1,4 @@
-/* import axios from 'axios'; */
-/* import { stopSubmit } from 'redux-form'; */
+import { stopSubmit } from "redux-form";
 
 import {
   USER_LOADING,
@@ -10,49 +9,54 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_SUCCESS
-} from './types';
+} from "./types";
 
-// LOAD USER
+/* Spør server om brukerdata */
 export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
-  console.log("load user");
 
   try {
     const token = tokenConfig(getState);
-    console.log(token);
-    const res =  await fetch(`http://localhost:8000/api/auth/user`, {
+    const res = await fetch(`http://localhost:8000/api/auth/user`, {
       method: "GET",
       mode: "cors",
-      headers: { 
+      headers: {
         "Content-Type": "application/json",
-        "Authorization": "Token " + token
+        Authorization: "Token " + token
       },
-      body: null,
+      body: null
     });
-    console.log("res.ok",res)
     const data = await res.json();
-    if(res.status !== 200){
-      throw Error(data)
+    if (res.status !== 200) {
+      throw Error(data);
     }
     dispatch({
       type: USER_LOADED,
       payload: data
     });
-    console.log("User-loaded");
-
   } catch (err) {
-    console.log("error", err);
     dispatch({
       type: AUTH_ERROR
     });
   }
 };
 
-// REGISTER USER
-export const register = ({ username, email, password, first_name, last_name }) => async dispatch => {
-  console.log("register user");
+/* Registrer bruker */
+export const register = ({
+  email,
+  password,
+  first_name,
+  last_name
+}) => async dispatch => {
+  let formData = {
+    first_name: first_name,
+    last_name: last_name,
+    username: email,
+    email: email,
+    password: password
+  };
   // Request Body
-  const body = JSON.stringify({ username, email, password, first_name, last_name });
+  const body = JSON.stringify(formData);
 
   try {
     const res = await fetch(`http://localhost:8000/api/auth/register`, {
@@ -61,26 +65,27 @@ export const register = ({ username, email, password, first_name, last_name }) =
       headers: { "Content-Type": "application/json" },
       body: body
     });
+
+    if (res.status !== 200) {
+      //noe gikk galt
+      throw res;
+    }
     const data = await res.json();
     dispatch({
       type: REGISTER_SUCCESS,
       payload: data
     });
-    console.log("Register_succes")
   } catch (err) {
-    console.log("error", err)
+    const response = await err.json(); //ta ut melding fra respons fra server
     dispatch({
       type: REGISTER_FAIL
     });
-    /* dispatch(stopSubmit('registerForm', err.response.data)); */
+    dispatch(stopSubmit("registerForm", response));
   }
 };
 
-// LOGIN USER
+/* Logg inn bruker */
 export const login = ({ username, password }) => async dispatch => {
-  console.log("logginn user");
-  // Request Body
- /*  console.log("username " + username + " password " + password); */
   const body = JSON.stringify({ username, password });
 
   try {
@@ -90,62 +95,46 @@ export const login = ({ username, password }) => async dispatch => {
       headers: { "Content-Type": "application/json" },
       body: body
     });
-    console.log("response");
     const data = await res.json();
-    if(res.status !== 200){
-      throw Error(res);
+
+    if (res.status !== 200) {
+      //ting gikk ikke som planlagt
+      throw data;
     }
-    await console.log(data);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: data
     });
-    
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL
     });
-   /* dispatch('loginForm', err.response.data);  */
+    dispatch(stopSubmit("loginForm", err));
   }
 };
 
-// LOGOUT USER
+/* Logg ut bruker
+ vi forventer ikke svar */
 export const logout = () => async (dispatch, getState) => {
-  console.log("logout user");
   const token = tokenConfig(getState);
 
   await fetch(`http://localhost:8000/api/auth/logout`, {
     method: "POST",
     mode: "cors",
-    headers: { 
+    headers: {
       "Content-Type": "application/json",
-      "Authorization": "Token " + token
+      Authorization: "Token " + token
     },
-    body : null
+    body: null
   });
 
   dispatch({
     type: LOGOUT_SUCCESS
   });
-};  
+};
 
 // helper function
 export const tokenConfig = getState => {
-  console.log("get token");
-  // Get token
   const token = getState().auth.token;
-  console.log("token", token)
-  // Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
-
-  if (token) {
-    config.headers['Authorization'] = `Token ${token}`;
-  }
-  console.log("config", config)
-
   return token;
 };

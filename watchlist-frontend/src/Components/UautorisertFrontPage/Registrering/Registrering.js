@@ -9,137 +9,27 @@ import { Link, Redirect } from "react-router-dom";
 /* Redux */
 import { connect } from "react-redux";
 import { register } from "../../../actions/auth";
+import { Field, reduxForm } from "redux-form";
+import {
+  RenderField,
+  BackendResponsMeldingsboks
+} from "../ReduxFormContainers";
 
+/* Valideringer */
+import {
+  required,
+  minLength3,
+  maxLength100,
+  passwordsMatch,
+  isEmail,
+  firstCharCapital
+} from "../ValideringsFunksjoner";
+
+/* Her bruker vi redux-form for å gjøre ting mye lettere sammen med react-redux */
 class Registrering extends Component {
-  constructor() {
-    super();
-    this.state = {
-      first_name: "",
-      first_nameValid: false,
-      last_name: "",
-      last_nameValid: false,
-      email: "",
-      emailValid: false,
-      isEmailUsed: false,
-      password: "",
-      passwordValid: false,
-      repeatPassword: "",
-      repeatPasswordValid: false,
-      isPasswordEqual: false,
-      submited: false,
-      error: {}
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePasswordInputChange = this.handlePasswordInputChange.bind(this);
-  }
-
-  /* Kan flyttes inn i action auth */
-  addAccount() {
-    
-    var req = {
-      username: this.state.email,
-      email: this.state.email,
-      password: this.state.password,
-      first_name: this.state.first_name,
-      last_name: this.state.last_name
-    };
-
-    fetch(`http://localhost:8000/api/auth/register`, {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(req)
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        if (response.status === 400) {
-          this.setState({ isEmailUsed: true });
-          throw new Error("Email in use");
-        } else {
-          throw new Error("Something went wrong ...");
-        }
-      })
-      .catch(jsonError =>
-        this.setState({ error: jsonError }, () => console.log(jsonError))
-      );
-  }
-
-  handleSubmit(event) {
-    // er input valid?
-    if (
-      this.state.first_nameValid &&
-      this.state.last_nameValid &&
-      this.state.emailValid &&
-      this.state.passwordValid &&
-      this.state.repeatPasswordValid &&
-      this.state.isPasswordEqual &&
-      !this.state.isEmailUsed
-    ) {
-      console.log("success");
-      this.addAccount();
-      if (!this.state.isEmailUsed) {
-        console.log("email used");
-      }
-    } else {
-      console.log("Failed");
-      // gir feilmelding i form av farger på inputboks
-      this.setState({ submited: true });
-      /* console.log("Input not valid") */
-    }
-    event.preventDefault();
-  }
-
-  handleInputChange(event) {
-    this.setState({ isEmailUsed: false });
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    //console.log(name,value);
-    this.setState({
-      [name]: value
-    });
-    // regexp på hvordan input kan være
-    const patterns = {
-      last_name: /[A-Z][a-zA-Z]{1,100}$/, //stor bokstav som første bokstav i hvert navn
-      first_name: /[A-Z][a-zA-Z]{1,100}$/, // /[A-Z]$/,
-      email: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-    };
-
-    this.setState({ [name + "Valid"]: patterns[name].test(value) });
-    console.log({ [name + "Valid"]: patterns[name].test(value) });
-  }
-
-  handlePasswordInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    const patterns = {
-      password: /\S{2,100}$/,
-      repeatPassword: /\S{2,100}$/
-    };
-
-    if (name === "password") {
-      this.setState({ password: value });
-      this.setState({ passwordValid: patterns["password"].test(value) }, () =>
-        this.setState({
-          isPasswordEqual: this.state.password === this.state.repeatPassword
-        })
-      );
-    } else {
-      this.setState({ repeatPassword: value });
-      this.setState(
-        { repeatPasswordValid: patterns["repeatPassword"].test(value) },
-        () =>
-          this.setState({
-            isPasswordEqual: this.state.password === this.state.repeatPassword
-          })
-      );
-    }
-  }
+  onSubmit = formValues => {
+    this.props.register(formValues);
+  };
 
   render() {
     if (this.props.isAuthenticated) {
@@ -150,91 +40,54 @@ class Registrering extends Component {
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
           Registrering
         </Card.Title>
-        <Form noValidate onSubmit={this.handleSubmit}>
-          <Form.Group controlId="formName">
-            <Form.Label>Fornavn</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="first_name"
-              placeholder="'John'"
-              onChange={this.handleInputChange}
-              isInvalid={
-                !this.state.first_nameValid && this.state.first_name.length > 0
-              }
-            />
-            <Form.Control.Feedback type="invalid">
-              Navn ugyldig. Skriv på formen John
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Etternavn</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="last_name"
-              placeholder="'Doe'"
-              onChange={this.handleInputChange}
-              isInvalid={
-                !this.state.last_nameValid && this.state.last_name.length > 0
-              }
-            />
-            <Form.Control.Feedback type="invalid">
-              Navn ugyldig. Skriv på formen Doe
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Epost</Form.Label>
-            <Form.Control
-              required
-              type="email"
-              name="email"
-              placeholder="navn@domene.com"
-              onChange={this.handleInputChange}
-              isInvalid={
-                (!this.state.emailValid && this.state.email.length > 0) ||
-                this.state.isEmailUsed
-              }
-            />
-            <Form.Control.Feedback type="invalid">
-              Email ugyldig eller i bruk
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Passord</Form.Label>
-            <Form.Control
-              required
-              type="password"
-              name="password"
-              placeholder="Passord"
-              onChange={this.handlePasswordInputChange}
-              isInvalid={
-                !this.state.passwordValid && this.state.password.length > 0
-              }
-            />
-            <Form.Control.Feedback type="invalid">
-              Passord for kort
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword2">
-            <Form.Label>Gjenta passord</Form.Label>
-            <Form.Control
-              required
-              type="password"
-              name="repeatPassword"
-              placeholder="Passord"
-              onChange={this.handlePasswordInputChange}
-              isInvalid={
-                !this.state.isPasswordEqual &&
-                this.state.repeatPassword.length > 0
-              }
-            />
-            <Form.Control.Feedback type="invalid">
-              Passordene er ikke identiske
-            </Form.Control.Feedback>
-          </Form.Group>
+
+        <Form noValidate onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <Field
+            label="Fornavn"
+            name="first_name"
+            type="text"
+            component={RenderField}
+            placeholder="John"
+            validate={[required, minLength3, firstCharCapital, maxLength100]}
+          />
+          <Field
+            label="Etternavn"
+            name="last_name"
+            type="text"
+            component={RenderField}
+            placeholder="Doe"
+            validate={[required, minLength3, firstCharCapital, maxLength100]}
+          />
+          <Field
+            label="Epost"
+            name="email"
+            type="email"
+            component={RenderField}
+            placeholder="navn@domene.no"
+            validate={[required, isEmail]}
+          />
+          <Field
+            label="Passord"
+            name="password"
+            type="password"
+            component={RenderField}
+            placeholder="Passord"
+            validate={[required, minLength3]}
+          />
+          <Field
+            label="Gjenta passord"
+            name="password2"
+            type="password"
+            component={RenderField}
+            placeholder="Passord"
+            validate={[required, passwordsMatch]}
+          />
+          <Field
+            name="non_field_errors"
+            component={BackendResponsMeldingsboks}
+          />
           <Button variant="primary" type="submit" block>
-            Registrer
+            Log inn
           </Button>
         </Form>
         <p style={{ textAlign: "right", marginTop: "0.5em" }}>
@@ -246,10 +99,13 @@ class Registrering extends Component {
   }
 }
 
-
 /* Hvikle props vi vil ha fra redux store */
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, null)(Registrering);
+Registrering = connect(mapStateToProps, { register })(Registrering);
+
+export default reduxForm({
+  form: "registerForm"
+})(Registrering);

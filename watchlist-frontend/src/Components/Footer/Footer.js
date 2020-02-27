@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import "./styles.css";
 
 import DBlogo from "./DBlogo";

@@ -1,10 +1,13 @@
-import { ButtonGroup, Dropdown, Button } from "react-bootstrap";
 import React, { Component } from "react";
 
-class DropdownButton_1 extends Component {
+/* Styling */
+import { ButtonGroup, Dropdown, Button } from "react-bootstrap";
+
+
+export default class DropdownButton_1 extends Component {
 
   render() {
-    const OnCLickNameButton = () => {
+    /* const OnCLickNameButton = () => {
       console.log("Name Button pressed");
     };
 
@@ -14,14 +17,14 @@ class DropdownButton_1 extends Component {
 
     const OnCLickDropdown2 = () => {
       console.log("Dropdown action 2 pressed");
-    };
+    }; */
 
-    const OnCLickDropdown3 = () => {
-      this.props.func();
+    const OnCLickDropdown = () => {
+      this.props.logout();
     };
     return (
       <Dropdown as={ButtonGroup} className="ml-auto" >
-        <Button variant="primary" type="button" onClick={OnCLickNameButton} style={{minWidth: "200px"}}>
+        <Button variant="primary" type="button"  style={{minWidth: "200px"}}>
           {this.props.name ? this.props.name.first_name  : "Placeholder"}
         </Button>
         <Dropdown.Toggle split variant="primary" id="dropdown-split-basic" />
@@ -32,7 +35,7 @@ class DropdownButton_1 extends Component {
           <Dropdown.Item onClick={OnCLickDropdown2} deactivate>
             Følgere
           </Dropdown.Item> */}
-          <Dropdown.Item onClick={OnCLickDropdown3} >
+          <Dropdown.Item onClick={OnCLickDropdown} >
             Logg ut
           </Dropdown.Item>
         </Dropdown.Menu>
@@ -40,5 +43,3 @@ class DropdownButton_1 extends Component {
     );
   }
 }
-
-export default DropdownButton_1;

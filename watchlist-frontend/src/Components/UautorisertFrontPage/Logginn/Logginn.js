@@ -9,43 +9,23 @@ import { Link, Redirect } from "react-router-dom";
 /* Redux */
 import { connect } from "react-redux";
 import { login } from "../../../actions/auth";
+import { Field, reduxForm } from "redux-form";
+import {
+  RenderField,
+  BackendResponsMeldingsboks
+} from "../ReduxFormContainers";
 
+/* Valideringer */
+import { required, minLength3 } from "../ValideringsFunksjoner";
+
+/* Her bruker vi redux-form for å gjøre ting mye lettere sammen med react-redux */
 class Logginn extends Component {
-  constructor() {
-    super();
-    this.state = {
-      username: "",
-      password: ""
-    };
-    /* Gjør at vi kan kalle metodene i JSX i render */
-    this.eventHandler = this.eventHandler.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  /* Tar ut verdien av det som blir skrevet i Form.Contol inputboksene og oppdaterer state*/
-  eventHandler(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value
-    });
-  }
-
-  /* Hva som skal gjøres når logginn knappen blir trykket på */
-  onSubmit(event) {
-    const formValues = {
-      // hva som skal bli sendt til backenden
-      username: this.state.username,
-      password: this.state.password
-    };
+  onSubmit = formValues => {
     this.props.login(formValues);
-    event.preventDefault(); // stopper nettleseren fra å prøve å redirecte oss
-  }
+  };
 
   render() {
     if (this.props.isAuthenticated) {
-      console.log("logget inn")
       return <Redirect to="/" />;
     }
     return (
@@ -53,25 +33,27 @@ class Logginn extends Component {
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
           Log inn
         </Card.Title>
-        <Form noValidate onSubmit={this.onSubmit}>
-          <Form.Group controlId="formName">
-            <Form.Label>Fornavn</Form.Label>
-            <Form.Control
-              type="username"
-              name="username"
-              placeholder="navn@domene.com"
-              onChange={this.eventHandler}
-            />
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Passord</Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              placeholder="Passord"
-              onChange={this.eventHandler}
-            />
-          </Form.Group>
+        <Form noValidate onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <Field
+            label="Epost"
+            name="username"
+            type="text"
+            component={RenderField}
+            placeholder="navn@domene.no"
+            validate={[required, minLength3]}
+          />
+          <Field
+            label="Passord"
+            name="password"
+            type="password"
+            component={RenderField}
+            placeholder="Passord"
+            validate={[required, minLength3]}
+          />
+          <Field
+            name="non_field_errors"
+            component={BackendResponsMeldingsboks}
+          />
           <Button variant="primary" type="submit" block>
             Log inn
           </Button>
@@ -90,4 +72,9 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { login })(Logginn);
+Logginn = connect(mapStateToProps, { login })(Logginn);
+
+/* Kobler til biblioteket reduxform til vår reduxstore */
+export default reduxForm({
+  form: "loginForm"
+})(Logginn);
