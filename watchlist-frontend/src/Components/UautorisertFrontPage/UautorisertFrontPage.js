@@ -1,27 +1,27 @@
-import React from 'react';
-import Registrering from '../UautorisertFrontPage/Registrering/Registrering';
-import Logginn from './Logginn/Logginn';
-import Informasjon from '../UautorisertFrontPage/Informasjon/Informasjon';
-import { Row, Col } from 'react-bootstrap';
-import {
-  Switch,
-  Route,
-} from 'react-router-dom';
+import React from "react";
 
-const UautorisertFrontPage = () => {
+/* Komponenter */
+import Informasjon from "../UautorisertFrontPage/Informasjon/Informasjon";
+
+/* Styling */
+import { Row, Col } from "react-bootstrap";
+import { Route } from "react-router-dom";
+
+const UautorisertFrontPage = ({ component: Component, ...rest }) => {
   return (
-    <Row className="justify-content-center">
-        <Col xs={{ order: 2 ,span: "12"}} lg={{ order: 1, span:"6"}}>
+    <Route
+      {...rest}
+      render={props => (
+        <Row className="justify-content-center">
+          <Col xs={{ order: 2, span: "12" }} lg={{ order: 1, span: "6" }}>
             <Informasjon />
-        </Col>
-        <Col xs={{ order: 1 ,span: "12"}} lg={{ order: 2, span:"6"}}>
-        <Switch> {/* gjør at bare en av componentene blir rendret, basert på linken. */}
-            <Route path="/" exact component={Registrering} /> {/* midlertidig path for testing av registreringskjema, må sette opp redirects senere */}
-            <Route path="/registrering"  component={Registrering} />
-            <Route path="/logginn" component={Logginn} />
-        </Switch>
-        </Col>
-    </Row>
+          </Col>
+          <Col xs={{ order: 1, span: "12" }} lg={{ order: 2, span: "6" }}>
+            <Component {...rest} />
+          </Col>
+        </Row>
+      )}
+    />
   );
 };
 
