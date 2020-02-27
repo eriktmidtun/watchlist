@@ -6,12 +6,12 @@ import Logo from './Logo';
 import DropdownButton from './DropdownButton'
 import SearchBar from './SearchBar'
 import { LinkContainer } from 'react-router-bootstrap';
-import { ButtonGroup, Dropdown, Button, Container, FormControl, InputGroup} from 'react-bootstrap';
+import { ButtonGroup, Dropdown, Button, Container, FormControl, Form, InputGroup} from 'react-bootstrap';
 /* import NavDropdown from 'react-bootstrap/NavDropdown'; */
 
 const NavBarAut = () => {
   
-  const isAuthenticated = true
+  const isAuthenticated = false
 
   const unauthorizedLinks = () =>{
     return(
@@ -47,6 +47,8 @@ const NavBarAut = () => {
           : unauthorizedLinks()}
     </Navbar>
   );
+
+  
 };
 
 export default NavBarAut;

@@ -26,10 +26,11 @@ const DropdownButton_1 = () =>{
     return (
         <Dropdown as={ButtonGroup} className="ml-auto">
         <Button 
+          
           variant="primary"
           type="button"
           onClick={OnCLickNameButton}
-        >Navn</Button>
+        >Navn Navnesen </Button>
         <Dropdown.Toggle split variant="primary" id="dropdown-split-basic" />
         <Dropdown.Menu alignRight>
           <Dropdown.Item onClick ={OnCLickDropdown1} href="#/action-1">Følger</Dropdown.Item>
