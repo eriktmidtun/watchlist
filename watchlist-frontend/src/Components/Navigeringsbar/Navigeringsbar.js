@@ -1,40 +1,64 @@
+import React, { Component } from "react";
 
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Logo from './Logo';
-import { LinkContainer } from 'react-router-bootstrap';
-/* import NavDropdown from 'react-bootstrap/NavDropdown'; */
+/* Komponenter */
+import Logo from "./Logo";
+import SearchBar from "./SearchBar";
+import DropdownButton from "./DropdownButton";
 
-const Navigeringsbar = () => {
-  return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top" style={{height: '60px'}}  >
-      <LinkContainer to="/">
-        <Navbar.Brand >
-            <Logo/>
-        </Navbar.Brand>
-      </LinkContainer>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
-          {/*  searchbar om logged inn } */}
+/* Bootstrap styling */
+import { Nav, Navbar } from "react-bootstrap";
+
+/* Routing */
+import { LinkContainer } from "react-router-bootstrap";
+
+/* Redux */
+import { connect } from "react-redux";
+import { logout } from "../../actions/auth";
+
+class Navigeringsbar extends Component {
+
+  render() {
+    const { user, isAuthenticated } = this.props.auth;
+    /* Hva som vises om brukeren er logget inn */
+    const unauthorizedLinks = () => {
+      return (
+        <Nav className="ml-auto">
+          <LinkContainer to="/logginn">
+            <Nav.Link eventKey={2}>Logg inn</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/registrering">
+            <Nav.Link>Registrering</Nav.Link>
+          </LinkContainer>
         </Nav>
-        <Nav>
-        <LinkContainer to="/registrering">
-          <Nav.Link >Registrering</Nav.Link>
-        </LinkContainer>
-        <LinkContainer to="/logginn">
-          <Nav.Link eventKey={2}>
-            Logg inn
-          </Nav.Link>
-        </LinkContainer>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  );
-};
+      );
+    };
 
-export default Navigeringsbar;
+    return (
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+        sticky="top"
+        style={{ height: "60px" }}
+      >
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Logo />
+        {isAuthenticated ? (
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <SearchBar />
+            <DropdownButton name={user} logout={this.props.logout} />
+          </Navbar.Collapse>
+        ) : (
+          unauthorizedLinks()
+        )}
+      </Navbar>
+    );
+  }
+}
 
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
-
+export default connect(mapStateToProps, { logout })(Navigeringsbar);
