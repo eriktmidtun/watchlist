@@ -41,7 +41,6 @@ class Navigeringsbar extends Component {
         variant="dark"
         sticky="top"
         style={{ height: "60px" }}
-        onMouseEnter={() => console.log("navbar", user, isAuthenticated)} //for testing av redirects
       >
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Logo />
