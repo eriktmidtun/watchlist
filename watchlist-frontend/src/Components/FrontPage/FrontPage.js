@@ -1,14 +1,32 @@
-import React from 'react';
-/* import {
-  Redirect,
-} from 'react-router-dom'; */
+import React, { Component } from "react";
 
-function FrontPage() {
-  return (
-    <div>
-    <h1>FrontPage</h1>
-    </div>
-  );
+/* Styling */
+import { Row, Col, Card } from "react-bootstrap";
+
+/* Redux */
+import { connect } from "react-redux";
+
+class FrontPage extends Component {
+  render() {
+    const  {user} = this.props.auth;
+    return (
+      <Row className="justify-content-center">
+        <Col xs={{ span: "12" }}>
+          <Card style={{ margin: "2em", padding: "2em" }}>
+            <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
+              Forside
+            </Card.Title>
+            <p>Du er logget inn som <b>{user? user.username: "INGEN"} </b></p>
+            <p>Her kommer feed</p>
+          </Card>
+        </Col>
+      </Row>
+    );
+  }
 }
 
-export default FrontPage;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(FrontPage);
