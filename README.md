@@ -83,7 +83,6 @@ Logge inne på 138.68.107.119/admin/:
 
 Brukernavn: admin
 
-Passord: Y4wfitPqqYq7keSNVM7CUKQeE4nHMNqbNTqvNG4vGsK7zABw3UmgVRwxu2nxTuiwWLD9P3BJx9Pqo6fyrNc8fRnwDp8zEj4T4uK4fzx3tfnjBkdECD3dkwpZWVhm5ouj
-
+Passord: demo1234
 
 
