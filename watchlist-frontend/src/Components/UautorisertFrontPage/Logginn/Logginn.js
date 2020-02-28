@@ -31,7 +31,7 @@ class Logginn extends Component {
     return (
       <Card style={{ margin: "2em", padding: "2em" }}>
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
-          Log inn
+          Logg inn
         </Card.Title>
         <Form noValidate onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Field
@@ -55,7 +55,7 @@ class Logginn extends Component {
             component={BackendResponsMeldingsboks}
           />
           <Button variant="primary" type="submit" block>
-            Log inn
+            Logg inn
           </Button>
         </Form>
         <p style={{ textAlign: "right", marginTop: "0.5em" }}>

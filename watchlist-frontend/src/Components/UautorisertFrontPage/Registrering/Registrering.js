@@ -87,7 +87,7 @@ class Registrering extends Component {
             component={BackendResponsMeldingsboks}
           />
           <Button variant="primary" type="submit" block>
-            Log inn
+            Registrer deg
           </Button>
         </Form>
         <p style={{ textAlign: "right", marginTop: "0.5em" }}>
