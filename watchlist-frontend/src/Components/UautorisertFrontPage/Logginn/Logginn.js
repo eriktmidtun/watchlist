@@ -29,7 +29,7 @@ class Logginn extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <Card style={{ margin: "2em", padding: "2em" }}>
+      <Card style={{ padding: "32px" }}>
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
           Logg inn
         </Card.Title>
@@ -58,7 +58,7 @@ class Logginn extends Component {
             Logg inn
           </Button>
         </Form>
-        <p style={{ textAlign: "right", marginTop: "0.5em" }}>
+        <p style={{ textAlign: "right", marginTop: "10px" }}>
           Mangler du konto?
           <Link to="/registrering"> Registrering</Link>
         </p>
