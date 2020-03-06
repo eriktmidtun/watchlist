@@ -5,8 +5,9 @@ import { Container } from "react-bootstrap";
 import "./App.css";
 
 /* Routing */
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./Components/Common/PrivateRoute";
+import NotFound from "./Components/Common/NotFound";
 import UautorisertFrontPage from "./Components/UautorisertFrontPage/UautorisertFrontPage";
 
 /* Komponenter */
@@ -14,6 +15,7 @@ import Registrering from "./Components/UautorisertFrontPage/Registrering/Registr
 import Logginn from "./Components/UautorisertFrontPage/Logginn/Logginn";
 import FrontPage from "./Components/FrontPage/FrontPage";
 import Navigeringsbar from "./Components/Navigeringsbar/Navigeringsbar";
+import Profil from "./Components/Profil/Profil";
 import Footer from "./Components/Footer/Footer";
 
 /* Redux */
@@ -21,6 +23,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { loadUser } from "./actions/auth";
 import history from "./history";
+
 
 class App extends Component {
   componentDidMount() {
@@ -33,9 +36,10 @@ class App extends Component {
         <Router history={history}>
           <div className="App">
             <Navigeringsbar />
-            <Container>
+            <Container style={{padding:"30px"}}>
               <Switch>
                 <PrivateRoute exact path="/" component={FrontPage} />
+                <PrivateRoute exact path="/profil" component={Profil} />
                 <UautorisertFrontPage
                   exact
                   path="/logginn"
@@ -46,6 +50,7 @@ class App extends Component {
                   path="/registrering"
                   component={Registrering}
                 />
+                <Route component={NotFound}/>
               </Switch>
             </Container>
             <Footer />

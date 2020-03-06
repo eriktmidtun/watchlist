@@ -1,15 +1,20 @@
 import React from "react";
 import { Card } from "react-bootstrap/";
 
-const Informasjon = () => {
+const Liste = ({ listeNavn}) => {
   return (
     <Card style={{padding: "32px" }}>
       <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
-        Om WatchList
+        {listeNavn}
       </Card.Title>
-      <p>WatchList er et sosialt nettverk rundt filmer og serier</p>
+      <ul> {/* Disse er bare midleridige */}
+      <li>Film 1</li>
+      <li>Film 2</li>
+      <li>Film 3</li>
+      <li>Film 4</li>
+      </ul>
     </Card>
   );
 };
 
-export default Informasjon;
+export default Liste;
