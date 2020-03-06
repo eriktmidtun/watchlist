@@ -5,8 +5,9 @@ import { Container } from "react-bootstrap";
 import "./App.css";
 
 /* Routing */
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./Components/Common/PrivateRoute";
+import NotFound from "./Components/Common/NotFound";
 import UautorisertFrontPage from "./Components/UautorisertFrontPage/UautorisertFrontPage";
 
 /* Komponenter */
@@ -46,6 +47,7 @@ class App extends Component {
                   path="/registrering"
                   component={Registrering}
                 />
+                <Route component={NotFound}/>
               </Switch>
             </Container>
             <Footer />
