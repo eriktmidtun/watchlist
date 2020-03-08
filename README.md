@@ -50,39 +50,6 @@ Vi kan så installere riktig versjon av Django og andre pakker vi bruker med: `p
 for å gå ut av virtual envirnoment kan man skrive `deactivate`i terminalen/cmd
 
 ## Deployment
-For å deploye til vår server må man ha SSH. på windows kan man bruke Putty, og på linux/Mac kan man bruke terminalen.
-http://watchlist.social er det tilknyttede domenet
-
-Kommer mer senere...
-
-### Server Frontend:
- ssh root@207.154.225.88
- 
- passord: dgwUDQbYTnDBXJGff2H6R5UnzxgTLDgbkBM6ssy4qrTnF5T6m
- 
- naviger til watchlist-frontend
- 
- git pull origin master
- 
- npm run-script build
- 
- serve -s -l 80 build 
- 
- Legg til & etter kommandoen for å spawne en egen prosess. Bruk sudo lsof -i :80 for å finne prosess id som bruker port 80, og kill PID for å avslutte prosessen. 
-
-### Server Backend:
-ssh root@138.68.107.119
-
-. venv/bin/activate
-
-python manage.py runserver 138.68.107.119:80
-
-passord: vgTRUyXstunLtLJa628d6BuGtVLzzwD4kVgYB9MVrj7xfm7zoEdy4ioQWgaqgZGGetCYR24XJsFP2GyfbrVXcuzmFy2NXQqw4wjCuZRr32PgdpRzRevRf43EKCg3fXnK
-
-Logge inne på 138.68.107.119/admin/:
-
-Brukernavn: admin
-
-Passord: demo1234
+Se Wiki
 
 
