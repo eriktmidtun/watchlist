@@ -16,6 +16,7 @@ import Logginn from "./Components/UautorisertFrontPage/Logginn/Logginn";
 import FrontPage from "./Components/FrontPage/FrontPage";
 import Navigeringsbar from "./Components/Navigeringsbar/Navigeringsbar";
 import Profil from "./Components/Profil/Profil";
+import SearchPage from "./Components/SearchPage/SearchPage";
 import Footer from "./Components/Footer/Footer";
 
 /* Redux */
@@ -39,6 +40,7 @@ class App extends Component {
             <Container style={{padding:"30px"}}>
               <Switch>
                 <PrivateRoute exact path="/" component={FrontPage} />
+                <PrivateRoute exact path="/søk/:medium" component={SearchPage} />
                 <PrivateRoute exact path="/profil" component={Profil} />
                 <UautorisertFrontPage
                   exact

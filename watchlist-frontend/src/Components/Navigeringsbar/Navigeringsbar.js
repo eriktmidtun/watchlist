@@ -42,7 +42,7 @@ class Navigeringsbar extends Component {
         sticky="top"
         style={{ height: "60px" }}
       >
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Logo />
         {isAuthenticated ? (
           <Navbar.Collapse id="responsive-navbar-nav">
