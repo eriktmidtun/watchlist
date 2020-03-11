@@ -18,6 +18,7 @@ import Navigeringsbar from "./Components/Navigeringsbar/Navigeringsbar";
 import Profil from "./Components/Profil/Profil";
 import SearchPage from "./Components/SearchPage/SearchPage";
 import Footer from "./Components/Footer/Footer";
+import MediaDetailPage from "./Components/MediaDetaljer/MediaDetailPage";
 
 /* Redux */
 import { Provider } from "react-redux";
@@ -42,6 +43,7 @@ class App extends Component {
                 <PrivateRoute exact path="/" component={FrontPage} />
                 <PrivateRoute exact path="/søk/:medium" component={SearchPage} />
                 <PrivateRoute exact path="/profil" component={Profil} />
+                <PrivateRoute exact path="/media/film1" component={MediaDetailPage} />
                 <UautorisertFrontPage
                   exact
                   path="/logginn"
