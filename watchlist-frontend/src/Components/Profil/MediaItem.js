@@ -23,10 +23,17 @@ const MediaItem = ({id}) => {
     //     width: "1px",
     //     textAlign: "center",
     // }
-    
+    let this_id = id
     let  title = "Pulp Fiction"
     let year = 1994
     
+    const removeBackend = (id) =>{
+
+
+        //use remove movie by id API 
+        console.log("Hei")
+        console.log(this_id)
+    }
 
     return (
        <Card style={{marginBottom: "32px", padding: "15px" }} >
@@ -38,7 +45,7 @@ const MediaItem = ({id}) => {
                     <h5>{title}</h5>
                     <h5>{year}</h5>
                 </Col>
-                <Button className="ml-auto mb-auto mr-3 btn-danger" >
+                <Button onClick={removeBackend} className="ml-auto mb-auto mr-3 btn-danger" >
                     x
                 </Button>
            </Row>
