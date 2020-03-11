@@ -24,17 +24,17 @@ class SearchPage extends Component {
               <Nav variant="tabs" defaultActiveKey="/filmer">
                 <Nav.Item>
                   <LinkContainer to="filmer">
-                    <Nav.Link >Filmer (14)</Nav.Link>
+                    <Nav.Link >Filmer</Nav.Link>
                   </LinkContainer>
                 </Nav.Item>
                 <Nav.Item>
                   <LinkContainer to="serier">
-                    <Nav.Link >Serier (0)</Nav.Link>
+                    <Nav.Link >Serier</Nav.Link>
                   </LinkContainer>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link eventKey="disabled" disabled>
-                    Brukere (0)
+                    Brukere
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
@@ -42,7 +42,6 @@ class SearchPage extends Component {
             </Card>
           </Col>
         </Row>
-        
       </React.Fragment>
     );
   }
