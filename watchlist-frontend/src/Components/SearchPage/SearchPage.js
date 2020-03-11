@@ -8,10 +8,22 @@ import Results from "./Results";
 /* Redux */
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { searchForMovies, searchForSeries } from "../../actions/TheMovieDB"
 /* import { Switch, Route } from "react-router-dom"; */
 
 /* Viser en brukerprofil, samt dens lister */
 class SearchPage extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      mediaType: "filmer",
+      søk: "Game of"
+    }
+  }
+  componentDidMount() {
+    this.props.searchForSeries(this.state.søk);
+    console.log("componentD", this.props.medier)
+  }
   render() {
     return (
       <React.Fragment>
@@ -19,17 +31,27 @@ class SearchPage extends Component {
           <Col xs={{ span: "12" }}>
             <Card style={{ marginBottom: "32px", padding: "32px" }}>
               <Card.Title style={{ textAlign: "left", fontSize: "2em" }}>
-                Søk: " Avengers "
+                Søk: "{this.state.søk}"
               </Card.Title>
               <Nav variant="tabs" defaultActiveKey="/filmer">
                 <Nav.Item>
                   <LinkContainer to="filmer">
-                    <Nav.Link >Filmer</Nav.Link>
+                    <Nav.Link 
+                    onClick={()=> this.setState({mediaType:"filmer"})}
+                    active={this.state.mediaType === "filmer"}
+                    >
+                      Filmer
+                    </Nav.Link>
                   </LinkContainer>
                 </Nav.Item>
                 <Nav.Item>
                   <LinkContainer to="serier">
-                    <Nav.Link >Serier</Nav.Link>
+                    <Nav.Link 
+                    onClick={()=> this.setState({mediaType:"serier"})}
+                    active={this.state.mediaType === "serier"}
+                    >
+                      Serier
+                    </Nav.Link>
                   </LinkContainer>
                 </Nav.Item>
                 <Nav.Item>
@@ -38,7 +60,7 @@ class SearchPage extends Component {
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
-              <Results/>
+              <Results results={this.props.medier.mediums} mediaType={this.state.mediaType}/>
             </Card>
           </Col>
         </Row>
@@ -47,6 +69,8 @@ class SearchPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  medier: state.medier
+});
 
-export default connect(mapStateToProps, null)(SearchPage);
+export default connect(mapStateToProps, { searchForMovies, searchForSeries })(SearchPage);

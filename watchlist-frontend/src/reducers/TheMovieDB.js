@@ -8,7 +8,6 @@ import {
 
 const initialState = {
     isLoading: false,
-    input: null
 };
 
 export default function(state = initialState, action) {
@@ -16,10 +15,11 @@ export default function(state = initialState, action) {
         case SERIES_RESULTS_LOADED:
         case MOVIE_RESULTS_LOADED:
             console.log("RESULTS_LOADED");
+            console.log(action.payload)
             return {
                 ...state,
+                mediums: action.payload,
                 isLoading: false,
-                input: null
             }
         case SERIES_RESULTS_LOADING:
         case MOVIE_RESULTS_LOADING:
@@ -27,12 +27,14 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 isLoading: true,
-                input: localStorage.getItem("keyword")
             }
         case SEARCH_FAIL:
             console.log("SEARCH_FAIL");
             return {
-                state
+                isLoading: false,
+                ...state,
             }
+        default:
+            return state
     }
 }

@@ -1,5 +1,3 @@
-import { stopSubmit } from "redux-form";
-
 import {
     MOVIE_RESULTS_LOADED,
     MOVIE_RESULTS_LOADING,
@@ -8,107 +6,110 @@ import {
     SEARCH_FAIL
 } from "./types";
 
-const keyword = '';
-const ID = '';
-const movieSearchURL = 'https://api.themoviedb.org/3/search/movie?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm&query=' + keyword + '&page=1&include_adult=false';
+let keyword = 'Knerten';
+let ID = '';
+//const movieSearchURL = 'https://api.themoviedb.org/3/search/movie?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm&query=' + keyword + '&page=1&include_adult=false';
 const seriesSearchURL = 'https://api.themoviedb.org/3/search/tv?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm&query=' + keyword + '&page=1&first_air_date_year=false';
 const movieInfoURL = 'https://api.themoviedb.org/3/movie/' + ID + '?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm';
 const seriesInfoURL = 'https://api.themoviedb.org/3/tv/' + ID + '?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm';
 
-export const searchForMovies = (input) => async dispatch => {let formData = input};
+export const searchForMovies = (input) => async dispatch => {
+    dispatch({
+        type: MOVIE_RESULTS_LOADING,
+    });
+    const movieSearchURL = 'https://api.themoviedb.org/3/search/movie?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm&query=' + input + '&page=1&include_adult=false';
 
-keyword = formData;
-dispatch({
-    type: MOVIE_RESULTS_LOADING,
-});
-
-try {
-    const res = await fetch(movieSearchURL);
-    if (res.status !== 200) {
-        throw res;
+    try {
+        const res = await fetch(movieSearchURL);
+        console.log(res)
+        if (res.status !== 200) {
+            throw res;
+        };
+        const data = await res.json();
+        console.log(data)
+        dispatch({
+            type: MOVIE_RESULTS_LOADED,
+            payload: data
+        });
+    } catch (err) {
+       /*  const response = await err.json(); */
+        dispatch({
+            type: SEARCH_FAIL
+        });
     };
-    const data = await res.json();
+}
+
+export const searchForSeries = (input) => async dispatch => {
     dispatch({
-        type: MOVIE_RESULTS_LOADED,
-        payload: data
+        type: SERIES_RESULTS_LOADING
     });
-} catch (err) {
-    const response = await err.json();
-    dispatch({
-        type: SEARCH_FAIL
-    });
-    dispatch(stopSubmit('something', response));
-};
-
-export const searchForSeries = (input) => async dispatch => {let formData = input};
-
-keyword = formData;
-dispatch({
-    type: SERIES_RESULTS_LOADING
-});
-
-try {
-    const res = await fetch(seriesSearchURL);
-    if (res.status !== 200) {
-        throw res;
+    const seriesSearchURL = 'https://api.themoviedb.org/3/search/tv?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm&query=' + input + '&page=1&first_air_date_year=false';
+    try {
+        const res = await fetch(seriesSearchURL);
+        if (res.status !== 200) {
+            throw res;
+        };
+        const data = await res.json();
+        dispatch({
+            type: SERIES_RESULTS_LOADED,
+            payload: data
+        });
+    } catch (err) {
+        const response = await err.json();
+        dispatch({
+            type: SEARCH_FAIL
+        });
+        /* dispatch(stopSubmit('something', response)); */
     };
-    const data = await res.json();
+}
+
+export const getMovieInfo = (movieID) => async dispatch => {
+    ID = movieID;
     dispatch({
-        type: SERIES_RESULTS_LOADED,
-        payload: data
+        type: MOVIE_RESULTS_LOADING
     });
-} catch (err) {
-    const response = await err.json();
-    dispatch({
-        type: SEARCH_FAIL
-    });
-    dispatch(stopSubmit('something', response));
-};
 
-export const getMovieInfo = (movieID);
-
-ID = movieID;
-dispatch({
-    type: MOVIE_RESULTS_LOADING
-});
-
-try {
-    const res = await fetch(movieInfoURL);
-    if (res.status !== 200) {
-        throw res;
+    try {
+        const res = await fetch(movieInfoURL);
+        if (res.status !== 200) {
+            throw res;
+        };
+        const data = await res.json();
+        dispatch({
+            type: SERIES_RESULTS_LOADED,
+            payload: data
+        });
+    } catch (err) {
+        /* const response = await err.json(); */
+        dispatch({
+            type: SEARCH_FAIL
+        });
     };
-    const data = await res.json();
+}
+
+
+
+export const getSeriesInfo = (seriesID) => async dispatch => {
+    ID = seriesID;
     dispatch({
-        type: SERIES_RESULTS_LOADED,
-        payload: data
-    });
-} catch (err) {
-    const response = await err.json();
-    dispatch({
-        type: SEARCH_FAIL
-    });
-};
-
-export const getSeriesInfo = (seriesID);
-
-ID = seriesID;
-dispatch({
-    type: SERIES_RESULTS_LOADING
-})
-
-try {
-    const res = await fetch(seriesInfoURL);
-    if (res.status !== 200) {
-        throw res;
+        type: SERIES_RESULTS_LOADING
+    })
+    try {
+        const res = await fetch(seriesInfoURL);
+        if (res.status !== 200) {
+            throw res;
+        };
+        const data = await res.json();
+        dispatch({
+            type: SERIES_RESULTS_LOADED,
+            payload: data
+        });
+    } catch (err) {
+        /* const response = await err.json(); */
+        dispatch({
+            type: SEARCH_FAIL
+        });
     };
-    const data = await res.json();
-    dispatch({
-        type: SERIES_RESULTS_LOADED,
-        payload: data
-    });
-} catch (err) {
-    const response = await err.json();
-    dispatch({
-        type: SEARCH_FAIL
-    });
-};
+}
+
+
