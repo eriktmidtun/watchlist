@@ -21,6 +21,9 @@ const MediaDetailPage = () => {
         </Col>
         </Row>
         <Row>
+        <Col xs="3" classN>
+          <Image></Image>
+        </Col>
         Her kommer filmdetaljer
         </Row>
         </Container>

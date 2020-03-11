@@ -18,7 +18,7 @@ import Navigeringsbar from "./Components/Navigeringsbar/Navigeringsbar";
 import Profil from "./Components/Profil/Profil";
 import SearchPage from "./Components/SearchPage/SearchPage";
 import Footer from "./Components/Footer/Footer";
-import MediaDetailPage from "./Components/MediaDetaljer/MediaDetailPage";
+import MediaDetailPage from "./Components/SearchPage/MediaDetaljer/MediaDetailPage";
 
 /* Redux */
 import { Provider } from "react-redux";

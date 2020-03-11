@@ -8,7 +8,7 @@ import Results from "./Results";
 /* Redux */
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { Switch, Route } from "react-router-dom";
+/* import { Switch, Route } from "react-router-dom"; */
 
 /* Viser en brukerprofil, samt dens lister */
 class SearchPage extends Component {
@@ -19,17 +19,17 @@ class SearchPage extends Component {
           <Col xs={{ span: "12" }}>
             <Card style={{ marginBottom: "32px", padding: "32px" }}>
               <Card.Title style={{ textAlign: "left", fontSize: "2em" }}>
-                Søk: " {this.props.query} "
+                Søk: " Avengers "
               </Card.Title>
               <Nav variant="tabs" defaultActiveKey="/filmer">
                 <Nav.Item>
                   <LinkContainer to="filmer">
-                    <Nav.Link eventKey="link-1">Filmer (0)</Nav.Link>
+                    <Nav.Link >Filmer (14)</Nav.Link>
                   </LinkContainer>
                 </Nav.Item>
                 <Nav.Item>
                   <LinkContainer to="serier">
-                    <Nav.Link eventKey="link-2">Serier (0)</Nav.Link>
+                    <Nav.Link >Serier (0)</Nav.Link>
                   </LinkContainer>
                 </Nav.Item>
                 <Nav.Item>
@@ -38,15 +38,10 @@ class SearchPage extends Component {
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
+              <Results/>
             </Card>
           </Col>
         </Row>
-        
-          <Route path={"/filmer"}>
-            
-          </Route>
-          <Route path={"/serier"} component={Results} />
-          <Route path={"/brukere"} />
         
       </React.Fragment>
     );
