@@ -8,47 +8,45 @@ import Results from "./Results";
 /* Redux */
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import queryString from 'query-string'
 import { searchForMovies, searchForSeries } from "../../actions/TheMovieDB"
+import { Route } from "react-router-dom";
 /* import { Switch, Route } from "react-router-dom"; */
 
 /* Viser en brukerprofil, samt dens lister */
 class SearchPage extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      mediaType: "filmer",
-      søk: "Game of"
-    }
-  }
-  componentDidMount() {
-    this.props.searchForSeries(this.state.søk);
-    console.log("componentD", this.props.medier)
-  }
+
+  /* componentDidMount() {
+    const mediaType = this.props.location.pathname.split("/")[2];
+    const query = queryString.parse(this.props.location.search).q;
+    this.search(mediaType, query);
+  } */
+
   render() {
+    const query = queryString.parse(this.props.location.search).q
+    const mediaType = this.props.location.pathname.split("/")[2];
     return (
       <React.Fragment>
         <Row className="justify-content-center">
           <Col xs={{ span: "12" }}>
             <Card style={{ marginBottom: "32px", padding: "32px" }}>
               <Card.Title style={{ textAlign: "left", fontSize: "2em" }}>
-                Søk: "{this.state.søk}"
+                Søk: "{query}"
               </Card.Title>
               <Nav variant="tabs" defaultActiveKey="/filmer">
                 <Nav.Item>
-                  <LinkContainer to="filmer">
+                  <LinkContainer to={"filmer?q=" + query}>
                     <Nav.Link 
-                    onClick={()=> this.setState({mediaType:"filmer"})}
-                    active={this.state.mediaType === "filmer"}
+                    active={mediaType === "filmer"}
                     >
                       Filmer
                     </Nav.Link>
                   </LinkContainer>
                 </Nav.Item>
                 <Nav.Item>
-                  <LinkContainer to="serier">
+                  <LinkContainer to={"serier?q=" + query}>
                     <Nav.Link 
-                    onClick={()=> this.setState({mediaType:"serier"})}
-                    active={this.state.mediaType === "serier"}
+                    active={mediaType === "serier"}
                     >
                       Serier
                     </Nav.Link>
@@ -60,7 +58,12 @@ class SearchPage extends Component {
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
-              <Results results={this.props.medier.mediums} mediaType={this.state.mediaType}/>
+              <Route path="/søk/filmer">
+                <Results query={query} mediaType={'filmer'}/>
+              </Route>
+              <Route path="/søk/serier">
+                <Results query={query} mediaType={'serier'}/>
+              </Route>
             </Card>
           </Col>
         </Row>
@@ -69,8 +72,4 @@ class SearchPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  medier: state.medier
-});
-
-export default connect(mapStateToProps, { searchForMovies, searchForSeries })(SearchPage);
+export default SearchPage;

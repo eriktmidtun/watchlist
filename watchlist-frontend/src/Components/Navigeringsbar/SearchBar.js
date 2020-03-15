@@ -1,23 +1,23 @@
 import React, { Component } from "react";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import {LinkContainer} from 'react-router-bootstrap';
+import { withRouter } from 'react-router-dom'
 
 class SearchBar extends Component {
   constructor() {
     super();
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      query : ''
+    };
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
-  handleClick = () => {
-    return (
-      <Redirect
-        to={{
-          pathname: "/søk/filmer",
-          state: { query: this.inputNode.value }
-        }}
-      />
-    );
-  };
+  handleKeyPress(target){
+    if(target.charCode==13 && this.state.query !== ''){
+      this.props.history.push("/søk/filmer?q=" + this.state.query)
+    }
+  }
 
   render() {
     return (
@@ -27,13 +27,18 @@ class SearchBar extends Component {
             this.inputNode = n;
           }}
           placeholder="Søk etter filmer og serier"
+          onChange={() => this.setState({query: this.inputNode.value})}
+          onKeyPress={this.handleKeyPress}
         />
-        <Button onClick={this.handleClick} variant="primary">
-          Søk
-        </Button>
+        <LinkContainer to={"/søk/filmer?q=" + this.state.query}>
+          <Button variant="primary">
+            Søk
+          </Button>
+        </LinkContainer>
+        
       </InputGroup>
     );
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

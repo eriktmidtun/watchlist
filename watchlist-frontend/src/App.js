@@ -41,9 +41,10 @@ class App extends Component {
             <Container style={{padding:"30px"}}>
               <Switch>
                 <PrivateRoute exact path="/" component={FrontPage} />
-                <PrivateRoute exact path="/søk/:medium" component={SearchPage} />
+                <PrivateRoute path="/søk/:medium" component={SearchPage} />
                 <PrivateRoute exact path="/profil" component={Profil} />
-                <PrivateRoute exact path="/media/film1" component={MediaDetailPage} />
+                <PrivateRoute exact path="/filmer/:id" component={MediaDetailPage} />
+                <PrivateRoute exact path="/serier/:id" component={MediaDetailPage} />
                 <UautorisertFrontPage
                   exact
                   path="/logginn"

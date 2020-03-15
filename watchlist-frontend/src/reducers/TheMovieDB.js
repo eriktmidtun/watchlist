@@ -7,7 +7,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-    isLoading: false,
+    resultsLoading: false,
 };
 
 export default function(state = initialState, action) {
@@ -19,19 +19,19 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 mediums: action.payload,
-                isLoading: false,
+                resultsLoading: false,
             }
         case SERIES_RESULTS_LOADING:
         case MOVIE_RESULTS_LOADING:
             console.log("RESULTS_LOADING");
             return {
                 ...state,
-                isLoading: true,
+                resultsLoading: true,
             }
         case SEARCH_FAIL:
             console.log("SEARCH_FAIL");
             return {
-                isLoading: false,
+                resultsLoading: false,
                 ...state,
             }
         default:
