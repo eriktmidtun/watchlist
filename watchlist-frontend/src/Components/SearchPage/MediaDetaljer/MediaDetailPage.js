@@ -4,14 +4,16 @@ import React, {Component} from "react";
 import { Container, Row, Col, Card, Image, Button } from "react-bootstrap";
 
 /* Komponenter */
+import {Loader} from "../../Common/Loader";
+import NotFound from "../../Common/NotFound";
 import Anmeldelser from "./Anmeldelser";
+
 
 /* Redux */
 import { connect } from "react-redux";
 import { getMovieInfo, getSeriesInfo } from "../../../actions/TheMovieDB"
 
 /* rendrer en enkelt serieoversikt */
-/* rendrer en enkelt filmoversikt */
 const serie = (mediumDetails) => {
   const imageUrl = mediumDetails.poster_path? "https://image.tmdb.org/t/p/w300" + mediumDetails.poster_path : "";
   return (
@@ -194,11 +196,12 @@ class MediaDetailPage extends Component {
   }
 
   render() {
+    console.log("this.props.detailResultLoading " +this.props.detailResultLoading);
     if (this.props.detailResultLoading) {
-      return (<h1>Laster inn</h1>)
+      return <Loader/>
     }
-    if (!this.props.mediumDetails) {
-      return (<h1>Ingen resultater</h1>)
+    else if (!this.props.mediumDetails) {
+      return <NotFound error={"Kunne ikke finne angitt serie/film"}/>
     };
     return (
       <React.Fragment>

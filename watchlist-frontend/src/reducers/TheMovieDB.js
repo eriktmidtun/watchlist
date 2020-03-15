@@ -11,12 +11,12 @@ import {
     MEDIA_DETAILS_FAIL
 } from "../actions/types";
 
-const initialState = {
+/* const initialState = {
     resultsLoading: false,
     detailResultLoading: false,
-};
+}; */
 
-export default function(state = initialState, action) {
+export default function(state = {}, action) {
     switch (action.type) {
         case SERIES_RESULTS_LOADED:
         case MOVIE_RESULTS_LOADED:
@@ -37,8 +37,8 @@ export default function(state = initialState, action) {
         case SEARCH_FAIL:
             console.log("SEARCH_FAIL");
             return {
-                resultsLoading: false,
                 ...state,
+                resultsLoading: false,
             }
         /* For getting media details  */
         case SERIES_LOADED:
@@ -60,8 +60,9 @@ export default function(state = initialState, action) {
         case MEDIA_DETAILS_FAIL:
             console.log("MEDIA_DETAILS_FAIL");
             return {
-                detailResultLoading: false,
                 ...state,
+                detailResultLoading: false,
+                
             }
         default:
             return state

@@ -53,7 +53,7 @@ export const searchForSeries = (input) => async dispatch => {
             payload: data
         });
     } catch (err) {
-        const response = await err.json();
+        /* const response = await err.json(); */
         dispatch({
             type: SEARCH_FAIL
         });

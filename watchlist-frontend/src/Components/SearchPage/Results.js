@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom'
 /* Redux */
 import { connect } from "react-redux";
 import { searchForMovies, searchForSeries } from "../../actions/TheMovieDB"
+import { Loader } from "../Common/Loader";
 
 /* rendrer en enkelt serieoversikt i resultater */
 const serier = (serie, imageUrl) => {
@@ -73,11 +74,12 @@ class Results extends React.Component {
   }
 
   render(){
+    console.log("this.props.resultsLoading " +this.props.resultsLoading);
     if (this.props.resultsLoading) {
-      return (<h1>Laster inn</h1>)
+      return (<Loader variant="dark"/>)
     }
     if (!this.props.mediums || this.props.mediums.results.length === 0) {
-      return (<h1>Ingen resultater</h1>)
+      return (<h1 className="mt-2">Ingen resultater</h1>)
     };
     const results = this.props.mediums.results;
     return (
@@ -94,7 +96,7 @@ class Results extends React.Component {
 
 const mapStateToProps = state => ({
   mediums: state.medier.mediums,
-  resultsLoading: state.medier.resultsLoading
+  resultsLoading: state.medier.resultsLoading,
 });
 
 export default withRouter(connect(mapStateToProps, { searchForMovies, searchForSeries })(Results));
