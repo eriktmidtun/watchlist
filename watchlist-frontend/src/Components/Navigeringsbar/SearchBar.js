@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+
+/* Routing */
 import {LinkContainer} from 'react-router-bootstrap';
 import { withRouter } from 'react-router-dom'
 
@@ -13,6 +14,7 @@ class SearchBar extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
+  /* Søk med enter knappen */
   handleKeyPress(target){
     if(target.charCode==13 && this.state.query !== ''){
       this.props.history.push("/søk/filmer?q=" + this.state.query)
@@ -21,7 +23,7 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <InputGroup style={{ width: "40%", marginLeft: "0%" }}>
+      <InputGroup style={{ width: "50%", marginLeft: "0%" }}>
         <FormControl
           ref={n => {
             this.inputNode = n;
@@ -35,7 +37,6 @@ class SearchBar extends Component {
             Søk
           </Button>
         </LinkContainer>
-        
       </InputGroup>
     );
   }

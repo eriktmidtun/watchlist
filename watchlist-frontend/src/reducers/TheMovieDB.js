@@ -3,11 +3,17 @@ import {
     MOVIE_RESULTS_LOADING,
     SERIES_RESULTS_LOADED,
     SERIES_RESULTS_LOADING,
-    SEARCH_FAIL
+    SEARCH_FAIL,
+    MOVIE_LOADED,
+    MOVIE_LOADING,
+    SERIES_LOADED,
+    SERIES_LOADING,
+    MEDIA_DETAILS_FAIL
 } from "../actions/types";
 
 const initialState = {
     resultsLoading: false,
+    detailResultLoading: false,
 };
 
 export default function(state = initialState, action) {
@@ -32,6 +38,29 @@ export default function(state = initialState, action) {
             console.log("SEARCH_FAIL");
             return {
                 resultsLoading: false,
+                ...state,
+            }
+        /* For getting media details  */
+        case SERIES_LOADED:
+        case MOVIE_LOADED:
+            console.log("RESULT_LOADED");
+            console.log(action.payload)
+            return {
+                ...state,
+                mediumDetails: action.payload,
+                detailResultLoading: false,
+            }
+        case SERIES_LOADING:
+        case MOVIE_LOADING:
+            console.log("RESULT_LOADING");
+            return {
+                ...state,
+                detailResultLoading: true,
+            }
+        case MEDIA_DETAILS_FAIL:
+            console.log("MEDIA_DETAILS_FAIL");
+            return {
+                detailResultLoading: false,
                 ...state,
             }
         default:

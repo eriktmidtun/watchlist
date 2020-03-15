@@ -1,15 +1,16 @@
 import React from "react";
+/* Styling */
 import {  Row, Col, Image, Card } from "react-bootstrap/";
+
+/* Routing */
 import { LinkContainer} from "react-router-bootstrap";
 import { withRouter } from 'react-router-dom'
 
+/* Redux */
 import { connect } from "react-redux";
 import { searchForMovies, searchForSeries } from "../../actions/TheMovieDB"
-import {testdata} from "./testdata" //testdata skal slettes i endelig produkt
 
-
-
-
+/* rendrer en enkelt serieoversikt i resultater */
 const serier = (serie, imageUrl) => {
   return (
   <LinkContainer key={serie.id} to={"/serier/" + serie.id}>
@@ -28,7 +29,7 @@ const serier = (serie, imageUrl) => {
   )
 };
 
-
+/* rendrer en enkelt filmoversikt i resultater */
 const filmer = (film, imageUrl) => {
   return (
   <LinkContainer key={film.id} to={"/filmer/" + film.id}>
@@ -47,8 +48,11 @@ const filmer = (film, imageUrl) => {
   )
 };
 
+/* Respons fra filmer og serier fra MovieDB har ulike felter
+   Vi må derfor ha seperate koponeter for filmer og serier */
 class Results extends React.Component {
 
+  /* Spør movieDB om å hente de 20 første filmer/serier */
   search = (mediaType, query) => {
     if(mediaType === "filmer") {
       this.props.searchForMovies(query);
@@ -56,11 +60,12 @@ class Results extends React.Component {
       this.props.searchForSeries(query);
     }
   }
-
+ 
   componentDidMount(){
     this.search(this.props.mediaType, this.props.query);
   }
 
+   /* utfører søking om query-del av URL oppdateres */
   componentDidUpdate(prevProps) {
     if (this.props.query !== prevProps.query) {
       this.search(this.props.mediaType, this.props.query);

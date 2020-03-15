@@ -3,28 +3,28 @@ import React, { Component } from "react";
 /* Styling */
 import { Row, Col, Card, Nav } from "react-bootstrap";
 
+/* Komponenter */
 import Results from "./Results";
+import NotFound from "../Common/NotFound.js"
 
-/* Redux */
-import { connect } from "react-redux";
+/* Routring */
 import { LinkContainer } from "react-router-bootstrap";
-import queryString from 'query-string'
-import { searchForMovies, searchForSeries } from "../../actions/TheMovieDB"
 import { Route } from "react-router-dom";
-/* import { Switch, Route } from "react-router-dom"; */
+import queryString from 'query-string' //for parsing av URL
 
-/* Viser en brukerprofil, samt dens lister */
+/* En blir flyttet hit om man skriver i søkebaren i Navbar.
+   Søkesiden med navigasjon mellom å søke på serier og filmer. */
 class SearchPage extends Component {
 
-  /* componentDidMount() {
-    const mediaType = this.props.location.pathname.split("/")[2];
-    const query = queryString.parse(this.props.location.search).q;
-    this.search(mediaType, query);
-  } */
-
+  /* parser URL of får ut søkestreng og mediaType for deretter å rendre disse */
   render() {
     const query = queryString.parse(this.props.location.search).q
     const mediaType = this.props.location.pathname.split("/")[2];
+    if(!(mediaType === 'serier' ||
+         mediaType === 'filmer' ||
+         mediaType === 'brukere')){  //feil path
+      return <NotFound/>
+    }
     return (
       <React.Fragment>
         <Row className="justify-content-center">
