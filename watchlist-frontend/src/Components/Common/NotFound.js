@@ -4,7 +4,7 @@ import React from "react";
 import { Row, Col, Card } from "react-bootstrap";
 
 /* Blir rendret om ingen av de andre pathene passer. feks watchlist.socail/eksempel skal komme hit */
-const NotFound = () => {
+const NotFound = ({error}) => {
   return (
     <Row className="justify-content-center">
       <Col xs={{ span: "12" }}>
@@ -12,7 +12,7 @@ const NotFound = () => {
           <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
             404 - side ikke funnet
           </Card.Title>
-          <p>Bruk navigeringsbaren over til å komme til riktig side</p>
+          <p>{error?error:"Bruk navigeringsbaren over til å komme til riktig side"}</p>
         </Card>
       </Col>
     </Row>
