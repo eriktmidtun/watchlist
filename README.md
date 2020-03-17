@@ -85,5 +85,48 @@ Brukernavn: admin
 
 Passord: Y4wfitPqqYq7keSNVM7CUKQeE4nHMNqbNTqvNG4vGsK7zABw3UmgVRwxu2nxTuiwWLD9P3BJx9Pqo6fyrNc8fRnwDp8zEj4T4uK4fzx3tfnjBkdECD3dkwpZWVhm5ouj
 
+## Sikker kommunikasjon
+Bruker ngnix som reverse proxy server og LetsEncrypt med certbot for å generere SSL sertifikat. Fremmgangsmåten er så godt som identisk for frontend og backend.
+### Sette opp ngnix server
+        sudo apt install ngnix               
+        sudo ufw status                              #Sjekk om brannmuren er aktivert. Default er den deaktivert, i så fall ingenting å bry seg om(for oss)
+        sudo ufw allow 'Ngnix Full'                  #Får brannmur til å slippe igjennom https. Eller bare deaktiver hele greia med sudo ufw disable 
+        sudo nano /etc/nginx/sites-available/default #åpner en fil som skal redigeres 
+        Finn  hvor det står server_name_ location /... og erstatt dette med
+        
+            server_name domene.no www.domene.com; #feks watchlist.social
+        location / {
+        
+            proxy_pass http://localhost:3000; #eller 8000 for django
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+        
 
+        sudo service ngnix restart                  #restart ngnix server med den nye koden. Hvis front eller backend startes (npm start / runserver) vil siden nå fungere over http         
+   
 
+### Legge til SSL med med certbot og LetsEncrypt
+Certbot gjør det mest av arbeidet her, legger sertifikater i riktige mapper og oppdaterer ngnix filer
+
+        sudo add-apt-repository ppa:certbot/certbot
+        sudo apt-get update
+        sudo apt-get install python-certbot-nginx
+        sudo certbot --nginx -d domene.com -d www.domene.com #erstatt domene her     
+        Her må det svares på et par spørsmål i løpet av prosessen, legge inn mail etc
+        Kommer et spørsmål om http forespørsler skal håndeteres over https automatisk. Kan sikkert svare ja her
+
+        
+Bonus for backend:
+
+        gå inn i settings.py og legg domenenavne som ble lagt inn i ngnix fila tidligere inn i  ALLOWED_HOSTS. feks
+        ALLOWED_HOSTS = ['www.watchlist.social, 'mittdomene.bike']
+
+Til slutt for både frontend og backend
+
+      sudo service ngnix restart   #oppdater og restart nginx server som nå hånderer https
+      Start frontend/backend med npm start eller runserver. 
+      
