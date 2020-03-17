@@ -67,7 +67,8 @@ Kommer mer senere...
  npm run-script build
  
  serve -s -l 80 build #Oppdatering for https:  serve -s -l 3000 build & (ngnix kjører på 80 og sender til 3000)
- Legg til & etter kommandoen for å spawne en egen prosess. Bruk sudo lsof -i :80 for å finne prosess id som bruker port 80, og kill PID for å avslutte prosessen. 
+ Legg til & etter kommandoen for å spawne en egen prosess.
+ Bruk sudo lsof -i :80 for å finne prosess id som bruker port 80, og kill PID for å avslutte prosessen. 
 
 ### Server Backend:
 ssh root@138.68.107.119
