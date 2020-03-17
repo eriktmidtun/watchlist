@@ -90,7 +90,7 @@ Passord: Y4wfitPqqYq7keSNVM7CUKQeE4nHMNqbNTqvNG4vGsK7zABw3UmgVRwxu2nxTuiwWLD9P3B
 ## Sikker kommunikasjon
 Bruker ngnix som reverse proxy server og LetsEncrypt med certbot for å generere SSL sertifikat. Fremmgangsmåten er så godt som identisk for frontend og backend.
 ### Sette opp ngnix server
-        sudo apt install ngnix               
+        sudo apt install nginx               
         sudo ufw status                              #Sjekk om brannmuren er aktivert. Default er den deaktivert, i så fall ingenting å bry seg om(for oss)
         sudo ufw allow 'Ngnix Full'                  #Får brannmur til å slippe igjennom https. Eller bare deaktiver hele greia med sudo ufw disable 
         sudo nano /etc/nginx/sites-available/default #åpner en fil som skal redigeres 
@@ -108,7 +108,7 @@ Bruker ngnix som reverse proxy server og LetsEncrypt med certbot for å generere
         }
         
 
-        sudo service ngnix restart                  #restart ngnix server med den nye koden. Hvis front eller backend startes (npm start / runserver) vil siden nå fungere over http         
+        sudo service nginx restart eller sudo systemctl restart nginx                 #restart ngnix server med den nye koden. Hvis front eller backend startes (npm start / runserver) vil siden nå fungere over http         
    
 
 ### Legge til SSL med med certbot og LetsEncrypt
@@ -124,7 +124,7 @@ Certbot gjør det mest av arbeidet her, legger sertifikater i riktige mapper og 
         
 Bonus for backend:
 
-        gå inn i settings.py og legg domenenavne som ble lagt inn i ngnix fila tidligere inn i  ALLOWED_HOSTS. feks
+        gå inn i settings.py og legg domenenavne som ble lagt inn i ngnix fila tidligere inn i  ALLOWED_HOSTS. feks // mulig dette ikke trengs med [*]
         ALLOWED_HOSTS = ['www.watchlist.social, 'mittdomene.bike']
 
 Til slutt for både frontend og backend
