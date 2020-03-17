@@ -4,12 +4,13 @@ import MediaItem from "./MediaItem"
 
 
 
-// se på map
 
 const Liste = ({listeNavn}) => {
 
-  let ids = [1, 2, 3, 4, 5,5,5,5,5,5]
+  let ids = [550, 551]
 
+  //håndter state her, send props som argument. 
+  //eventuelt lag nytt redux som i TheMovieDatabase typisk, og bruk dette. 
 
   return (
     <Card style={{padding: "32px" }}>
