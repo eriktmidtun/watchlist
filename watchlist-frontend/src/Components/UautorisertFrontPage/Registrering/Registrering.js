@@ -36,7 +36,7 @@ class Registrering extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <Card style={{ margin: "2em", padding: "2em" }}>
+      <Card style={{ padding: "32px" }}>
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
           Registrering
         </Card.Title>
@@ -90,7 +90,7 @@ class Registrering extends Component {
             Registrer deg
           </Button>
         </Form>
-        <p style={{ textAlign: "right", marginTop: "0.5em" }}>
+        <p style={{ textAlign: "right", marginTop: "10px" }}>
           Allerede en konto?
           <Link to="/logginn"> Logg inn</Link>
         </p>
