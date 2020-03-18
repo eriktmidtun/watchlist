@@ -8,7 +8,10 @@ import {
     MOVIE_LOADING,
     SERIES_LOADED,
     SERIES_LOADING,
-    MEDIA_DETAILS_FAIL
+    MEDIA_DETAILS_FAIL,
+    LIST_DETAILS_LOADING,
+    LIST_DETAILS_LOADED,
+    LIST_DETAILS_FAIL
 } from "../actions/types";
 
 /* const initialState = {
@@ -62,7 +65,27 @@ export default function(state = {}, action) {
             return {
                 ...state,
                 detailResultLoading: false,
-                
+            }
+        /* For getting list details */
+        case LIST_DETAILS_LOADED:
+            console.log("LIST_DETAILS_LOADED");
+            console.log(action.payload)
+            return {
+                ...state,
+                listDetails: action.payload,
+                detailResultLoading: false,
+            }
+        case LIST_DETAILS_LOADING:
+            console.log("LIST_DETAILS_LOADING");
+            return {
+                ...state,
+                detailResultLoading: true,
+            }
+        case LIST_DETAILS_FAIL:
+            console.log("LIST_DETAILS_FAIL");
+            return {
+                ...state,
+                detailResultLoading: false,
             }
         default:
             return state

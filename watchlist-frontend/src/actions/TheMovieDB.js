@@ -8,7 +8,10 @@ import {
     MOVIE_LOADING,
     SERIES_LOADED,
     SERIES_LOADING,
-    MEDIA_DETAILS_FAIL
+    MEDIA_DETAILS_FAIL,
+    LIST_DETAILS_LOADING,
+    LIST_DETAILS_LOADED,
+    LIST_DETAILS_FAIL
 } from "./types";
 
 export const searchForMovies = (input) => async dispatch => {
@@ -114,4 +117,39 @@ export const getSeriesInfo = (ID) => async dispatch => {
     };
 }
 
-
+/* tar inn en liste av mediums gitt av backend databsen vår */
+export const getListToDetails = (mediums) => async dispatch => {
+    dispatch({
+        type: LIST_DETAILS_LOADING
+    })
+    try { 
+        let url = '';
+        const details = [];
+        console.log("getListToDetails")
+        for (const medium of mediums){
+            console.log(medium);
+            if (medium.mediaType === 'filmer') {
+                url = 'https://api.themoviedb.org/3/tv/' + medium.mdbID + '?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm';
+            }
+            else {
+                url = 'https://api.themoviedb.org/3/movie/' + medium.mdbID + '?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm';
+            }
+            console.log(url);
+            let res = await fetch(url);
+            console.log(res);
+            if (res.status !== 200) {
+                throw res;
+            };
+            const data = await res.json();
+            details.push(data)
+        }
+        dispatch({
+            type: LIST_DETAILS_LOADED,
+            payload: details
+        });
+    } catch (err) {
+        dispatch({
+            type: LIST_DETAILS_FAIL
+        });
+    };
+}
