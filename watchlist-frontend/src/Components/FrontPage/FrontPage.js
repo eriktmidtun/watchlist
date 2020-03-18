@@ -12,7 +12,7 @@ class FrontPage extends Component {
     return (
       <Row className="justify-content-center">
         <Col xs={{ span: "12" }}>
-          <Card style={{ margin: "2em", padding: "2em" }}>
+          <Card style={{padding: "32px" }}>
             <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
               Forside
             </Card.Title>
