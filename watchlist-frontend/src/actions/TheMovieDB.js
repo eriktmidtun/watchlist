@@ -128,7 +128,7 @@ export const getListToDetails = (mediums) => async dispatch => {
         console.log("getListToDetails")
         for (const medium of mediums){
             console.log(medium);
-            if (medium.mediaType === 'filmer') {
+            if (medium.mediumType === 'serier') {
                 url = 'https://api.themoviedb.org/3/tv/' + medium.mdbID + '?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm';
             }
             else {
