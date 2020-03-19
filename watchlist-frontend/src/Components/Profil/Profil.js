@@ -34,7 +34,7 @@ class Profil extends Component {
             <Liste listeNavn={"Har sett"} />
           </Col>
           <Col xs={{ order: 1, span: "12" }} lg={{ order: 2, span: "6" }}>
-            <Liste listeNavn={"Skal se"} />
+            <Liste listeNavn={"Skal se"}> </Liste>
           </Col>
         </Row>
       </React.Fragment>

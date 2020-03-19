@@ -48,8 +48,8 @@ class Liste extends React.Component {
     return (
       <Card style={{padding: "32px" }}>
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }} >
-        </Card.Title>
-          {/* ids.map( (i) => <MediaItem id={i}> </MediaItem>) */}
+        {this.props.listeNavn} </Card.Title>
+          {this.props.listDetails.map((i) => <MediaItem id={i}> </MediaItem>) }
       </Card>
     );
   }

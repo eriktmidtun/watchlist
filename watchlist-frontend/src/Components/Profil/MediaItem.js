@@ -13,6 +13,11 @@ class MediaItem extends React.Component{
     constructor(props){
         super(props)
         this.id = props.id
+        this.title = props.id.original_title
+        this.release_date = props.id.release_date
+        this.poster_path = props.id.poster_path
+        console.log("here")
+        console.log(this.poster_path)
         
     }
 
@@ -24,15 +29,12 @@ class MediaItem extends React.Component{
     }
 
     componentDidMount(){
-        this.props.getMovieInfo(this.id);
+        // this.props.getMovieInfo(this.id);
     }
 
 
     render(){
-        if (!this.props.mediumDetails   ) {
-            return <Loader/>
-        };
-        const imageUrl = this.props.mediumDetails.poster_path? "https://image.tmdb.org/t/p/w300" + this.props.mediumDetails.poster_path : "";
+        const imageUrl = this.poster_path? "https://image.tmdb.org/t/p/w300" + this.poster_path : "";
         return(
         <Card style={{marginBottom: "32px", padding: "15px" }} >
            <Row>
@@ -40,8 +42,8 @@ class MediaItem extends React.Component{
                     <Image src={imageUrl} style={{height: 135, width: 90}} rounded />
                 </Card>     
                 <Col>
-                    <h5>{this.props.mediumDetails.original_title}</h5>
-                    <h5>{this.props.mediumDetails.release_date } </h5>
+                    <h5>{this.title}</h5>
+                    <h5>{this.release_date}</h5>
                 </Col>
                 <Button onClick={this.removeBackend} className="ml-auto mb-auto mr-3 btn-danger" >
                     x
@@ -52,13 +54,6 @@ class MediaItem extends React.Component{
     }  
 }
 
-
-const foo = (info) => {
-    if (info){
-        return(info.original_title)
-    }
-
-}
 
 const mapStateToProps = state => ({
     mediumDetails: state.medier.mediumDetails,
