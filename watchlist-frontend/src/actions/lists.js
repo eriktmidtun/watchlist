@@ -7,7 +7,9 @@ import {
     ADD_TO_LIST_LOADING,
     ADD_TO_LIST,
     ADD_TO_LIST_FAILED,
-    //DELETE_FROM_LIST,
+    DELETE_FROM_LIST,
+    DELETE_FROM_LIST_LOADING,
+    DELETE_FROM_LIST_FAILED,
     LIST_FAILED,
 } from "./types";
 import {tokenConfig} from './auth'
@@ -102,6 +104,34 @@ export const isMediaInList = (mdbID, list) => async (dispatch, getState) => {
     } catch (err) {
     dispatch({
         type: LIST_ITEM_FAILED
+    });
+    }
+};
+
+export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) => {
+    dispatch({ type: DELETE_FROM_LIST_LOADING });
+
+    try {
+    const token = tokenConfig(getState);
+
+    const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID `/` , {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + token
+        }
+    });
+    const data = await res.json();
+    if (res.status !== 200 || res.status !== 204 ) {
+        throw Error(data);
+    }
+    dispatch({
+        type: DELETE_FROM_LIST
+    });
+    } catch (err) {
+    dispatch({
+        type: DELETE_FROM_LIST_FAILED
     });
     }
 };
