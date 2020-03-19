@@ -20,6 +20,9 @@ export const loadUser = () => async (dispatch, getState) => {
 
   try {
     const token = tokenConfig(getState);
+    if(!token) {
+      throw Error("ingen token lagret");
+    }
     const res = await fetch(baseURL + `/api/auth/user`, {
       method: "GET",
       mode: "cors",
