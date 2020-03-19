@@ -31,7 +31,7 @@ class Profil extends Component {
         </Row>
         <Row className="justify-content-center">
           <Col xs={{ order: 2, span: "12" }} lg={{ order: 1, span: "6" }}>
-            <Liste listeNavn={"Har sett"} />
+            {/* <Liste listeNavn={"Har sett"} /> */}
           </Col>
           <Col xs={{ order: 1, span: "12" }} lg={{ order: 2, span: "6" }}>
             <Liste listeNavn={"Skal se"}> </Liste>

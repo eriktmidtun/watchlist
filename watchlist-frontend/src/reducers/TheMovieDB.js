@@ -11,7 +11,10 @@ import {
     MEDIA_DETAILS_FAIL,
     LIST_DETAILS_LOADING,
     LIST_DETAILS_LOADED,
-    LIST_DETAILS_FAIL
+    LIST_DETAILS_FAIL,
+    BACKEND_IDS_LOADING,
+    BACKEND_IDS_LOADED
+
 } from "../actions/types";
 
 /* const initialState = {
@@ -86,6 +89,19 @@ export default function(state = {}, action) {
             return {
                 ...state,
                 detailResultLoading: false,
+            }
+        case BACKEND_IDS_LOADING:
+            console.log("BACKEND_IDS_LOADING")
+            return {
+                ...state,
+                backendIdsLoading: true
+            }
+        case BACKEND_IDS_LOADED:
+            console.log("BACKEND_IDS_LOADED")
+            return {
+                ...state,
+                listOfIds: action.payload,
+                backendIdsLoading: false
             }
         default:
             return state

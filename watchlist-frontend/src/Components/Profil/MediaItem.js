@@ -15,10 +15,7 @@ class MediaItem extends React.Component{
         this.id = props.id
         this.title = props.id.original_title
         this.release_date = props.id.release_date
-        this.poster_path = props.id.poster_path
-        console.log("here")
-        console.log(this.poster_path)
-        
+        this.poster_path = props.id.poster_path        
     }
 
     

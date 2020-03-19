@@ -11,7 +11,9 @@ import {
     MEDIA_DETAILS_FAIL,
     LIST_DETAILS_LOADING,
     LIST_DETAILS_LOADED,
-    LIST_DETAILS_FAIL
+    LIST_DETAILS_FAIL,
+    BACKEND_IDS_LOADING,
+    BACKEND_IDS_LOADED
 } from "./types";
 
 export const searchForMovies = (input) => async dispatch => {
@@ -152,4 +154,33 @@ export const getListToDetails = (mediums) => async dispatch => {
             type: LIST_DETAILS_FAIL
         });
     };
+}
+
+
+export const getBackendMediaID =(token) => async dispatch =>{
+
+    dispatch({
+        type: BACKEND_IDS_LOADING
+    })
+
+    let res = await fetch("watchlist.social/api/lists/wantToWatch", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token
+        }
+      })
+
+    if (res.status !== 200) {
+        console.log("error")
+    };
+
+    const data = await res.json();
+    console.log("token: " + token)
+
+    dispatch({
+        type: BACKEND_IDS_LOADED,
+        payload: data
+    });
+
 }

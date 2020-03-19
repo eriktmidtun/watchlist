@@ -196,7 +196,7 @@ class MediaDetailPage extends Component {
   }
 
   render() {
-    console.log("this.props.detailResultLoading " +this.props.detailResultLoading);
+    // console.log("this.props.detailResultLoading " +this.props.detailResultLoading);
     if (this.props.detailResultLoading) {
       return <Loader/>
     }
