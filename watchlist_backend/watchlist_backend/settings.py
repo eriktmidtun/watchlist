@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'knox',
     'accounts.apps.AccountsConfig',
+    'mediaItem.apps.MediaitemConfig'
+    #trengs 'rest_framework',?
 ]
 
 REST_FRAMEWORK = {
