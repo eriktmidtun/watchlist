@@ -2,14 +2,14 @@ import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import auth from "./auth";
 import medier from "./TheMovieDB";
-import lists from "./lists";
+import list from "./lists";
 import { LOGOUT_SUCCESS } from "../actions/types";
 
 const appReducer = combineReducers({
   form: formReducer,
   auth,
   medier,
-  lists,
+  list,
 });
 
 const rootReducer = (state, action) => {

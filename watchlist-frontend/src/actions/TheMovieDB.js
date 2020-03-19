@@ -161,8 +161,6 @@ export const getListToDetails = (mediums) => async dispatch => {
 
 const baseURL = `http://localhost:8000`;
 
-/* Spør server om want to watch list */
-
 
 export const getBackendMediaID = () => async (dispatch, getState) => {
 
@@ -172,7 +170,7 @@ export const getBackendMediaID = () => async (dispatch, getState) => {
 
     try {
     const token = tokenConfig(getState);
-    const res = await fetch(baseURL + `/api/lists/wantToWatch`, {
+    const res = await fetch(baseURL + `/api/lists/wantToWatch/`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -194,7 +192,7 @@ export const getBackendMediaID = () => async (dispatch, getState) => {
     //     type: WANT_TO_WATCH_FAILED
     // });
     }
-};
+}; 
 
 
 // export const getBackendMediaID =(token) => async dispatch =>{

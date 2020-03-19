@@ -12,10 +12,10 @@ import Anmeldelser from "./Anmeldelser";
 /* Redux */
 import { connect } from "react-redux";
 import { getMovieInfo, getSeriesInfo } from "../../../actions/TheMovieDB"
+import { isMediaInList , addMediaToList } from "../../../actions/lists.js"
 
 /* rendrer en enkelt serieoversikt */
-const serie = (mediumDetails) => {
-  const imageUrl = mediumDetails.poster_path? "https://image.tmdb.org/t/p/w300" + mediumDetails.poster_path : "";
+const Details = ({name , poster_path, details, overview, vilSeKnapp, harSettKnapp }) => {
   return (
     <Row className="justify-content-center">
     <Col xs={{ span: "12" }}>
@@ -24,19 +24,43 @@ const serie = (mediumDetails) => {
         <Row className="justify-content-center">
           <Col xs="9">
           <Card.Title style={{ textAlign: "left", fontSize: "2em", marginRight:"auto" }}>
-              <b>{mediumDetails.name}</b>
+              <b>{name}</b>
             </Card.Title>
           </Col>
           <Col xs="3" style={{marginLeft: "auto"}} >
-            <Button style={{width: "50%"}} className="mr-1">Vil se</Button>
-            <Button >Har sett</Button>
+            <Button style={{width: "50%"}} 
+                    className="mr-1"
+                    onClick={()=> vilSeKnapp}
+                    >
+                    Vil se
+                    </Button>
+            <Button onClick={()=> harSettKnapp}>Har sett</Button>
           </Col>
         </Row>
         <Row>
           <Col xs="auto" >
-            <Image src={imageUrl} style={{height: 300, width: 200}} rounded />
+            <Image src={poster_path} style={{height: 300, width: 200}} rounded />
           </Col>
           <Col>
+            {details}
+          </Col>
+        </Row>
+        <Row>
+        <Col className="mt-1">
+          <h4><b>Beskrivelse</b></h4>
+          <p>{overview?overview: "Ingen beskrivelse tilgjenlig"}</p>
+        </Col>
+        </Row>
+      </Container>
+      </Card>
+    </Col>
+  </Row>
+  )
+};
+
+const serieDetails = (mediumDetails) => {
+  return (
+          <React.Fragment>
             <p><b>Original tittel: </b>
             {
               mediumDetails.original_name
@@ -74,45 +98,14 @@ const serie = (mediumDetails) => {
                 <span key={genre.id}>{genre.name + ", "}</span> )
             }
             </p>
-          </Col>
-        </Row>
-        <Row>
-        <Col className="mt-1">
-          <h4><b>Beskrivelse</b></h4>
-          <p>{mediumDetails.overview?mediumDetails.overview: "Ingen beskrivelse tilgjenlig"}</p>
-        </Col>
-        </Row>
-      </Container>
-      </Card>
-    </Col>
-  </Row>
-  )
-};
+          </React.Fragment>
+          );
+}
 
 /* rendrer en enkelt filmoversikt */
-const film = (mediumDetails) => {
-  const imageUrl = mediumDetails.poster_path? "https://image.tmdb.org/t/p/w300" + mediumDetails.poster_path : "";
+const filmDetails = (mediumDetails) => {
   return (
-    <Row className="justify-content-center">
-    <Col xs={{ span: "12" }}>
-      <Card style={{marginBottom: "32px", padding: "32px" }}>
-      <Container>
-        <Row className="justify-content-center">
-          <Col xs="9">
-          <Card.Title style={{ textAlign: "left", fontSize: "2em", marginRight:"auto" }}>
-              <b>{mediumDetails.title}</b>
-            </Card.Title>
-          </Col>
-          <Col xs="3" style={{marginLeft: "auto"}} >
-            <Button style={{width: "50%"}} className="mr-1">Vil se</Button>
-            <Button >Har sett</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs="auto" >
-            <Image src={imageUrl} style={{height: 300, width: 200}} rounded />
-          </Col>
-          <Col>
+          <React.Fragment>
             <p><b>Original tittel: </b>
             {
               mediumDetails.original_title
@@ -145,20 +138,10 @@ const film = (mediumDetails) => {
                 <span key={genre.id}>{genre.name + ", "}</span> )
             }
             </p>
-          </Col>
-        </Row>
-        <Row>
-        <Col className="mt-1">
-          <h4><b>Beskrivelse</b></h4>
-          <p>{mediumDetails.overview?mediumDetails.overview: "Ingen beskrivelse tilgjenlig"}</p>
-        </Col>
-        </Row>
-      </Container>
-      </Card>
-    </Col>
-  </Row>
-  )
+          </React.Fragment>  
+          )
 };
+
 
 class MediaDetailPage extends Component {
   constructor(props){
@@ -203,13 +186,26 @@ class MediaDetailPage extends Component {
     else if (!this.props.mediumDetails) {
       return <NotFound error={"Kunne ikke finne angitt serie/film"}/>
     };
+    const imageUrl = this.props.mediumDetails.poster_path? "https://image.tmdb.org/t/p/w300" + this.props.mediumDetails.poster_path : "";
     return (
       <React.Fragment>
       <Row className="justify-content-center">
         <Col xs={{ span: "12" }}>
           {this.state.mediaType === "filmer" ?
-           film(this.props.mediumDetails):
-           serie(this.props.mediumDetails)}
+           <Details
+             name={this.props.mediumDetails.title}
+             poster_path={imageUrl}
+             details={filmDetails(this.props.mediumDetails)}
+             overveiw={this.props.mediumDetails.overview}
+             vilSeKnapp={this.props.addMediaToList(this.state.mediaID,this.state.mediaType,'wantToWatch')}
+             harSettKnapp={this.props.addMediaToList(this.state.mediaID,this.state.mediaType,'haveWatched')}
+             />:
+            <Details
+             name={this.props.mediumDetails.name}
+             poster_path={imageUrl}
+             details={serieDetails(this.props.mediumDetails)}
+             overveiw={this.props.mediumDetails.overview}
+             />}
           <Anmeldelser />
         </Col>
       </Row>
@@ -220,7 +216,8 @@ class MediaDetailPage extends Component {
 
 const mapStateToProps = state => ({
   mediumDetails: state.medier.mediumDetails,
-  detailResultLoading: state.medier.detailResultLoading
+  detailResultLoading: state.medier.detailResultLoading,
+  
 });
 
-export default connect(mapStateToProps, { getMovieInfo, getSeriesInfo })(MediaDetailPage);
+export default connect(mapStateToProps, { getMovieInfo, getSeriesInfo,isMediaInList , addMediaToList  })(MediaDetailPage);
