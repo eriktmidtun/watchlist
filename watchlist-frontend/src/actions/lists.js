@@ -1,11 +1,15 @@
 import {
     LIST_LOADED,
-    LIST_ITEM_LOADING,
-    LIST_ITEM_FAILED,
-    LIST_ITEM,
+    WTW_ITEM_LOADING,
+    WTW_ITEM_FAILED,
+    WTW_ITEM,
+    HW_ITEM_LOADING,
+    HW_ITEM_FAILED,
+    HW_ITEM,
     LIST_LOADING,
     ADD_TO_LIST_LOADING,
-    ADD_TO_LIST,
+    ADD_TO_WTW,
+    ADD_TO_HW,
     ADD_TO_LIST_FAILED,
     DELETE_FROM_LIST,
     DELETE_FROM_LIST_LOADING,
@@ -52,13 +56,14 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
 
     try {
     const token = tokenConfig(getState);
-
+    console.log("mdbID, mediaType, list",mdbID, mediaType, list);
     const body = {
         mdbID: mdbID,
-        mediaType: mediaType
+        mediumType: mediaType
     }
+    console.log("body",body);
     const res = await fetch(baseURL + `/api/lists/` + list +`/` , {
-        method: "GET",
+        method: "POST",
         mode: "cors",
         headers: {
         "Content-Type": "application/json",
@@ -67,12 +72,20 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
         body: JSON.stringify(body)
     });
     const data = await res.json();
-    if (res.status !== 200 || res.status !== 204 ) {
+    console.log("data",data);
+    if (res.status !== 201 ) {
         throw Error(data);
     }
-    dispatch({
-        type: ADD_TO_LIST,
-    });
+    if(list === 'wantToWatch'){
+        dispatch({
+            type: ADD_TO_WTW,
+        });
+    } else {
+        dispatch({
+            type: ADD_TO_HW,
+        });
+    }
+    
     } catch (err) {
     dispatch({
         type: ADD_TO_LIST_FAILED
@@ -80,12 +93,44 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
     }
 };
 
-export const isMediaInList = (mdbID, list) => async (dispatch, getState) => {
-    dispatch({ type: LIST_ITEM_LOADING });
 
+
+export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
+    dispatch({ type: WTW_ITEM_LOADING });
+    console.log("isMediaInWTW mdbID",mdbID);
     try {
     const token = tokenConfig(getState);
-    const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID `/` , {
+    console.log("isMediaInWTW token",token);
+    const res = await fetch(baseURL + `/api/lists/wantToWatch/` + mdbID  , {
+        method: "GET",
+        mode: "cors",
+        headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + token
+        }
+    });
+    console.log("isMediaInWTW res",res);
+    if (res.status !== 200 ) {
+        throw Error("den er ikke i listen");
+    }
+    dispatch({
+        type: WTW_ITEM,
+    });
+    } catch (err) {
+        console.log("isMediaInWTW err",err);
+    dispatch({
+        type: WTW_ITEM_FAILED
+    });
+    }
+};
+
+export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
+    dispatch({ type: HW_ITEM_LOADING });
+    //console.log("isMediaInHW mdbID",mdbID);
+    try {
+    const token = tokenConfig(getState);
+   // console.log("isMediaInHW token",token);
+    const res = await fetch(baseURL + `/api/lists/haveWatched/` + mdbID + `/` , {
         method: "GET",
         mode: "cors",
         headers: {
@@ -94,23 +139,24 @@ export const isMediaInList = (mdbID, list) => async (dispatch, getState) => {
         },
         body: null
     });
-    const data = await res.json();
-    if (res.status !== 200 || res.status !== 204 ) {
-        throw Error(data);
+   // console.log("isMediaInHW res",res);
+    if (res.status !== 200 ) {
+        throw Error("Den er ikke i listen");
     }
     dispatch({
-        type: LIST_ITEM,
+        type: HW_ITEM,
     });
     } catch (err) {
+        console.log(err)
     dispatch({
-        type: LIST_ITEM_FAILED
+        type: HW_ITEM_FAILED
     });
     }
 };
 
 export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) => {
     dispatch({ type: DELETE_FROM_LIST_LOADING });
-
+    
     try {
     const token = tokenConfig(getState);
 
@@ -122,9 +168,8 @@ export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) =
         Authorization: "Token " + token
         }
     });
-    const data = await res.json();
     if (res.status !== 200 || res.status !== 204 ) {
-        throw Error(data);
+        throw Error("No gikk galt med deletefrom list");
     }
     dispatch({
         type: DELETE_FROM_LIST

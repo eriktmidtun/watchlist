@@ -1,13 +1,19 @@
 import {
     LIST_LOADED,
-    LIST_ITEM_LOADING,
-    LIST_ITEM_FAILED,
-    LIST_ITEM,
+    WTW_ITEM_LOADING,
+    WTW_ITEM_FAILED,
+    WTW_ITEM,
+    HW_ITEM_LOADING,
+    HW_ITEM_FAILED,
+    HW_ITEM,
     LIST_LOADING,
     ADD_TO_LIST_LOADING,
-    ADD_TO_LIST,
+    ADD_TO_WTW,
+    ADD_TO_HW,
     ADD_TO_LIST_FAILED,
-    //DELETE_FROM_LIST,
+    DELETE_FROM_LIST,
+    DELETE_FROM_LIST_LOADING,
+    DELETE_FROM_LIST_FAILED,
     LIST_FAILED,
 } from "../actions/types";
 
@@ -31,27 +37,57 @@ export default function(state = {}, action) {
                 listLoading: false,
             }
         /* for one item in a list */
-        case LIST_ITEM:
+        case WTW_ITEM:
             return {
                 ...state,
                 listItemLoading: false,
+                isInWantToWatch:  true,
             }
-        case LIST_ITEM_LOADING:
+        case WTW_ITEM_LOADING:
             console.log("LIST_LOADING");
             return {
                 ...state,
                 listItemLoading: true,
+                isInWantToWatch:  false,
             }
-        case LIST_ITEM_FAILED:
+        case WTW_ITEM_FAILED:
             return {
                 ...state,
                 listItemLoading: false,
+                isInWantToWatch:  false,
+            }
+
+        /* have watched in list */
+        case HW_ITEM:
+            return {
+                ...state,
+                listItemLoading: false,
+                isInHaveWatched: true,
+            }
+        case HW_ITEM_LOADING:
+            return {
+                ...state,
+                listItemLoading: true,
+                isInHaveWatched: false,
+            }
+        case HW_ITEM_FAILED:
+            return {
+                ...state,
+                listItemLoading: false,
+                isInHaveWatched: false,
             }
         /* add to list */
-        case ADD_TO_LIST:
+        case ADD_TO_WTW:
             return {
                 ...state,
                 addLoading: false,
+                isInWantToWatch:  true,
+            }
+        case ADD_TO_HW:
+            return {
+                ...state,
+                addLoading: false,
+                isInHaveWatched: true,
             }
         case ADD_TO_LIST_LOADING:
             return {
@@ -63,6 +99,7 @@ export default function(state = {}, action) {
                 ...state,
                 addLoading: false,
             }
+        
         default:
             return state
     }

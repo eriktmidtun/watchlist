@@ -14,8 +14,6 @@ import {
     LIST_DETAILS_FAIL,
 } from "./types";
 
-import {tokenConfig} from '../actions/auth'
-
 export const searchForMovies = (input) => async dispatch => {
     dispatch({
         type: MOVIE_RESULTS_LOADING,

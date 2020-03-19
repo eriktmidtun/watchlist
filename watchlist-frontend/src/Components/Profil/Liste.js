@@ -5,7 +5,8 @@ import MediaItem from "./MediaItem"
 import {Loader} from "../Common/Loader"
 
 import { connect } from "react-redux";
-import { getListToDetails, getBackendMediaID } from "../../actions/TheMovieDB"
+import { getListToDetails  } from "../../actions/TheMovieDB"
+import { getBackendMediaID } from "../../actions/lists"
 
 
 class Liste extends React.Component {
@@ -35,17 +36,17 @@ class Liste extends React.Component {
   }
 
   componentDidMount(){
-    this.props.getBackendMediaID(this.props.token)  
+    this.props.getBackendMediaID('wantToWatch');
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.backendIdList !== prevProps.backendIdList) {
-      this.props.getListToDetails(this.props.backendIdList);
+    if (this.props.list !== prevProps.list) {
+      this.props.getListToDetails(this.props.list);
     }
   } 
   
  render() {
-    if (this.props.backendIdListLoading){
+    if (this.props.listLoading){
       return (<Loader/>)
     }
 
@@ -70,8 +71,8 @@ const mapStateToProps = state => ({
   listDetails: state.medier.listDetails,
   detailResultLoading: state.medier.detailResultLoading,
   token: state.auth.token,
-  backendIdList: state.medier.backendIdList,
-  backendIdListLoading: state.medier.backendIdListLoading
+  list: state.list.list,
+  listLoading: state.list.listLoading
 });
 
 

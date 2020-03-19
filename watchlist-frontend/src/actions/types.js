@@ -32,11 +32,16 @@ export const LIST_LOADED = "LIST_LOADED";
 export const LIST_FAILED = "LIST_FAILED";
 export const LIST_LOADING = "LIST_LOADING";
 
-export const LIST_ITEM_LOADING = "LIST_ITEM_LOADED";
-export const LIST_ITEM = "LIST_ITEM";
-export const LIST_ITEM_FAILED = "LIST_ITEM_FAILED";
+export const HW_ITEM_LOADING = "HW_ITEM_LOADED";
+export const HW_ITEM = "HW_ITEM";
+export const HW_ITEM_FAILED = "HW_ITEM_FAILED";
 
-export const ADD_TO_LIST = "ADD_TO_LIST";
+export const WTW_ITEM_LOADING = "WTW_ITEM_LOADED";
+export const WTW_ITEM = "WTW_ITEM";
+export const WTW_ITEM_FAILED = "WTW_ITEM_FAILED";
+
+export const ADD_TO_HW = "ADD_TO_HW";
+export const ADD_TO_WTW = "ADD_TO_WTW";
 export const ADD_TO_LIST_LOADING = "ADD_TO_LIST_LOADING";
 export const ADD_TO_LIST_FAILED = "ADD_TO_LIST_FAILED";
 
