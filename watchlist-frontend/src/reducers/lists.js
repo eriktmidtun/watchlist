@@ -1,50 +1,105 @@
 import {
-    WANT_TO_WATCH_LOADED,
-    HAVE_WATCHED_LOADED,
-    WANT_TO_WATCH_LOADING,
-    HAVE_WATCHED_LOADING,
-    ADD_WANT_TO_WATCH,
-    ADD_HAVE_WATCHED,
-    DELETE_WANT_TO_WATCH,
-    DELETE_HAVE_WATCHED,
-    WANT_TO_WATCH_FAILED,
-    HAVE_WATCHED_FAILED,
+    LIST_LOADED,
+    WTW_ITEM_LOADING,
+    WTW_ITEM_FAILED,
+    WTW_ITEM,
+    HW_ITEM_LOADING,
+    HW_ITEM_FAILED,
+    HW_ITEM,
+    LIST_LOADING,
+    ADD_TO_LIST_LOADING,
+    ADD_TO_WTW,
+    ADD_TO_HW,
+    ADD_TO_LIST_FAILED,
+    DELETE_FROM_LIST,
+    DELETE_FROM_LIST_LOADING,
+    DELETE_FROM_LIST_FAILED,
+    LIST_FAILED,
 } from "../actions/types";
 
 export default function(state = {}, action) {
     switch (action.type) {
-        case WANT_TO_WATCH_LOADED:
-        case HAVE_WATCHED_LOADED:
+        case LIST_LOADED:
             return {
                 ...state,
-                lists: action.payload,
-                listsLoading: false,
+                list: action.payload,
+                listLoading: false,
             }
-        case WANT_TO_WATCH_LOADING:
-        case HAVE_WATCHED_LOADING:
-            console.log("RESULTS_LOADING");
+        case LIST_LOADING:
+            console.log("LIST_LOADING");
             return {
                 ...state,
-                listsLoading: true,
+                listLoading: true,
             }
-        case WANT_TO_WATCH_FAILED:
-        case HAVE_WATCHED_FAILED:
+        case LIST_FAILED:
             return {
                 ...state,
-                listsLoading: false,
+                listLoading: false,
             }
-        case ADD_WANT_TO_WATCH:
-        case ADD_HAVE_WATCHED:
+        /* for one item in a list */
+        case WTW_ITEM:
             return {
                 ...state,
-                listsLoading: false,
+                listItemLoading: false,
+                isInWantToWatch:  true,
             }
-        case DELETE_WANT_TO_WATCH:
-        case DELETE_HAVE_WATCHED:
+        case WTW_ITEM_LOADING:
+            console.log("LIST_LOADING");
             return {
                 ...state,
-                listsLoading: false,
+                listItemLoading: true,
+                isInWantToWatch:  false,
             }
+        case WTW_ITEM_FAILED:
+            return {
+                ...state,
+                listItemLoading: false,
+                isInWantToWatch:  false,
+            }
+
+        /* have watched in list */
+        case HW_ITEM:
+            return {
+                ...state,
+                listItemLoading: false,
+                isInHaveWatched: true,
+            }
+        case HW_ITEM_LOADING:
+            return {
+                ...state,
+                listItemLoading: true,
+                isInHaveWatched: false,
+            }
+        case HW_ITEM_FAILED:
+            return {
+                ...state,
+                listItemLoading: false,
+                isInHaveWatched: false,
+            }
+        /* add to list */
+        case ADD_TO_WTW:
+            return {
+                ...state,
+                addLoading: false,
+                isInWantToWatch:  true,
+            }
+        case ADD_TO_HW:
+            return {
+                ...state,
+                addLoading: false,
+                isInHaveWatched: true,
+            }
+        case ADD_TO_LIST_LOADING:
+            return {
+                ...state,
+                addLoading: true,
+            }
+        case ADD_TO_LIST_FAILED:
+            return {
+                ...state,
+                addLoading: false,
+            }
+        
         default:
             return state
     }
