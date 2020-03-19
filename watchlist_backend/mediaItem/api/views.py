@@ -15,7 +15,7 @@ class wantToWatchMediaItemViewSet(viewsets.ModelViewSet):
         return self.request.user.wantToWatchMediaItem.all()
 
     def perform_create(self, serializer):  
-        queryset = self.request.user.haveWatchedMediaItem.all().filter(mdbID = self.request.data['mdbID'])
+        queryset = self.request.user.wantToWatchMediaItem.all().filter(mdbID = self.request.data['mdbID'])
         if queryset.exists():
             raise ValidationError('mediumet finnes allerede i listen')
         serializer.save(owner=self.request.user)
