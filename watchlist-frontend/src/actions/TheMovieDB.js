@@ -12,6 +12,8 @@ import {
     LIST_DETAILS_LOADING,
     LIST_DETAILS_LOADED,
     LIST_DETAILS_FAIL,
+    BACKEND_IDS_LOADING,
+    BACKEND_IDS_LOADED,
 } from "./types";
 
 export const searchForMovies = (input) => async dispatch => {
@@ -125,7 +127,7 @@ export const getListToDetails = (mediums) => async dispatch => {
     try { 
         let url = '';
         const details = [];
-        console.log("getListToDetails")
+        // console.log("getListToDetails")
         for (const medium of mediums){
             console.log(medium);
             if (medium.mediumType === 'serier') {
@@ -134,9 +136,9 @@ export const getListToDetails = (mediums) => async dispatch => {
             else {
                 url = 'https://api.themoviedb.org/3/movie/' + medium.mdbID + '?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm';
             }
-            console.log(url);
+            // console.log(url);
             let res = await fetch(url);
-            console.log(res);
+            // console.log(res);
             if (res.status !== 200) {
                 throw res;
             };
@@ -153,3 +155,10 @@ export const getListToDetails = (mediums) => async dispatch => {
         });
     };
 }
+
+
+const baseURL = `http://localhost:8000`;
+
+/* Spør server om want to watch list */
+
+

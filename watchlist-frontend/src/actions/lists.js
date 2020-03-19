@@ -180,3 +180,24 @@ export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) =
     });
     }
 };
+
+export const deleteMovieItem = (apiUrl, id) => async(getState) => {
+
+    try {
+        const token = tokenConfig(getState);
+        const res = await fetch(baseURL + `/api/lists/` + apiUrl + '/' + id, {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: "Token " + token
+            },
+            body: null
+        });
+    }
+    catch {
+
+    }
+
+}
+

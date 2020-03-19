@@ -13,6 +13,8 @@ class Liste extends React.Component {
   constructor(props){
     super(props);
 
+    // console.log(this.props.apiUrl)
+
     this.state={
 
       mediums: [
@@ -49,7 +51,6 @@ class Liste extends React.Component {
     if (this.props.listLoading){
       return (<Loader/>)
     }
-
     if (this.props.detailResultLoading) {
       return (<Loader/>)
     }

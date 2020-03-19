@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Image, Col, Row, Button } from "react-bootstrap/";
 import "./MediaItem.css";
 import {getMovieInfo, getSeriesInfo} from "../../actions/TheMovieDB"
+import {deleteMovieItem} from "../../actions/lists"
 import {Loader} from "../Common/Loader"
 
 
@@ -15,14 +16,13 @@ class MediaItem extends React.Component{
         this.id = props.id
         this.title = props.id.original_title
         this.release_date = props.id.release_date
-        this.poster_path = props.id.poster_path        
+        this.poster_path = props.id.poster_path
+        this.apiUrl = "wantToWatch"        
     }
 
     
-    removeBackend = (id) =>{
-        //use remove movie by id API 
-        console.log("Hei")
-        console.log(this.id)
+    removeBackend = () =>{
+        this.props.deleteMovieItem(this.apiUrl, this.id)
     }
 
     componentDidMount(){
@@ -57,4 +57,4 @@ const mapStateToProps = state => ({
     detailResultLoading: state.medier.detailResultLoading,
 });
 
-export default connect(mapStateToProps, { getMovieInfo, getSeriesInfo })(MediaItem);
+export default connect(mapStateToProps, { getMovieInfo, getSeriesInfo, deleteMovieItem })(MediaItem);
