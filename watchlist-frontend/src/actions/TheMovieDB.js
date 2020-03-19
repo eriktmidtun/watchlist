@@ -16,6 +16,8 @@ import {
     BACKEND_IDS_LOADED
 } from "./types";
 
+import {tokenConfig} from '../actions/auth'
+
 export const searchForMovies = (input) => async dispatch => {
     dispatch({
         type: MOVIE_RESULTS_LOADING,
@@ -157,30 +159,71 @@ export const getListToDetails = (mediums) => async dispatch => {
 }
 
 
-export const getBackendMediaID =(token) => async dispatch =>{
+const baseURL = `http://localhost:8000`;
+
+/* Spør server om want to watch list */
+
+
+export const getBackendMediaID = () => async (dispatch, getState) => {
 
     dispatch({
         type: BACKEND_IDS_LOADING
     })
 
-    let res = await fetch("watchlist.social/api/lists/wantToWatch", {
-        method: 'GET',
+    try {
+    const token = tokenConfig(getState);
+    const res = await fetch(baseURL + `/api/lists/wantToWatch`, {
+        method: "GET",
+        mode: "cors",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token
-        }
-      })
-
-    if (res.status !== 200) {
-        console.log("error")
-    };
-
+        "Content-Type": "application/json",
+        Authorization: "Token " + token
+        },
+        body: null
+    });
     const data = await res.json();
-    console.log("token: " + token)
-
+    if (res.status !== 200) {
+        throw Error(data);
+    }
     dispatch({
         type: BACKEND_IDS_LOADED,
         payload: data
     });
+    } catch (err) {
+    // dispatch({
+    //     type: WANT_TO_WATCH_FAILED
+    // });
+    }
+};
 
-}
+
+// export const getBackendMediaID =(token) => async dispatch =>{
+
+//     console.log("token: " + token)
+
+//     dispatch({
+//         type: BACKEND_IDS_LOADING
+//     })
+
+//     let res = await fetch("watchlist.social/api/lists/wantToWatch", {
+//         method: 'GET',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': token
+//         }
+//       })
+
+//     console.log("res: " + res)
+
+//     if (res.status !== 200) {
+//         console.log("error")
+//     };
+
+//     const data = await res.json();
+
+//     dispatch({
+//         type: BACKEND_IDS_LOADED,
+//         payload: data
+//     });
+
+// }

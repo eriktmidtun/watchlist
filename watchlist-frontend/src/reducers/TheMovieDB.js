@@ -94,14 +94,14 @@ export default function(state = {}, action) {
             console.log("BACKEND_IDS_LOADING")
             return {
                 ...state,
-                backendIdsLoading: true
+                backendIdListLoading: true
             }
         case BACKEND_IDS_LOADED:
             console.log("BACKEND_IDS_LOADED")
             return {
                 ...state,
-                listOfIds: action.payload,
-                backendIdsLoading: false
+                backendIdList: action.payload,
+                backendIdListLoading: false
             }
         default:
             return state

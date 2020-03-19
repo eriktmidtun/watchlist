@@ -35,24 +35,19 @@ class Liste extends React.Component {
   }
 
   componentDidMount(){
-
-    this.props.getBackendMediaID(this.props.token)
-    console.log(this.props.backendIdList)
-    // console.log(this.props.token)
-
-
-    //send inn filmene
-    //this.props.getListToDetails(this.state.mediums);
+    this.props.getBackendMediaID(this.props.token)  
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.backendIdList !== prevProps.backendIdList) {
+      this.props.getListToDetails(this.props.backendIdList);
+    }
+  } 
   
  render() {
-    // console.log("this.props.detailResultLoading " + this.props.detailResultLoading);
     if (this.props.backendIdListLoading){
       return (<Loader/>)
     }
-    console.log("ID list " + this.props.backendIdListLoading)
-
-   // this.props.getListToDetails(this.props.backendIdList);
 
     if (this.props.detailResultLoading) {
       return (<Loader/>)
@@ -78,5 +73,6 @@ const mapStateToProps = state => ({
   backendIdList: state.medier.backendIdList,
   backendIdListLoading: state.medier.backendIdListLoading
 });
+
 
 export default connect(mapStateToProps, { getListToDetails,  getBackendMediaID })(Liste);
