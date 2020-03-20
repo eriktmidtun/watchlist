@@ -13,7 +13,9 @@ class Liste extends React.Component {
   constructor(props){
     super(props);
 
-    // console.log(this.props.apiUrl)
+
+    let list = this.props.apiUrl
+    console.log(list)
 
     this.state={
 
@@ -38,11 +40,17 @@ class Liste extends React.Component {
   }
 
   componentDidMount(){
-    this.props.getBackendMediaID('wantToWatch');
+    this.props.getBackendMediaID(this.props.apiUrl);
     console.log("token: " + this.props.token)
   }
 
   componentDidUpdate(prevProps) {
+    if (this.props.deleteLoading != prevProps.deleteLoading){
+      this.props.getBackendMediaID(this.props.apiUrl);
+    }
+
+    console.log("inside")
+
     if (this.props.list !== prevProps.list) {
       this.props.getListToDetails(this.props.list);
     }
@@ -74,7 +82,8 @@ const mapStateToProps = state => ({
   detailResultLoading: state.medier.detailResultLoading,
   token: state.auth.token,
   list: state.list.list,
-  listLoading: state.list.listLoading
+  listLoading: state.list.listLoading,
+  deleteLoading: state.list.deleteFromListLoading
 });
 
 

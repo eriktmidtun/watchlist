@@ -99,7 +99,22 @@ export default function(state = {}, action) {
                 ...state,
                 addLoading: false,
             }
-        
+        case DELETE_FROM_LIST_LOADING:
+            console.log("DELETE_FROM_LIST_LOADING")
+            return{
+                ...state,
+                deleteFromListLoading: true,
+            }
+        case DELETE_FROM_LIST_FAILED:
+            return {
+                ...state,
+            }
+        case DELETE_FROM_LIST:
+            console.log("DELETE_FROM_LIST")
+            return {
+                ...state,
+                deleteFromListLoading: false,                
+            }
         default:
             return state
     }

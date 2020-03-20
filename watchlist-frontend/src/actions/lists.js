@@ -24,6 +24,7 @@ const baseURL = `http://localhost:8000`;
 export const getBackendMediaID = (list) => async (dispatch, getState) => {
     dispatch({ type: LIST_LOADING });
 
+    console.log("getBakcendMedia: " + list)
     try {
     const token = tokenConfig(getState);
     const res = await fetch(baseURL + `/api/lists/` + list +`/`, {
@@ -93,8 +94,6 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
     }
 };
 
-
-
 export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
     dispatch({ type: WTW_ITEM_LOADING });
     console.log("isMediaInWTW mdbID",mdbID);
@@ -156,25 +155,33 @@ export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
 
 export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) => {
     dispatch({ type: DELETE_FROM_LIST_LOADING });
-    console.log("delete: " + baseURL + `/api/lists/` + list + `/` + mdbID + `/` )
-    try {
-    const token = tokenConfig(getState);
 
-    const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID  + `/` , {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-        "Content-Type": "application/json",
-        Authorization: "Token " + token
+    try {
+        const token = tokenConfig(getState);
+
+        const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID  + `/` , {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: "Token " + token
+            }
+        });
+        console.log("res.status: " + res.status)
+    
+        dispatch({
+            type: DELETE_FROM_LIST
+        });
+
+        if (res.status !== 200 || res.status !== 204 ) {
+            throw Error("No gikk galt med deletefrom list");
         }
-    });
-    console.log("res: " + res.status)
-    if (res.status !== 200 || res.status !== 204 ) {
-        throw Error("No gikk galt med deletefrom list");
-    }
-    dispatch({
-        type: DELETE_FROM_LIST
-    });
+
+        console.log("Denne linjen kjøres ikke av en eller annen grunn..")
+
+        dispatch({
+            type: DELETE_FROM_LIST
+        });
     } catch (err) {
     dispatch({
         type: DELETE_FROM_LIST_FAILED
@@ -182,25 +189,4 @@ export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) =
     }
 };
 
-// export const deleteMovieItem = (apiUrl, id) => async(getState) => {
-
-//     console.log("delete: " + baseURL + `/api/lists/` + apiUrl + '/' + id.id + '/')
-
-//     try {
-//         const token = tokenConfig(getState);
-//         const res = await fetch(baseURL + `/api/lists/` + apiUrl + '/' + id.id + '/', {
-//             method: "DELETE",
-//             mode: "cors",
-//             headers: {
-//             "Content-Type": "application/json",
-//             Authorization: "Token " + token
-//             },
-//             body: null
-//         });
-//     }
-//     catch {
-
-//     }
-
-// }
 
