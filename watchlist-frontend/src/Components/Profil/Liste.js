@@ -26,7 +26,7 @@ class Liste extends React.Component {
       if (this.props.wtwList !== prevProps.wtwList){
         this.props.getListToDetails(this.props.wtwList, this.props.apiUrl );
       }
-      
+
     }else {
       if (this.props.hwList !== prevProps.hwList){
         this.props.getListToDetails(this.props.hwList, this.props.apiUrl );
@@ -60,6 +60,7 @@ class Liste extends React.Component {
     );
   }
 };
+
 
 const mapStateToProps = state => ({
   hwListDetails: state.medier.hwListDetails,

@@ -21,8 +21,8 @@ class MediaItem extends React.Component{
         //this.apiUrl = "wantToWatch" 
 
         
+        console.log("id: " + this.id)
     }
-
     
     removeBackend = () =>{
         this.props.deleteMediaFromList(this.id, this.props.apiUrl)
