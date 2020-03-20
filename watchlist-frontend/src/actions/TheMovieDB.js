@@ -143,6 +143,7 @@ export const getListToDetails = (mediums) => async dispatch => {
                 throw res;
             };
             const data = await res.json();
+            //lag en liste med [data + medium.mdbID]
             details.push(data)
         }
         dispatch({
@@ -160,5 +161,6 @@ export const getListToDetails = (mediums) => async dispatch => {
 const baseURL = `http://localhost:8000`;
 
 /* Spør server om want to watch list */
+
 
 

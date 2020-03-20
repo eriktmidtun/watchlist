@@ -99,7 +99,6 @@ export default function(state = {}, action) {
         case BACKEND_IDS_LOADED:
             console.log("BACKEND_IDS_LOADED")
 
-            
             return {
                 ...state,
                 backendIdList: action.payload,

@@ -39,6 +39,7 @@ class Liste extends React.Component {
 
   componentDidMount(){
     this.props.getBackendMediaID('wantToWatch');
+    console.log("token: " + this.props.token)
   }
 
   componentDidUpdate(prevProps) {

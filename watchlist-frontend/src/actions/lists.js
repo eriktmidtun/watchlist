@@ -156,11 +156,11 @@ export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
 
 export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) => {
     dispatch({ type: DELETE_FROM_LIST_LOADING });
-    
+    console.log("delete: " + baseURL + `/api/lists/` + list + `/` + mdbID + `/` )
     try {
     const token = tokenConfig(getState);
 
-    const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID `/` , {
+    const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID  + `/` , {
         method: "DELETE",
         mode: "cors",
         headers: {
@@ -168,6 +168,7 @@ export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) =
         Authorization: "Token " + token
         }
     });
+    console.log("res: " + res.status)
     if (res.status !== 200 || res.status !== 204 ) {
         throw Error("No gikk galt med deletefrom list");
     }
@@ -181,23 +182,25 @@ export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) =
     }
 };
 
-export const deleteMovieItem = (apiUrl, id) => async(getState) => {
+// export const deleteMovieItem = (apiUrl, id) => async(getState) => {
 
-    try {
-        const token = tokenConfig(getState);
-        const res = await fetch(baseURL + `/api/lists/` + apiUrl + '/' + id, {
-            method: "DELETE",
-            mode: "cors",
-            headers: {
-            "Content-Type": "application/json",
-            Authorization: "Token " + token
-            },
-            body: null
-        });
-    }
-    catch {
+//     console.log("delete: " + baseURL + `/api/lists/` + apiUrl + '/' + id.id + '/')
 
-    }
+//     try {
+//         const token = tokenConfig(getState);
+//         const res = await fetch(baseURL + `/api/lists/` + apiUrl + '/' + id.id + '/', {
+//             method: "DELETE",
+//             mode: "cors",
+//             headers: {
+//             "Content-Type": "application/json",
+//             Authorization: "Token " + token
+//             },
+//             body: null
+//         });
+//     }
+//     catch {
 
-}
+//     }
+
+// }
 
