@@ -2,6 +2,7 @@ import React, {Component} from "react";
 
 /* Styling */
 import { Container, Row, Col, Card, Image, Button } from "react-bootstrap";
+import "./MediaDetailPage.css"
 
 /* Komponenter */
 import {Loader} from "../../Common/Loader";
@@ -12,7 +13,7 @@ import Anmeldelser from "./Anmeldelser";
 /* Redux */
 import { connect } from "react-redux";
 import { getMovieInfo, getSeriesInfo } from "../../../actions/TheMovieDB"
-import { isMediaInWTW, isMediaInHW , addMediaToList } from "../../../actions/lists.js"
+import { isMediaInWTW, isMediaInHW , addMediaToList, deleteMediaFromList } from "../../../actions/lists.js"
 
 /* rendrer en enkelt serieoversikt */
 
@@ -164,10 +165,8 @@ class MediaDetailPage extends Component {
                 { //knapp for skal se
                   this.props.isInWantToWatch?
                   <Button style={{width: "50%"}} 
-                        variant="success"
-                        className="mr-1"
-                        disabled
-                        //onClick={()=> this.props.addMediaToList(this.state.mediaID,this.state.mediaType,'wantToWatch')}
+                        className="mr-1 btn-success"
+                        onClick={()=> this.props.deleteMediaFromList(this.state.mediaID,'wantToWatch')}
                         >
                         Skal se
                 </Button>:
@@ -181,9 +180,10 @@ class MediaDetailPage extends Component {
                 }
                 { //knapp for skal se
                   this.props.isInHaveWatched?
-                  <Button 
-                        variant="success"
-                        disabled>
+                  <Button
+                        className="btn-success"
+                        onClick={()=> this.props.deleteMediaFromList(this.state.mediaID,'haveWatched')}
+                        >
                         Har sett
                   </Button>
                   :
@@ -228,4 +228,4 @@ const mapStateToProps = state => ({
   isInWantToWatch: state.list.isInWantToWatch,
 });
 
-export default connect(mapStateToProps, { getMovieInfo, getSeriesInfo, isMediaInWTW, isMediaInHW , addMediaToList  })(MediaDetailPage);
+export default connect(mapStateToProps, { getMovieInfo, getSeriesInfo, isMediaInWTW, isMediaInHW , addMediaToList, deleteMediaFromList })(MediaDetailPage);

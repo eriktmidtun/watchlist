@@ -11,7 +11,8 @@ import {
     ADD_TO_WTW,
     ADD_TO_HW,
     ADD_TO_LIST_FAILED,
-    DELETE_FROM_LIST,
+    DELETE_FROM_HW,
+    DELETE_FROM_WTW,
     DELETE_FROM_LIST_LOADING,
     DELETE_FROM_LIST_FAILED,
     LIST_FAILED,
@@ -156,11 +157,11 @@ export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
 
 export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) => {
     dispatch({ type: DELETE_FROM_LIST_LOADING });
-    
+    console.log("deleteMediaFromList")
     try {
     const token = tokenConfig(getState);
-
-    const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID `/` , {
+    console.log("token", token)
+    const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID + `/` , {
         method: "DELETE",
         mode: "cors",
         headers: {
@@ -168,12 +169,19 @@ export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) =
         Authorization: "Token " + token
         }
     });
-    if (res.status !== 200 || res.status !== 204 ) {
+    console.log("deleteMediaFromList res", res);
+    if (res.status !== 204 ) {
         throw Error("No gikk galt med deletefrom list");
     }
-    dispatch({
-        type: DELETE_FROM_LIST
-    });
+    if(list === 'wantToWatch'){
+        dispatch({
+            type: DELETE_FROM_WTW
+        });
+    } else {
+        dispatch({
+            type: DELETE_FROM_HW
+        });
+    }
     } catch (err) {
     dispatch({
         type: DELETE_FROM_LIST_FAILED
