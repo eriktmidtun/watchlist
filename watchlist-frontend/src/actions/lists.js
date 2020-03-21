@@ -1,5 +1,5 @@
 import {
-    LIST_LOADED,
+    HW_LIST_LOADED,
     WTW_ITEM_LOADING,
     WTW_ITEM_FAILED,
     WTW_ITEM,
@@ -15,6 +15,7 @@ import {
     DELETE_FROM_LIST_LOADING,
     DELETE_FROM_LIST_FAILED,
     LIST_FAILED,
+    WTW_LIST_LOADED
 } from "./types";
 import {tokenConfig} from './auth'
 
@@ -24,7 +25,6 @@ const baseURL = `http://localhost:8000`;
 export const getBackendMediaID = (list) => async (dispatch, getState) => {
     dispatch({ type: LIST_LOADING });
 
-    console.log("getBakcendMedia: " + list)
     try {
     const token = tokenConfig(getState);
     const res = await fetch(baseURL + `/api/lists/` + list +`/`, {
@@ -40,10 +40,18 @@ export const getBackendMediaID = (list) => async (dispatch, getState) => {
     if (res.status !== 200) {
         throw Error(data);
     }
-    dispatch({
-        type: LIST_LOADED,
-        payload: data
-    });
+    if (list === "wantToWatch"){
+        dispatch({
+            type: WTW_LIST_LOADED,
+            payload: data
+        });
+    } else {
+        dispatch({
+            type: HW_LIST_LOADED,
+            payload: data
+        });
+    }
+
     } catch (err) {
     dispatch({
         type: LIST_FAILED
@@ -57,12 +65,10 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
 
     try {
     const token = tokenConfig(getState);
-    console.log("mdbID, mediaType, list",mdbID, mediaType, list);
     const body = {
         mdbID: mdbID,
         mediumType: mediaType
     }
-    console.log("body",body);
     const res = await fetch(baseURL + `/api/lists/` + list +`/` , {
         method: "POST",
         mode: "cors",
@@ -73,7 +79,6 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
         body: JSON.stringify(body)
     });
     const data = await res.json();
-    console.log("data",data);
     if (res.status !== 201 ) {
         throw Error(data);
     }
@@ -167,17 +172,10 @@ export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) =
             Authorization: "Token " + token
             }
         });
-        console.log("res.status: " + res.status)
-    
-        dispatch({
-            type: DELETE_FROM_LIST
-        });
-
-        if (res.status !== 200 || res.status !== 204 ) {
+        
+        if (res.status !== 204 ) { 
             throw Error("No gikk galt med deletefrom list");
         }
-
-        console.log("Denne linjen kjøres ikke av en eller annen grunn..")
 
         dispatch({
             type: DELETE_FROM_LIST

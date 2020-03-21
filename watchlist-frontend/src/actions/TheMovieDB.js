@@ -10,10 +10,9 @@ import {
     SERIES_LOADING,
     MEDIA_DETAILS_FAIL,
     LIST_DETAILS_LOADING,
-    LIST_DETAILS_LOADED,
+    HW_LIST_DETAILS_LOADED,
     LIST_DETAILS_FAIL,
-    BACKEND_IDS_LOADING,
-    BACKEND_IDS_LOADED,
+    WTW_LIST_DETAILS_LOADED
 } from "./types";
 
 export const searchForMovies = (input) => async dispatch => {
@@ -24,12 +23,10 @@ export const searchForMovies = (input) => async dispatch => {
 
     try {
         const res = await fetch(movieSearchURL);
-        console.log(res)
         if (res.status !== 200) {
             throw res;
         };
         const data = await res.json();
-        console.log(data)
         dispatch({
             type: MOVIE_RESULTS_LOADED,
             payload: data
@@ -75,12 +72,10 @@ export const getMovieInfo = (ID) => async dispatch => {
 
     try {
         const res = await fetch(movieInfoURL);
-        console.log(res)
         if (res.status !== 200) {
             throw res;
         };
         const data = await res.json();
-        console.log(data)
         dispatch({
             type: MOVIE_LOADED,
             payload: data
@@ -120,36 +115,40 @@ export const getSeriesInfo = (ID) => async dispatch => {
 }
 
 /* tar inn en liste av mediums gitt av backend databsen vår */
-export const getListToDetails = (mediums) => async dispatch => {
+export const getListToDetails = (mediums, list) => async dispatch => {
+    
     dispatch({
         type: LIST_DETAILS_LOADING
     })
     try { 
         let url = '';
         const details = [];
-        // console.log("getListToDetails")
         for (const medium of mediums){
-            console.log(medium);
             if (medium.mediumType === 'serier') {
                 url = 'https://api.themoviedb.org/3/tv/' + medium.mdbID + '?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm';
             }
             else {
                 url = 'https://api.themoviedb.org/3/movie/' + medium.mdbID + '?api_key=c5733a52f13cedc8b47b7a21e8edd914&language=no-bm';
             }
-            // console.log(url);
             let res = await fetch(url);
-            // console.log(res);
             if (res.status !== 200) {
                 throw res;
             };
             const data = await res.json();
-            //lag en liste med [data + medium.mdbID]
             details.push(data)
         }
-        dispatch({
-            type: LIST_DETAILS_LOADED,
-            payload: details
-        });
+        if (list === "wantToWatch"){
+            dispatch({
+                type: WTW_LIST_DETAILS_LOADED,
+                payload: details
+            });
+        } else {
+            dispatch({
+                type: HW_LIST_DETAILS_LOADED,
+                payload: details
+            });
+        }
+
     } catch (err) {
         dispatch({
             type: LIST_DETAILS_FAIL

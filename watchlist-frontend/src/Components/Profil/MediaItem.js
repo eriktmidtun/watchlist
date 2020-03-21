@@ -18,15 +18,14 @@ class MediaItem extends React.Component{
         this.title = props.id.original_title
         this.release_date = props.id.release_date
         this.poster_path = props.id.poster_path
-        this.apiUrl = "wantToWatch"  
+        //this.apiUrl = "wantToWatch" 
+
         
     }
 
     
     removeBackend = () =>{
-        // this.props.deleteMovieItem(this.apiUrl, this.id)
-        console.log("id: " + this.id + "url: " + this.apiUrl)
-        this.props.deleteMediaFromList(this.id, this.apiUrl)
+        this.props.deleteMediaFromList(this.id, this.props.apiUrl)
     }
 
     componentDidMount(){

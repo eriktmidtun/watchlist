@@ -10,11 +10,9 @@ import {
     SERIES_LOADING,
     MEDIA_DETAILS_FAIL,
     LIST_DETAILS_LOADING,
-    LIST_DETAILS_LOADED,
+    HW_LIST_DETAILS_LOADED,
     LIST_DETAILS_FAIL,
-    BACKEND_IDS_LOADING,
-    BACKEND_IDS_LOADED,
-
+    WTW_LIST_DETAILS_LOADED
 } from "../actions/types";
 
 /* const initialState = {
@@ -70,40 +68,29 @@ export default function(state = {}, action) {
                 detailResultLoading: false,
             }
         /* For getting list details */
-        case LIST_DETAILS_LOADED:
-            console.log("LIST_DETAILS_LOADED");
-            console.log(action.payload)
+        case HW_LIST_DETAILS_LOADED:
             return {
                 ...state,
-                listDetails: action.payload,
+                hwListDetails: action.payload,
+                detailResultLoading: false,
+            }
+        case WTW_LIST_DETAILS_LOADED:
+            return {
+                ...state,
+                wtwListDetails: action.payload,
                 detailResultLoading: false,
             }
         case LIST_DETAILS_LOADING:
-            console.log("LIST_DETAILS_LOADING");
             return {
                 ...state,
                 detailResultLoading: true,
             }
         case LIST_DETAILS_FAIL:
-            console.log("LIST_DETAILS_FAIL");
             return {
                 ...state,
                 detailResultLoading: false,
             }
-        case BACKEND_IDS_LOADING:
-            console.log("BACKEND_IDS_LOADING")
-            return {
-                ...state,
-                backendIdListLoading: true
-            }
-        case BACKEND_IDS_LOADED:
-            console.log("BACKEND_IDS_LOADED")
 
-            return {
-                ...state,
-                backendIdList: action.payload,
-                backendIdListLoading: false
-            }
         default:
             return state
     }
