@@ -159,6 +159,7 @@ export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
 };
 
 export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) => {
+    
     dispatch({ type: DELETE_FROM_LIST_LOADING });
 
     try {
@@ -176,7 +177,8 @@ export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) =
         if (res.status !== 204 ) { 
             throw Error("No gikk galt med deletefrom list");
         }
-
+        
+        console.log("Delete media from list res: " + res.status + " ID: " + mdbID)
         dispatch({
             type: DELETE_FROM_LIST
         });

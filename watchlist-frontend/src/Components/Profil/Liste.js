@@ -26,7 +26,6 @@ class Liste extends React.Component {
       if (this.props.wtwList !== prevProps.wtwList){
         this.props.getListToDetails(this.props.wtwList, this.props.apiUrl );
       }
-
     }else {
       if (this.props.hwList !== prevProps.hwList){
         this.props.getListToDetails(this.props.hwList, this.props.apiUrl );
@@ -55,7 +54,7 @@ class Liste extends React.Component {
       <Card style={{padding: "32px" }}>
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }} >
         {this.props.listeNavn} </Card.Title>
-        {(this.props.apiUrl === "haveWatched") ? this.props.hwListDetails.map((i) => <MediaItem id={i} apiUrl={"haveWatched"}> </MediaItem>) : this.props.wtwListDetails.map((i) => <MediaItem id={i} apiUrl={"wantToWatch"}> </MediaItem>)}
+        {(this.props.apiUrl === "haveWatched") ? this.props.hwListDetails.map((i) => <MediaItem info={i} apiUrl={"haveWatched"}> </MediaItem>) : this.props.wtwListDetails.map((i) => <MediaItem info={i} apiUrl={"wantToWatch"}> </MediaItem>)}
       </Card>
     );
   }

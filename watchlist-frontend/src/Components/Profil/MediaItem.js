@@ -10,31 +10,13 @@ import {Loader} from "../Common/Loader"
 import { connect } from "react-redux";
 
 class MediaItem extends React.Component{
-
-    constructor(props){
-        super(props)
-        this.id = props.id.id
-        this.mdbID = props.id.mdbID
-        this.title = props.id.original_title
-        this.release_date = props.id.release_date
-        this.poster_path = props.id.poster_path
-        //this.apiUrl = "wantToWatch" 
-
-        
-        console.log("id: " + this.id)
-    }
     
     removeBackend = () =>{
-        this.props.deleteMediaFromList(this.id, this.props.apiUrl)
+        this.props.deleteMediaFromList(this.props.info.id, this.props.apiUrl)
     }
-
-    componentDidMount(){
-        // this.props.getMovieInfo(this.id);
-    }
-
 
     render(){
-        const imageUrl = this.poster_path? "https://image.tmdb.org/t/p/w300" + this.poster_path : "";
+        const imageUrl = this.props.info.poster_path? "https://image.tmdb.org/t/p/w300" + this.props.info.poster_path : "";
         return(
         <Card style={{marginBottom: "32px", padding: "15px" }} >
            <Row>
@@ -42,8 +24,8 @@ class MediaItem extends React.Component{
                     <Image src={imageUrl} style={{height: 135, width: 90}} rounded />
                 </Card>     
                 <Col>
-                    <h5>{this.title}</h5>
-                    <h5>{this.release_date}</h5>
+                    <h5>{this.props.info.original_title}</h5>
+                    <h5>{this.props.info.release_date}</h5>
                 </Col>
                 <Button onClick={this.removeBackend} className="ml-auto mb-auto mr-3 btn-danger" >
                     x
