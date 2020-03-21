@@ -3,7 +3,6 @@ import { Card, Image, Col, Row, Button } from "react-bootstrap/";
 import "./MediaItem.css";
 import {getMovieInfo, getSeriesInfo} from "../../actions/TheMovieDB"
 import {deleteMediaFromList} from "../../actions/lists"
-import {Loader} from "../Common/Loader"
 
 
 /* Redux */

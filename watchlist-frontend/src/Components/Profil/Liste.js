@@ -10,16 +10,13 @@ import { getBackendMediaID } from "../../actions/lists"
 
 
 class Liste extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
   componentDidMount(){
     this.props.getBackendMediaID(this.props.apiUrl);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.deleteLoading != prevProps.deleteLoading){
+    if (this.props.deleteLoading !== prevProps.deleteLoading){
       this.props.getBackendMediaID(this.props.apiUrl); 
     }
     if (this.props.apiUrl === "wantToWatch"){

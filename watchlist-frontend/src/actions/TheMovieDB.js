@@ -157,9 +157,5 @@ export const getListToDetails = (mediums, list) => async dispatch => {
 }
 
 
-const baseURL = `http://localhost:8000`;
-
-/* Spør server om want to watch list */
-
 
 
