@@ -101,10 +101,9 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
 
 export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
     dispatch({ type: WTW_ITEM_LOADING });
-    console.log("isMediaInWTW mdbID",mdbID);
+
     try {
     const token = tokenConfig(getState);
-    console.log("isMediaInWTW token",token);
     const res = await fetch(baseURL + `/api/lists/wantToWatch/` + mdbID  , {
         method: "GET",
         mode: "cors",
@@ -113,7 +112,6 @@ export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
         Authorization: "Token " + token
         }
     });
-    console.log("isMediaInWTW res",res);
     if (res.status !== 200 ) {
         throw Error("den er ikke i listen");
     }
@@ -130,10 +128,10 @@ export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
 
 export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
     dispatch({ type: HW_ITEM_LOADING });
-    //console.log("isMediaInHW mdbID",mdbID);
+    console.log("isMediaInHW mdbID",mdbID);
     try {
     const token = tokenConfig(getState);
-   // console.log("isMediaInHW token",token);
+   console.log("isMediaInHW token",token);
     const res = await fetch(baseURL + `/api/lists/haveWatched/` + mdbID + `/` , {
         method: "GET",
         mode: "cors",
@@ -143,7 +141,7 @@ export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
         },
         body: null
     });
-   // console.log("isMediaInHW res",res);
+   console.log("isMediaInHW res",res);
     if (res.status !== 200 ) {
         throw Error("Den er ikke i listen");
     }

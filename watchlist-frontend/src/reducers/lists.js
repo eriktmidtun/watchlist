@@ -10,9 +10,11 @@ import {
     ADD_TO_WTW,
     ADD_TO_HW,
     ADD_TO_LIST_FAILED,
-    DELETE_FROM_LIST,
+    DELETE_FROM_HW,
+    DELETE_FROM_WTW,
     DELETE_FROM_LIST_LOADING,
     DELETE_FROM_LIST_FAILED,
+    DELETE_FROM_LIST,
     LIST_FAILED,
     WTW_LIST_LOADED,
     HW_LIST_LOADED
@@ -111,16 +113,33 @@ export default function(state = {}, action) {
                 ...state,
                 deleteFromListLoading: true,
             }
-        case DELETE_FROM_LIST_FAILED:
-            return {
-                ...state,
-            }
         case DELETE_FROM_LIST:
             console.log("DELETE_FROM_LIST")
             return {
                 ...state,
                 deleteFromListLoading: false,                
             }
+        /* Delete from list */
+        case DELETE_FROM_WTW:
+            console.log("DELETE_FROM_WTW")
+            return {
+                ...state,
+                deleteLoading: false,
+                isInWantToWatch:  false,
+            }
+        case DELETE_FROM_HW:
+            console.log("DELETE_FROM_HW")
+            return {
+                ...state,
+                deleteoading: false,
+                isInHaveWatched: false,
+            }
+        case DELETE_FROM_LIST_FAILED:
+            return {
+                ...state,
+                deleteLoading: false,
+            }
+        
         default:
             return state
     }

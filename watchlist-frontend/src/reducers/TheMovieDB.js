@@ -25,7 +25,6 @@ export default function(state = {}, action) {
         case SERIES_RESULTS_LOADED:
         case MOVIE_RESULTS_LOADED:
             console.log("RESULTS_LOADED");
-            console.log(action.payload)
             return {
                 ...state,
                 mediums: action.payload,
