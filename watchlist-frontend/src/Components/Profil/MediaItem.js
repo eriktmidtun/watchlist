@@ -3,6 +3,7 @@ import { Card, Image, Col, Row, Button } from "react-bootstrap/";
 import "./MediaItem.css";
 import {getMovieInfo, getSeriesInfo} from "../../actions/TheMovieDB"
 import {deleteMediaFromList} from "../../actions/lists"
+import {Loader} from "../Common/Loader"
 
 
 /* Redux */
@@ -11,6 +12,7 @@ import { connect } from "react-redux";
 class MediaItem extends React.Component{
     
     removeBackend = () =>{
+        console.log("deleting: " + this.props.info.original_title + "ID: " + this.props.info.id)
         this.props.deleteMediaFromList(this.props.info.id, this.props.apiUrl)
     }
 
@@ -22,9 +24,9 @@ class MediaItem extends React.Component{
                 <Card className="mr-1 ml-2">
                     <Image src={imageUrl} style={{height: 135, width: 90}} rounded />
                 </Card>     
-                <Col>
-                    <h5>{this.props.info.original_title}</h5>
-                    <h5>{this.props.info.release_date}</h5>
+                <Col style={{textAlign:"left", color: "black"}} className="ml-2">
+                    <h2>{this.props.info.original_title}</h2>
+                    <h5 style={{fontStyle: "italic"}}>{this.props.info.release_date}</h5>
                 </Col>
                 <Button onClick={this.removeBackend} className="ml-auto mb-auto mr-3 btn-danger" >
                     x
