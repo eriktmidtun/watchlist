@@ -10,9 +10,9 @@ import {
     SERIES_LOADING,
     MEDIA_DETAILS_FAIL,
     LIST_DETAILS_LOADING,
-    LIST_DETAILS_LOADED,
+    HW_LIST_DETAILS_LOADED,
     LIST_DETAILS_FAIL,
-
+    WTW_LIST_DETAILS_LOADED
 } from "../actions/types";
 
 /* const initialState = {
@@ -25,7 +25,6 @@ export default function(state = {}, action) {
         case SERIES_RESULTS_LOADED:
         case MOVIE_RESULTS_LOADED:
             console.log("RESULTS_LOADED");
-            console.log(action.payload)
             return {
                 ...state,
                 mediums: action.payload,
@@ -68,26 +67,29 @@ export default function(state = {}, action) {
                 detailResultLoading: false,
             }
         /* For getting list details */
-        case LIST_DETAILS_LOADED:
-            console.log("LIST_DETAILS_LOADED");
-            console.log(action.payload)
+        case HW_LIST_DETAILS_LOADED:
             return {
                 ...state,
-                listDetails: action.payload,
+                hwListDetails: action.payload,
+                detailResultLoading: false,
+            }
+        case WTW_LIST_DETAILS_LOADED:
+            return {
+                ...state,
+                wtwListDetails: action.payload,
                 detailResultLoading: false,
             }
         case LIST_DETAILS_LOADING:
-            console.log("LIST_DETAILS_LOADING");
             return {
                 ...state,
                 detailResultLoading: true,
             }
         case LIST_DETAILS_FAIL:
-            console.log("LIST_DETAILS_FAIL");
             return {
                 ...state,
                 detailResultLoading: false,
             }
+
         default:
             return state
     }

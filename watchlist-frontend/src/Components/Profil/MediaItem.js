@@ -1,46 +1,36 @@
 import React from "react";
 import { Card, Image, Col, Row, Button } from "react-bootstrap/";
 import "./MediaItem.css";
-import {getMovieInfo, getSeriesInfo} from "../../actions/TheMovieDB"
-import {Loader} from "../Common/Loader"
+import {getMovieInfo, getSeriesInfo} from "../../actions/TheMovieDB";
+import {deleteMediaFromList} from "../../actions/lists";
+import {Link} from "react-router-dom";
 
 
 /* Redux */
 import { connect } from "react-redux";
 
 class MediaItem extends React.Component{
-
-    constructor(props){
-        super(props)
-        this.id = props.id
-        this.title = props.id.original_title
-        this.release_date = props.id.release_date
-        this.poster_path = props.id.poster_path        
-    }
-
     
-    removeBackend = (id) =>{
-        //use remove movie by id API 
-        console.log("Hei")
-        console.log(this.id)
+    removeBackend = () =>{
+        console.log("deleting: " + this.props.info.original_title + "ID: " + this.props.info.id)
+        this.props.deleteMediaFromList(this.props.info.id, this.props.apiUrl)
     }
-
-    componentDidMount(){
-        // this.props.getMovieInfo(this.id);
-    }
-
 
     render(){
-        const imageUrl = this.poster_path? "https://image.tmdb.org/t/p/w300" + this.poster_path : "";
+        const imageUrl = this.props.info.poster_path? "https://image.tmdb.org/t/p/w300" + this.props.info.poster_path : "";
+        const title = this.props.info.mediumType === "filmer" ? this.props.info.title : this.props.info.name;
+        const air_date = this.props.info.mediumType === "filmer" ? this.props.info.release_date : this.props.info.first_air_date;
         return(
         <Card style={{marginBottom: "32px", padding: "15px" }} >
            <Row>
-                <Card className="mr-1 ml-2">
-                    <Image src={imageUrl} style={{height: 135, width: 90}} rounded />
-                </Card>     
-                <Col>
-                    <h5>{this.title}</h5>
-                    <h5>{this.release_date}</h5>
+                <Link to={"/" + this.props.info.mediumType + "/" + this.props.info.id}> 
+                    <Card className="mr-1 ml-2">
+                        <Image src={imageUrl} style={{height: 135, width: 90}} rounded />
+                    </Card>  
+                </Link>   
+                <Col style={{textAlign:"left", color: "black"}} className="ml-2">
+                    <h2>{title}</h2>
+                    <h5 style={{fontStyle: "italic"}}>{air_date}</h5>
                 </Col>
                 <Button onClick={this.removeBackend} className="ml-auto mb-auto mr-3 btn-danger" >
                     x
@@ -57,4 +47,4 @@ const mapStateToProps = state => ({
     detailResultLoading: state.medier.detailResultLoading,
 });
 
-export default connect(mapStateToProps, { getMovieInfo, getSeriesInfo })(MediaItem);
+export default connect(mapStateToProps, { getMovieInfo, getSeriesInfo, deleteMediaFromList })(MediaItem);

@@ -1,5 +1,5 @@
 import {
-    LIST_LOADED,
+    HW_LIST_LOADED,
     WTW_ITEM_LOADING,
     WTW_ITEM_FAILED,
     WTW_ITEM,
@@ -11,11 +11,11 @@ import {
     ADD_TO_WTW,
     ADD_TO_HW,
     ADD_TO_LIST_FAILED,
-    DELETE_FROM_HW,
-    DELETE_FROM_WTW,
+    DELETE_FROM_LIST,
     DELETE_FROM_LIST_LOADING,
     DELETE_FROM_LIST_FAILED,
     LIST_FAILED,
+    WTW_LIST_LOADED
 } from "./types";
 import {tokenConfig} from './auth'
 
@@ -40,10 +40,18 @@ export const getBackendMediaID = (list) => async (dispatch, getState) => {
     if (res.status !== 200) {
         throw Error(data);
     }
-    dispatch({
-        type: LIST_LOADED,
-        payload: data
-    });
+    if (list === "wantToWatch"){
+        dispatch({
+            type: WTW_LIST_LOADED,
+            payload: data
+        });
+    } else {
+        dispatch({
+            type: HW_LIST_LOADED,
+            payload: data
+        });
+    }
+
     } catch (err) {
     dispatch({
         type: LIST_FAILED
@@ -57,12 +65,10 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
 
     try {
     const token = tokenConfig(getState);
-    console.log("mdbID, mediaType, list",mdbID, mediaType, list);
     const body = {
         mdbID: mdbID,
         mediumType: mediaType
     }
-    console.log("body",body);
     const res = await fetch(baseURL + `/api/lists/` + list +`/` , {
         method: "POST",
         mode: "cors",
@@ -73,7 +79,6 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
         body: JSON.stringify(body)
     });
     const data = await res.json();
-    console.log("data",data);
     if (res.status !== 201 ) {
         throw Error(data);
     }
@@ -94,14 +99,11 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
     }
 };
 
-
-
 export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
     dispatch({ type: WTW_ITEM_LOADING });
-    console.log("isMediaInWTW mdbID",mdbID);
+
     try {
     const token = tokenConfig(getState);
-    console.log("isMediaInWTW token",token);
     const res = await fetch(baseURL + `/api/lists/wantToWatch/` + mdbID  , {
         method: "GET",
         mode: "cors",
@@ -110,7 +112,6 @@ export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
         Authorization: "Token " + token
         }
     });
-    console.log("isMediaInWTW res",res);
     if (res.status !== 200 ) {
         throw Error("den er ikke i listen");
     }
@@ -127,10 +128,10 @@ export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
 
 export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
     dispatch({ type: HW_ITEM_LOADING });
-    //console.log("isMediaInHW mdbID",mdbID);
+    console.log("isMediaInHW mdbID",mdbID);
     try {
     const token = tokenConfig(getState);
-   // console.log("isMediaInHW token",token);
+   console.log("isMediaInHW token",token);
     const res = await fetch(baseURL + `/api/lists/haveWatched/` + mdbID + `/` , {
         method: "GET",
         mode: "cors",
@@ -140,7 +141,7 @@ export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
         },
         body: null
     });
-   // console.log("isMediaInHW res",res);
+   console.log("isMediaInHW res",res);
     if (res.status !== 200 ) {
         throw Error("Den er ikke i listen");
     }
@@ -156,35 +157,34 @@ export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
 };
 
 export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) => {
+    
     dispatch({ type: DELETE_FROM_LIST_LOADING });
-    console.log("deleteMediaFromList")
+
     try {
-    const token = tokenConfig(getState);
-    console.log("token", token)
-    const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID + `/` , {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-        "Content-Type": "application/json",
-        Authorization: "Token " + token
+        const token = tokenConfig(getState);
+
+        const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID  + `/` , {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: "Token " + token
+            }
+        });
+        
+        if (res.status !== 204 ) { 
+            throw Error("No gikk galt med deletefrom list");
         }
-    });
-    console.log("deleteMediaFromList res", res);
-    if (res.status !== 204 ) {
-        throw Error("No gikk galt med deletefrom list");
-    }
-    if(list === 'wantToWatch'){
+        
+        console.log("Delete media from list res: " + res.status + " ID: " + mdbID)
         dispatch({
-            type: DELETE_FROM_WTW
+            type: DELETE_FROM_LIST
         });
-    } else {
-        dispatch({
-            type: DELETE_FROM_HW
-        });
-    }
     } catch (err) {
     dispatch({
         type: DELETE_FROM_LIST_FAILED
     });
     }
 };
+
+

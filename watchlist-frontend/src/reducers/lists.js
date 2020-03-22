@@ -1,5 +1,4 @@
 import {
-    LIST_LOADED,
     WTW_ITEM_LOADING,
     WTW_ITEM_FAILED,
     WTW_ITEM,
@@ -15,20 +14,27 @@ import {
     DELETE_FROM_WTW,
     DELETE_FROM_LIST_LOADING,
     DELETE_FROM_LIST_FAILED,
+    DELETE_FROM_LIST,
     LIST_FAILED,
-
+    WTW_LIST_LOADED,
+    HW_LIST_LOADED
 } from "../actions/types";
 
 export default function(state = {}, action) {
     switch (action.type) {
-        case LIST_LOADED:
+        case HW_LIST_LOADED:
             return {
                 ...state,
-                list: action.payload,
+                hwList: action.payload,
+                listLoading: false,
+            }
+        case WTW_LIST_LOADED:
+            return {
+                ...state,
+                wtwList: action.payload,
                 listLoading: false,
             }
         case LIST_LOADING:
-            console.log("LIST_LOADING");
             return {
                 ...state,
                 listLoading: true,
@@ -101,6 +107,18 @@ export default function(state = {}, action) {
                 ...state,
                 addLoading: false,
             }
+        case DELETE_FROM_LIST_LOADING:
+            console.log("DELETE_FROM_LIST_LOADING")
+            return{
+                ...state,
+                deleteFromListLoading: true,
+            }
+        case DELETE_FROM_LIST:
+            console.log("DELETE_FROM_LIST")
+            return {
+                ...state,
+                deleteFromListLoading: false,                
+            }
         /* Delete from list */
         case DELETE_FROM_WTW:
             console.log("DELETE_FROM_WTW")
@@ -115,11 +133,6 @@ export default function(state = {}, action) {
                 ...state,
                 deleteoading: false,
                 isInHaveWatched: false,
-            }
-        case DELETE_FROM_LIST_LOADING:
-            return {
-                ...state,
-                deleteLoading: true,
             }
         case DELETE_FROM_LIST_FAILED:
             return {

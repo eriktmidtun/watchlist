@@ -10,38 +10,23 @@ import { getBackendMediaID } from "../../actions/lists"
 
 
 class Liste extends React.Component {
-  constructor(props){
-    super(props);
-
-    this.state={
-
-      mediums: [
-        {//eksempel på hva får fra backenden
-            "id": 1,
-            "mdbID": 33407, //Knerten
-            "mediumType": "filmer"
-        },
-        {
-            "id": 3,
-            "mdbID": 272, //batman
-            "mediumType": "filmer"
-        },
-        {
-            "id": 4,
-            "mdbID": 414, //batman
-            "mediumType": "filmer"
-        }
-    ]
-    };
-  }
 
   componentDidMount(){
-    this.props.getBackendMediaID('wantToWatch');
+    this.props.getBackendMediaID(this.props.apiUrl);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.list !== prevProps.list) {
-      this.props.getListToDetails(this.props.list);
+    if (this.props.deleteLoading !== prevProps.deleteLoading){
+      this.props.getBackendMediaID(this.props.apiUrl); 
+    }
+    if (this.props.apiUrl === "wantToWatch"){
+      if (this.props.wtwList !== prevProps.wtwList){
+        this.props.getListToDetails(this.props.wtwList, this.props.apiUrl );
+      }
+    }else {
+      if (this.props.hwList !== prevProps.hwList){
+        this.props.getListToDetails(this.props.hwList, this.props.apiUrl );
+      }
     }
   } 
   
@@ -49,30 +34,52 @@ class Liste extends React.Component {
     if (this.props.listLoading){
       return (<Loader/>)
     }
-
     if (this.props.detailResultLoading) {
       return (<Loader/>)
     }
-    if (!this.props.listDetails || this.props.listDetails.length === 0) {
-      return (<h1 className="mt-2">Ingen filmer i listen din</h1>)
-    };
-    // console.log(this.props.listDetails)
+    if(this.props.apiUrl === "wantToWatch"){
+      if (!this.props.wtwListDetails || this.props.wtwListDetails.length === 0) {
+        return (
+        <Card style={{padding: "32px" }}>
+          <Card.Title style={{ textAlign: "center", fontSize: "2em" }} >
+          {this.props.listeNavn} </Card.Title>
+          <h2 className="mt-2">Ingen filmer i listen din</h2>
+        </Card>
+        )
+      };
+    }else{
+      if (!this.props.hwListDetails || this.props.hwListDetails.length === 0) {
+        return (
+          <Card style={{padding: "32px" }}>
+            <Card.Title style={{ textAlign: "center", fontSize: "2em" }} >
+            {this.props.listeNavn} </Card.Title>
+            <h2 className="mt-2">Ingen filmer i listen din</h2>
+          </Card>
+          )
+      };
+    }
+
     return (
       <Card style={{padding: "32px" }}>
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }} >
         {this.props.listeNavn} </Card.Title>
-          {this.props.listDetails.map((i) => <MediaItem id={i}> </MediaItem>) }
+        {(this.props.apiUrl === "haveWatched") ? 
+        this.props.hwListDetails.map((i) => <MediaItem info={i} key={i.id} apiUrl={"haveWatched"}> </MediaItem>) :
+        this.props.wtwListDetails.map((i) => <MediaItem info={i} key={i.id} apiUrl={"wantToWatch"}> </MediaItem>)}
       </Card>
     );
   }
 };
 
+
 const mapStateToProps = state => ({
-  listDetails: state.medier.listDetails,
+  hwListDetails: state.medier.hwListDetails,
+  wtwListDetails: state.medier.wtwListDetails,
   detailResultLoading: state.medier.detailResultLoading,
-  token: state.auth.token,
-  list: state.list.list,
-  listLoading: state.list.listLoading
+  hwList: state.list.hwList,
+  wtwList: state.list.wtwList,
+  listLoading: state.list.listLoading,
+  deleteLoading: state.list.deleteFromListLoading
 });
 
 
