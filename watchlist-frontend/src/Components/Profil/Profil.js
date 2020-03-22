@@ -31,10 +31,10 @@ class Profil extends Component {
         </Row>
         <Row className="justify-content-center">
           <Col xs={{ order: 2, span: "12" }} lg={{ order: 1, span: "6" }}>
-            <Liste listeNavn={"Har sett"} apiUrl={"haveWatched"}></Liste>
+            <Liste listeNavn={"Skal se"} apiUrl={"wantToWatch"}> </Liste>
           </Col>
           <Col xs={{ order: 1, span: "12" }} lg={{ order: 2, span: "6" }}>
-            <Liste listeNavn={"Skal se"} apiUrl={"wantToWatch"}> </Liste>
+            <Liste listeNavn={"Har sett"} apiUrl={"haveWatched"}></Liste>
           </Col>
         </Row>
       </React.Fragment>

@@ -39,11 +39,23 @@ class Liste extends React.Component {
     }
     if(this.props.apiUrl === "wantToWatch"){
       if (!this.props.wtwListDetails || this.props.wtwListDetails.length === 0) {
-        return (<h1 className="mt-2">Ingen filmer i listen din</h1>)
+        return (
+        <Card style={{padding: "32px" }}>
+          <Card.Title style={{ textAlign: "center", fontSize: "2em" }} >
+          {this.props.listeNavn} </Card.Title>
+          <h2 className="mt-2">Ingen filmer i listen din</h2>
+        </Card>
+        )
       };
     }else{
       if (!this.props.hwListDetails || this.props.hwListDetails.length === 0) {
-        return (<h1 className="mt-2">Ingen filmer i listen din</h1>)
+        return (
+          <Card style={{padding: "32px" }}>
+            <Card.Title style={{ textAlign: "center", fontSize: "2em" }} >
+            {this.props.listeNavn} </Card.Title>
+            <h2 className="mt-2">Ingen filmer i listen din</h2>
+          </Card>
+          )
       };
     }
 
@@ -51,7 +63,9 @@ class Liste extends React.Component {
       <Card style={{padding: "32px" }}>
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }} >
         {this.props.listeNavn} </Card.Title>
-        {(this.props.apiUrl === "haveWatched") ? this.props.hwListDetails.map((i) => <MediaItem info={i} apiUrl={"haveWatched"}> </MediaItem>) : this.props.wtwListDetails.map((i) => <MediaItem info={i} apiUrl={"wantToWatch"}> </MediaItem>)}
+        {(this.props.apiUrl === "haveWatched") ? 
+        this.props.hwListDetails.map((i) => <MediaItem info={i} key={i.id} apiUrl={"haveWatched"}> </MediaItem>) :
+        this.props.wtwListDetails.map((i) => <MediaItem info={i} key={i.id} apiUrl={"wantToWatch"}> </MediaItem>)}
       </Card>
     );
   }

@@ -134,7 +134,8 @@ export const getListToDetails = (mediums, list) => async dispatch => {
                 throw res;
             };
             const data = await res.json();
-            details.push(data)
+            data['mediumType'] = medium.mediumType;
+            details.push(data);
         }
         if (list === "wantToWatch"){
             dispatch({
