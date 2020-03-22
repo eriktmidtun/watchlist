@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', admin.site.urls),
+    path('api/lists/', include('mediaItem.api.urls')),
     path('api/auth/', include('accounts.api.urls')),
+    
+    #Trengs det en Path til movieItems???
 ]

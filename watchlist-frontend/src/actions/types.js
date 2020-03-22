@@ -1,8 +1,64 @@
-export const USER_LOADING = 'USER_LOADING'; // added
-export const USER_LOADED = 'USER_LOADED'; // added
-export const AUTH_ERROR = 'AUTH_ERROR'; // added
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'; // added
-export const REGISTER_FAIL = 'REGISTER_FAIL'; // added
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'; // added
-export const LOGIN_FAIL = 'LOGIN_FAIL'; // added
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'; // added
+// Authentication constants
+export const USER_LOADING = 'USER_LOADING'; 
+export const USER_LOADED = 'USER_LOADED'; 
+export const AUTH_ERROR = 'AUTH_ERROR'; 
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'; 
+export const REGISTER_FAIL = 'REGISTER_FAIL'; 
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'; 
+export const LOGIN_FAIL = 'LOGIN_FAIL'; 
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'; 
+
+// The Movie Database search constants
+export const MOVIE_RESULTS_LOADING = 'MOVIE_RESULTS_LOADING';
+export const MOVIE_RESULTS_LOADED = 'MOVIE_RESULTS_LOADED'; 
+export const SERIES_RESULTS_LOADING = 'SERIES_RESULTS_LOADING'; 
+export const SERIES_RESULTS_LOADED = 'SERIES_RESULTS_LOADED'; 
+export const SEARCH_FAIL = 'SEARCH_FAIL'; 
+
+// The Movie Database get constants
+export const MOVIE_LOADING = 'MOVIE_LOADING';
+export const MOVIE_LOADED = 'MOVIE_LOADED'; 
+export const SERIES_LOADING = 'SERIES_LOADING'; 
+export const SERIES_LOADED = 'SERIES_LOADED'; 
+export const MEDIA_DETAILS_FAIL = 'MEDIA_DETAILS_FAIL'; 
+
+//list details 
+export const LIST_DETAILS_LOADING = 'LIST_DETAILS_LOADING';
+export const HW_LIST_DETAILS_LOADED = 'HW_LIST_DETAILS_LOADED';
+export const LIST_DETAILS_FAIL = 'LIST_DETAILS_FAIL';
+export const WTW_LIST_DETAILS_LOADED = 'WTW_LIST_DETAILS_LOADED';
+
+//list constants
+export const WANT_TO_WATCH_LOADED = "WANT_TO_WATCH_LOADED";
+export const HAVE_WATCHED_LOADED  = "HAVE_WATCHED_LOADED";
+export const WANT_TO_WATCH_LOADING = "WANT_TO_WATCH_LOADING";
+export const HAVE_WATCHED_LOADING = "HAVE_WATCHED_LOADING";
+export const ADD_WANT_TO_WATCH = "ADD_WANT_TO_WATCH";
+export const ADD_HAVE_WATCHED = "ADD_HAVE_WATCHED";
+export const DELETE_WANT_TO_WATCH = "DELETE_WANT_TO_WATCH";
+export const DELETE_HAVE_WATCHED = "DELETE_HAVE_WATCHED";
+export const WANT_TO_WATCH_FAILED = "WANT_TO_WATCH_FAILED";
+export const HAVE_WATCHED_FAILED = "HAVE_WATCHED_FAILED";
+
+export const HW_ITEM_LOADING = "HW_ITEM_LOADED";
+export const HW_ITEM = "HW_ITEM";
+export const HW_ITEM_FAILED = "HW_ITEM_FAILED";
+
+export const WTW_ITEM_LOADING = "WTW_ITEM_LOADED";
+export const WTW_ITEM = "WTW_ITEM";
+export const WTW_ITEM_FAILED = "WTW_ITEM_FAILED";
+
+export const ADD_TO_HW = "ADD_TO_HW";
+export const ADD_TO_WTW = "ADD_TO_WTW";
+export const ADD_TO_LIST_LOADING = "ADD_TO_LIST_LOADING";
+export const ADD_TO_LIST_FAILED = "ADD_TO_LIST_FAILED";
+
+export const DELETE_FROM_HW = "DELETE_FROM_HW";
+export const DELETE_FROM_WTW = "DELETE_FROM_WTW";
+export const DELETE_FROM_LIST_LOADING = "DELETE_FROM_LIST_LOADING";
+export const DELETE_FROM_LIST_FAILED = "DELETE_FROM_LIST_FAILED";
+
+export const LIST_FAILED = "LIST_FAILED";
+export const LIST_LOADING = "LIST_LOADING";
+export const HW_LIST_LOADED = "HW_LIST_LOADED";
+export const WTW_LIST_LOADED = "WTW_LIST_LOADED";
