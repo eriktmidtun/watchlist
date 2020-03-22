@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 class MediaItem extends React.Component{
     
     removeBackend = () =>{
-        console.log("deleting: " + this.props.info.original_title + "ID: " + this.props.info.id)
+        //console.log("deleting: " + this.props.info.original_title + "ID: " + this.props.info.id)
         this.props.deleteMediaFromList(this.props.info.id, this.props.apiUrl)
     }
 

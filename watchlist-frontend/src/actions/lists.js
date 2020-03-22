@@ -11,7 +11,8 @@ import {
     ADD_TO_WTW,
     ADD_TO_HW,
     ADD_TO_LIST_FAILED,
-    DELETE_FROM_LIST,
+    DELETE_FROM_HW,
+    DELETE_FROM_WTW,
     DELETE_FROM_LIST_LOADING,
     DELETE_FROM_LIST_FAILED,
     LIST_FAILED,
@@ -119,7 +120,7 @@ export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
         type: WTW_ITEM,
     });
     } catch (err) {
-        console.log("isMediaInWTW err",err);
+        //console.log("isMediaInWTW err",err);
     dispatch({
         type: WTW_ITEM_FAILED
     });
@@ -128,10 +129,10 @@ export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
 
 export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
     dispatch({ type: HW_ITEM_LOADING });
-    console.log("isMediaInHW mdbID",mdbID);
+    //console.log("isMediaInHW mdbID",mdbID);
     try {
     const token = tokenConfig(getState);
-   console.log("isMediaInHW token",token);
+   //console.log("isMediaInHW token",token);
     const res = await fetch(baseURL + `/api/lists/haveWatched/` + mdbID + `/` , {
         method: "GET",
         mode: "cors",
@@ -141,7 +142,7 @@ export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
         },
         body: null
     });
-   console.log("isMediaInHW res",res);
+   //console.log("isMediaInHW res",res);
     if (res.status !== 200 ) {
         throw Error("Den er ikke i listen");
     }
@@ -149,7 +150,7 @@ export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
         type: HW_ITEM,
     });
     } catch (err) {
-        console.log(err)
+        //console.log(err)
     dispatch({
         type: HW_ITEM_FAILED
     });
@@ -176,10 +177,16 @@ export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) =
             throw Error("No gikk galt med deletefrom list");
         }
         
-        console.log("Delete media from list res: " + res.status + " ID: " + mdbID)
-        dispatch({
-            type: DELETE_FROM_LIST
-        });
+        //console.log("Delete media from list res: " + res.status + " ID: " + mdbID)
+        if(list === 'wantToWatch'){
+            dispatch({
+                type: DELETE_FROM_WTW,
+            });
+        } else {
+            dispatch({
+                type: DELETE_FROM_HW,
+            });
+        }
     } catch (err) {
     dispatch({
         type: DELETE_FROM_LIST_FAILED
