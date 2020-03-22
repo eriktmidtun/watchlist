@@ -1,50 +1,138 @@
 import {
-    WANT_TO_WATCH_LOADED,
-    HAVE_WATCHED_LOADED,
-    WANT_TO_WATCH_LOADING,
-    HAVE_WATCHED_LOADING,
-    ADD_WANT_TO_WATCH,
-    ADD_HAVE_WATCHED,
-    DELETE_WANT_TO_WATCH,
-    DELETE_HAVE_WATCHED,
-    WANT_TO_WATCH_FAILED,
-    HAVE_WATCHED_FAILED,
+    WTW_ITEM_LOADING,
+    WTW_ITEM_FAILED,
+    WTW_ITEM,
+    HW_ITEM_LOADING,
+    HW_ITEM_FAILED,
+    HW_ITEM,
+    LIST_LOADING,
+    ADD_TO_LIST_LOADING,
+    ADD_TO_WTW,
+    ADD_TO_HW,
+    ADD_TO_LIST_FAILED,
+    DELETE_FROM_HW,
+    DELETE_FROM_WTW,
+    DELETE_FROM_LIST_LOADING,
+    DELETE_FROM_LIST_FAILED,
+    LIST_FAILED,
+    WTW_LIST_LOADED,
+    HW_LIST_LOADED
 } from "../actions/types";
 
 export default function(state = {}, action) {
     switch (action.type) {
-        case WANT_TO_WATCH_LOADED:
-        case HAVE_WATCHED_LOADED:
+        case HW_LIST_LOADED:
             return {
                 ...state,
-                lists: action.payload,
-                listsLoading: false,
+                hwList: action.payload,
+                listLoading: false,
             }
-        case WANT_TO_WATCH_LOADING:
-        case HAVE_WATCHED_LOADING:
-            console.log("RESULTS_LOADING");
+        case WTW_LIST_LOADED:
             return {
                 ...state,
-                listsLoading: true,
+                wtwList: action.payload,
+                listLoading: false,
             }
-        case WANT_TO_WATCH_FAILED:
-        case HAVE_WATCHED_FAILED:
+        case LIST_LOADING:
             return {
                 ...state,
-                listsLoading: false,
+                listLoading: true,
             }
-        case ADD_WANT_TO_WATCH:
-        case ADD_HAVE_WATCHED:
+        case LIST_FAILED:
             return {
                 ...state,
-                listsLoading: false,
+                listLoading: false,
             }
-        case DELETE_WANT_TO_WATCH:
-        case DELETE_HAVE_WATCHED:
+        /* for one item in a list */
+        case WTW_ITEM:
             return {
                 ...state,
-                listsLoading: false,
+                listItemLoading: false,
+                isInWantToWatch:  true,
             }
+        case WTW_ITEM_LOADING:
+            //console.log("LIST_LOADING");
+            return {
+                ...state,
+                listItemLoading: true,
+                isInWantToWatch:  false,
+            }
+        case WTW_ITEM_FAILED:
+            return {
+                ...state,
+                listItemLoading: false,
+                isInWantToWatch:  false,
+            }
+
+        /* have watched in list */
+        case HW_ITEM:
+            return {
+                ...state,
+                listItemLoading: false,
+                isInHaveWatched: true,
+            }
+        case HW_ITEM_LOADING:
+            return {
+                ...state,
+                listItemLoading: true,
+                isInHaveWatched: false,
+            }
+        case HW_ITEM_FAILED:
+            return {
+                ...state,
+                listItemLoading: false,
+                isInHaveWatched: false,
+            }
+        /* add to list */
+        case ADD_TO_WTW:
+            return {
+                ...state,
+                addLoading: false,
+                isInWantToWatch:  true,
+            }
+        case ADD_TO_HW:
+            return {
+                ...state,
+                addLoading: false,
+                isInHaveWatched: true,
+            }
+        case ADD_TO_LIST_LOADING:
+            return {
+                ...state,
+                addLoading: true,
+            }
+        case ADD_TO_LIST_FAILED:
+            return {
+                ...state,
+                addLoading: false,
+            }
+        case DELETE_FROM_LIST_LOADING:
+            //console.log("DELETE_FROM_LIST_LOADING")
+            return{
+                ...state,
+                deleteFromListLoading: true,
+            }
+        /* Delete from list */
+        case DELETE_FROM_WTW:
+            //console.log("DELETE_FROM_WTW")
+            return {
+                ...state,
+                deleteFromListLoading: false,
+                isInWantToWatch:  false,
+            }
+        case DELETE_FROM_HW:
+            //console.log("DELETE_FROM_HW")
+            return {
+                ...state,
+                deleteFromListLoading: false,
+                isInHaveWatched: false,
+            }
+        case DELETE_FROM_LIST_FAILED:
+            return {
+                ...state,
+                deleteFromListLoading: false,
+            }
+        
         default:
             return state
     }

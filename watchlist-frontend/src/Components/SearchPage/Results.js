@@ -74,7 +74,7 @@ class Results extends React.Component {
   }
 
   render(){
-    console.log("this.props.resultsLoading " +this.props.resultsLoading);
+    //console.log("this.props.resultsLoading " + this.props.resultsLoading);
     if (this.props.resultsLoading) {
       return (<Loader variant="dark"/>)
     }

@@ -16,7 +16,7 @@ class SearchBar extends Component {
 
   /* Søk med enter knappen */
   handleKeyPress(target){
-    if(target.charCode==13 && this.state.query !== ''){
+    if(target.charCode===13 && this.state.query !== ''){
       this.props.history.push("/søk/filmer?q=" + this.state.query)
     }
   }
