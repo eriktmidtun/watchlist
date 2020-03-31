@@ -19,8 +19,7 @@ import {
     WTW_LIST_LOADED
 } from "./types";
 import {tokenConfig} from './auth'
-
-const baseURL = `http://localhost:8000`;
+import {backendBaseURL} from './constants'
 
 /* Spør server om want to watch list */
 export const getBackendMediaID = (list) => async (dispatch, getState) => {
@@ -28,7 +27,7 @@ export const getBackendMediaID = (list) => async (dispatch, getState) => {
 
     try {
     const token = tokenConfig(getState);
-    const res = await fetch(baseURL + `/api/lists/` + list +`/`, {
+    const res = await fetch(backendBaseURL + `/api/lists/` + list +`/`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -70,7 +69,7 @@ export const addMediaToList = (mdbID, mediaType, list) => async (dispatch, getSt
         mdbID: mdbID,
         mediumType: mediaType
     }
-    const res = await fetch(baseURL + `/api/lists/` + list +`/` , {
+    const res = await fetch(backendBaseURL + `/api/lists/` + list +`/` , {
         method: "POST",
         mode: "cors",
         headers: {
@@ -105,7 +104,7 @@ export const isMediaInWTW = (mdbID) => async (dispatch, getState) => {
 
     try {
     const token = tokenConfig(getState);
-    const res = await fetch(baseURL + `/api/lists/wantToWatch/` + mdbID  , {
+    const res = await fetch(backendBaseURL + `/api/lists/wantToWatch/` + mdbID  , {
         method: "GET",
         mode: "cors",
         headers: {
@@ -133,7 +132,7 @@ export const isMediaInHW = (mdbID) => async (dispatch, getState) => {
     try {
     const token = tokenConfig(getState);
    //console.log("isMediaInHW token",token);
-    const res = await fetch(baseURL + `/api/lists/haveWatched/` + mdbID + `/` , {
+    const res = await fetch(backendBaseURL + `/api/lists/haveWatched/` + mdbID + `/` , {
         method: "GET",
         mode: "cors",
         headers: {
@@ -164,7 +163,7 @@ export const deleteMediaFromList = (mdbID, list) => async (dispatch, getState) =
     try {
         const token = tokenConfig(getState);
 
-        const res = await fetch(baseURL + `/api/lists/` + list + `/` + mdbID  + `/` , {
+        const res = await fetch(backendBaseURL + `/api/lists/` + list + `/` + mdbID  + `/` , {
             method: "DELETE",
             mode: "cors",
             headers: {

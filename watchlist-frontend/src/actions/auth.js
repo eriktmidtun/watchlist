@@ -10,9 +10,7 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS
 } from "./types";
-
-/* Bytt denne addressen til http://admin.watchlist.social for å kjøre mot backend serveren vår */
-const baseURL = `http://localhost:8000`;
+import {backendBaseURL} from './constants'
 
 /* Spør server om brukerdata */
 export const loadUser = () => async (dispatch, getState) => {
@@ -23,7 +21,7 @@ export const loadUser = () => async (dispatch, getState) => {
     if(!token) {
       throw Error("ingen token lagret");
     }
-    const res = await fetch(baseURL + `/api/auth/user`, {
+    const res = await fetch(backendBaseURL + `/api/auth/user`, {
       method: "GET",
       mode: "cors",
       headers: {
@@ -65,7 +63,7 @@ export const register = ({
   const body = JSON.stringify(formData);
 
   try {
-    const res = await fetch(baseURL + `/api/auth/register`, {
+    const res = await fetch(backendBaseURL + `/api/auth/register`, {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -95,7 +93,7 @@ export const login = ({ username, password }) => async dispatch => {
   const body = JSON.stringify({ username, password });
 
   try {
-    const res = await fetch(baseURL +`/api/auth/login`, {
+    const res = await fetch(backendBaseURL +`/api/auth/login`, {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -124,7 +122,7 @@ export const login = ({ username, password }) => async dispatch => {
 export const logout = () => async (dispatch, getState) => {
   const token = tokenConfig(getState);
 
-  await fetch(baseURL +`/api/auth/logout`, {
+  await fetch(backendBaseURL +`/api/auth/logout`, {
     method: "POST",
     mode: "cors",
     headers: {
