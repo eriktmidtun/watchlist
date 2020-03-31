@@ -10,7 +10,7 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS
 } from "./types";
-import {backendBaseURL} from './constants'
+import { backendBaseURL } from "./constants";
 
 /* Spør server om brukerdata */
 export const loadUser = () => async (dispatch, getState) => {
@@ -18,7 +18,7 @@ export const loadUser = () => async (dispatch, getState) => {
 
   try {
     const token = tokenConfig(getState);
-    if(!token) {
+    if (!token) {
       throw Error("ingen token lagret");
     }
     const res = await fetch(backendBaseURL + `/api/auth/user`, {
@@ -93,7 +93,7 @@ export const login = ({ username, password }) => async dispatch => {
   const body = JSON.stringify({ username, password });
 
   try {
-    const res = await fetch(backendBaseURL +`/api/auth/login`, {
+    const res = await fetch(backendBaseURL + `/api/auth/login`, {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -122,7 +122,7 @@ export const login = ({ username, password }) => async dispatch => {
 export const logout = () => async (dispatch, getState) => {
   const token = tokenConfig(getState);
 
-  await fetch(backendBaseURL +`/api/auth/logout`, {
+  await fetch(backendBaseURL + `/api/auth/logout`, {
     method: "POST",
     mode: "cors",
     headers: {

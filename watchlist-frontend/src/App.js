@@ -26,7 +26,6 @@ import store from "./store";
 import { loadUser } from "./actions/auth";
 import history from "./history";
 
-
 class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser());
@@ -38,13 +37,21 @@ class App extends Component {
         <Router history={history}>
           <div className="App">
             <Navigeringsbar />
-            <Container style={{padding:"30px"}}>
+            <Container style={{ padding: "30px" }}>
               <Switch>
                 <PrivateRoute exact path="/" component={FrontPage} />
                 <PrivateRoute path="/søk/:medium" component={SearchPage} />
                 <PrivateRoute exact path="/profil" component={Profil} />
-                <PrivateRoute exact path="/filmer/:id" component={MediaDetailPage} />
-                <PrivateRoute exact path="/serier/:id" component={MediaDetailPage} />
+                <PrivateRoute
+                  exact
+                  path="/filmer/:id"
+                  component={MediaDetailPage}
+                />
+                <PrivateRoute
+                  exact
+                  path="/serier/:id"
+                  component={MediaDetailPage}
+                />
                 <UautorisertFrontPage
                   exact
                   path="/logginn"
@@ -55,7 +62,7 @@ class App extends Component {
                   path="/registrering"
                   component={Registrering}
                 />
-                <Route component={NotFound}/>
+                <Route component={NotFound} />
               </Switch>
             </Container>
             <Footer />

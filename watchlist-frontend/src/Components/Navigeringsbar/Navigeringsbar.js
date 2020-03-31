@@ -16,7 +16,6 @@ import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 
 class Navigeringsbar extends Component {
-
   render() {
     const { user, isAuthenticated } = this.props.auth;
     /* Hva som vises om brukeren er logget inn */
@@ -42,7 +41,7 @@ class Navigeringsbar extends Component {
         sticky="top"
         style={{ height: "60px" }}
       >
-        <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Logo />
         {isAuthenticated ? (
           <Navbar.Collapse id="responsive-navbar-nav">

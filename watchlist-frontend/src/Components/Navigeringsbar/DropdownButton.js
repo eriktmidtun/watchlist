@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { ButtonGroup, Dropdown, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 /* Routing */
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 class DropdownButton extends Component {
   render() {
@@ -13,9 +13,14 @@ class DropdownButton extends Component {
     };
     return (
       <Dropdown as={ButtonGroup} className="ml-auto">
-          <Button onClick={() => this.props.history.push("/profil")} variant="primary" type="button" style={{ minWidth: "200px" }}>
-            {this.props.name ? this.props.name.first_name : "Placeholder"}
-          </Button>
+        <Button
+          onClick={() => this.props.history.push("/profil")}
+          variant="primary"
+          type="button"
+          style={{ minWidth: "200px" }}
+        >
+          {this.props.name ? this.props.name.first_name : "Placeholder"}
+        </Button>
         <Dropdown.Toggle split variant="primary" id="dropdown-split-basic" />
         <Dropdown.Menu alignRight>
           <LinkContainer to="/profil">
