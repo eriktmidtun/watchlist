@@ -1,6 +1,7 @@
 """
-    Urls for mediaItem
+Urls for mediaItem.
 """
+
 from rest_framework import routers
 from .views import wantToWatchMediaItemViewSet, haveWatchedMediaItemViewSet
 

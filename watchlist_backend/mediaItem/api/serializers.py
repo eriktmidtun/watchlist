@@ -1,6 +1,7 @@
 """
-    Serializer for the mediaItem lists. 
+Serializer for the mediaItem lists. 
 """
+
 from rest_framework import serializers
 from mediaItem.models import HaveWatchedMediaItem, WantToWatchMediaItem
 
