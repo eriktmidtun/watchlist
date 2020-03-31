@@ -1,3 +1,3 @@
 """
-Unused but necessary init file.
+Empty but necessary init file.
 """
