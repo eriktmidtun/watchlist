@@ -1,5 +1,9 @@
+"""
+    list models. Relates mediaItems to a user.
+    A user have 2 lists. HaveWatched and WantToWatch.
+    These models generate alot of redundancy and should be updated
+"""
 from django.db import models
-# For å kunne relatere et movieItem til en bruker. 
 from django.contrib.auth.models import User  
 
 class HaveWatchedMediaItem(models.Model): 

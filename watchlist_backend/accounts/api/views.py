@@ -1,12 +1,16 @@
+"""
+    Views for the accounts aPI
+"""
 from rest_framework import generics, permissions
 from rest_framework.response import Response
-
 from knox.models import AuthToken
-
 from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 
 
 class UserAPIView(generics.RetrieveAPIView):
+    """
+        Returns a user object if he is logged in
+    """
     permission_classes = [
         permissions.IsAuthenticated,
     ]
@@ -17,6 +21,9 @@ class UserAPIView(generics.RetrieveAPIView):
 
 
 class RegisterAPIView(generics.GenericAPIView):
+    """
+        Returns a user object and its login token if successfull registration
+    """
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
@@ -30,6 +37,9 @@ class RegisterAPIView(generics.GenericAPIView):
 
 
 class LoginAPIView(generics.GenericAPIView):
+    """
+        Returns a user object and its login token if successfull login
+    """
     serializer_class = LoginSerializer
 
     def post(self, request, *args, **kwargs):
