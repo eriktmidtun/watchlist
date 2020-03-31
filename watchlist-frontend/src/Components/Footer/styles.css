@@ -1,11 +1,10 @@
 .footer {
-    padding-top:50px;
-    color:white;
-    line-height: 25px;
-    min-height: 150px;
-    width: 100%;
-    background-color: #343a40;
-    margin-top: auto;
-    align-content: center;
+  padding-top: 50px;
+  color: white;
+  line-height: 25px;
+  min-height: 150px;
+  width: 100%;
+  background-color: #343a40;
+  margin-top: auto;
+  align-content: center;
 }
-

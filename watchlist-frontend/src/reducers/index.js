@@ -9,7 +9,7 @@ const appReducer = combineReducers({
   form: formReducer,
   auth,
   medier,
-  list,
+  list
 });
 
 const rootReducer = (state, action) => {

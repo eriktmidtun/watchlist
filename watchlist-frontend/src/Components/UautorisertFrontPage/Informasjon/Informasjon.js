@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap/";
 
 const Informasjon = () => {
   return (
-    <Card style={{padding: "32px" }}>
+    <Card style={{ padding: "32px" }}>
       <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
         Om WatchList
       </Card.Title>
