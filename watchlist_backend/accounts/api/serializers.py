@@ -25,7 +25,8 @@ class RegisterSerializer(serializers.ModelSerializer):
                         'first_name': {'required': True},
                         'last_name': {'required': True}}
 
-    def create(self, validated_data):
+    @staticmethod
+    def create(validated_data):
         """
         Creates a user object based on validated form data.
         """
@@ -43,7 +44,8 @@ class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
 
-    def validate(self, data):
+    @staticmethod
+    def validate(data):
         """
         Checks if username and password combo is valid.
         """
