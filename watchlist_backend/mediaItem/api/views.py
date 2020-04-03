@@ -6,9 +6,9 @@ This view tries to work around the redundancy and "pretends"
 that a mediaItem is not bound by a single user.
 """
 
-from rest_framework import  viewsets, permissions, exceptions, status
-from rest_framework.exceptions import  ValidationError
 from django.shortcuts import get_object_or_404
+from rest_framework import viewsets, permissions, exceptions, status
+from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from mediaItem.models import HaveWatchedMediaItem, WantToWatchMediaItem
 from .serializers import HaveWatchedMediaItemSerializer, WantToWatchMediaItemSerializer
@@ -27,7 +27,8 @@ class wantToWatchMediaItemViewSet(viewsets.ModelViewSet):
         """
         return self.request.user.wantToWatchMediaItem.all()
 
-    def retrieve(self, request, pk):
+    @staticmethod
+    def retrieve(request, pk):
         """
         Returns a mediaItem by mdbID if it is in the user's list.
         """
@@ -47,7 +48,8 @@ class wantToWatchMediaItemViewSet(viewsets.ModelViewSet):
         self.perform_destroy(obj)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    def perform_destroy(self, instance):
+    @staticmethod
+    def perform_destroy(instance):
         """
         A helper function for destroy().
         """
@@ -77,7 +79,8 @@ class haveWatchedMediaItemViewSet(viewsets.ModelViewSet):
         """
         return self.request.user.haveWatchedMediaItem.all()
 
-    def retrieve(self, request, pk):
+    @staticmethod
+    def retrieve(request, pk):
         """
         Returns a mediaItem by mdbID if it is in the users list.
         """
@@ -96,7 +99,8 @@ class haveWatchedMediaItemViewSet(viewsets.ModelViewSet):
         self.perform_destroy(obj)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    def perform_destroy(self, instance):
+    @staticmethod
+    def perform_destroy(instance):
         """
         A helper function for destroy().
         """
