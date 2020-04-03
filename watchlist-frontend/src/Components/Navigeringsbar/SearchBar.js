@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+
+/* Styling */
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 
 /* Routing */
 import { LinkContainer } from "react-router-bootstrap";
 import { withRouter } from "react-router-dom";
 
+/*** 
+ * Searchbar for searching movies/series/users.
+ * redirects to the serchresults.
+ */
 class SearchBar extends Component {
   constructor() {
     super();
@@ -17,7 +23,7 @@ class SearchBar extends Component {
   /* Search with enter key. */
   handleKeyPress(target) {
     if (target.charCode === 13 && this.state.query !== "") {
-      /* Update URL and redirect to correct page. */
+      /* Update URL and redirect to it. */
       this.props.history.push("/søk/filmer?q=" + this.state.query);
     }
   }

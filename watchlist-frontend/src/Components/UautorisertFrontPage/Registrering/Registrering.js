@@ -25,7 +25,10 @@ import {
   firstCharCapital
 } from "../ValideringsFunksjoner";
 
-/* We use Redux Form together with React Redux to make things easier. */
+/*** 
+ * registrationform 
+ * Handles the registration process with validations and displaying validation errors
+*/
 class Registrering extends Component {
   onSubmit = formValues => {
     this.props.register(formValues);
@@ -99,7 +102,7 @@ class Registrering extends Component {
   }
 }
 
-/* The props we would like from Redux Store. */
+/* Props we would like from Redux Store. */
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });

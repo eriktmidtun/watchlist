@@ -1,6 +1,12 @@
 import React from "react";
+
+/* Styling */
 import { Spinner, Container, Row } from "react-bootstrap";
 
+/***  
+ *  Simple Loading animation.
+ *  Default variant is light. can use other bootstrap variants.
+ */
 export const Loader = ({ variant }) => {
   return (
     <Container>

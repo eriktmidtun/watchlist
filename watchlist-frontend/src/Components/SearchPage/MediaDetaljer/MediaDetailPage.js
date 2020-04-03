@@ -95,6 +95,10 @@ const filmDetails = mediumDetails => {
   );
 };
 
+/*** 
+ * Renders a overview of a movie/series.
+ * Users can see details of the movie/series and add it to their lists.
+ */
 class MediaDetailPage extends Component {
   constructor(props) {
     super(props);
@@ -121,7 +125,7 @@ class MediaDetailPage extends Component {
     this.props.isMediaInHW(mediaID);
   }
 
-  /* Commits a search if the query part of the URL is updated. */
+  /* Updates the movie/series based on the URL. */
   componentDidUpdate(prevProps) {
     const path = prevProps.location.pathname.split("/");
     const mediaType = path[1];
@@ -229,7 +233,7 @@ class MediaDetailPage extends Component {
                       rounded
                     />
                   </Col>
-                  <Col>
+                  <Col> {/* Movies and series have different object attributes and need to be rendered differently. */}
                     {this.state.mediaType === "filmer"
                       ? filmDetails(this.props.mediumDetails)
                       : serieDetails(this.props.mediumDetails)}

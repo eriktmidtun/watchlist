@@ -49,10 +49,7 @@ const filmer = (film, imageUrl) => {
   );
 };
 
-/*
-Since The Movie Database responds differently to movie requests
-and series requests, we need two seperate components.
-*/
+/* Starts the searching process and renders the results. */
 class Results extends React.Component {
   /* Requests the first 20 hits of the search. */
   search = (mediaType, query) => {

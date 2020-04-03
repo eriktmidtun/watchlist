@@ -6,6 +6,10 @@ import { Row, Col, Card } from "react-bootstrap";
 /* Redux */
 import { connect } from "react-redux";
 
+/*** 
+ * FrontPage
+ * This is where the user will be redirected to after logging in
+ */
 class FrontPage extends Component {
   render() {
     const { user } = this.props.auth;

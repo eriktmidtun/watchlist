@@ -9,6 +9,9 @@ import { Row, Col } from "react-bootstrap";
 /* Routing */
 import { Route } from "react-router-dom";
 
+/***
+ * Landing page when not logged in
+ */
 const UautorisertFrontPage = ({ component: Component, ...rest }) => {
   return (
     <Route

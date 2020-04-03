@@ -17,7 +17,10 @@ import {
 
 import { APIkey } from "./constants";
 
-/* Searches for movie titles matching the input. */
+/***  
+ *  Search for a movie based on the input
+ *  Gives back a list of max 20 movies
+ */
 export const searchForMovies = input => async dispatch => {
   console.log(APIkey);
   dispatch({
@@ -46,7 +49,10 @@ export const searchForMovies = input => async dispatch => {
   }
 };
 
-/* Searches for series titles matching the input. */
+/***  
+ *  Search for a series based on the input
+ *  Gives back a list of max 20 series
+ */
 export const searchForSeries = input => async dispatch => {
   dispatch({
     type: SERIES_RESULTS_LOADING
@@ -130,7 +136,10 @@ export const getSeriesInfo = ID => async dispatch => {
   }
 };
 
-/* Takes a list of tupples (ID, mediaType) and requests information about each film/series. */
+/***  
+ *  Takes in a list of mediaItem tuples (ID, mediaType) and asks for more details about each movie/series.
+ *  Nothing is returned if something goes wrong.
+ */
 export const getListToDetails = (mediums, list) => async dispatch => {
   dispatch({
     type: LIST_DETAILS_LOADING

@@ -18,7 +18,10 @@ import {
 /* Validations */
 import { required, minLength3 } from "../ValideringsFunksjoner";
 
-/* We use Redux Form together with React Redux to make things easier. */
+/*** 
+ * Loginform 
+ * Handles the login process with validations and displaying validation errors
+*/
 class Logginn extends Component {
   onSubmit = formValues => {
     this.props.login(formValues);

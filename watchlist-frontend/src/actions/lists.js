@@ -100,7 +100,9 @@ export const addMediaToList = (mdbID, mediaType, list) => async (
   }
 };
 
-/* Requests films/series contained in the wantToWatch list from the server. */
+/***  
+ *  Asks the server if the movie/series is in want to watch list
+ */
 export const isMediaInWTW = mdbID => async (dispatch, getState) => {
   dispatch({ type: WTW_ITEM_LOADING });
   try {
@@ -129,7 +131,9 @@ export const isMediaInWTW = mdbID => async (dispatch, getState) => {
   }
 };
 
-/* Requests films/series contained in the haveWatched list from the server. */
+/***  
+ *   Asks the server if the movie/series is in have watched list
+ */
 export const isMediaInHW = mdbID => async (dispatch, getState) => {
   dispatch({ type: HW_ITEM_LOADING });
   try {
@@ -146,8 +150,8 @@ export const isMediaInHW = mdbID => async (dispatch, getState) => {
         body: null
       }
     );
-    if (res.status !== 200) {
-      throw Error("It is not in the list.");
+    if (res.status !== 200) { //not in the list
+      throw Error("Den er ikke i listen");
     }
     dispatch({
       type: HW_ITEM
@@ -159,7 +163,9 @@ export const isMediaInHW = mdbID => async (dispatch, getState) => {
   }
 };
 
-/* Deletes a film/series from a list. */
+/*** 
+ *  Deletes the movie/series from the given list
+ */
 export const deleteMediaFromList = (mdbID, list) => async (
   dispatch,
   getState
@@ -182,7 +188,7 @@ export const deleteMediaFromList = (mdbID, list) => async (
     );
 
     if (res.status !== 204) {
-      throw Error("Something went wrong with the deletion.");
+      throw Error("No gikk galt med delete from list");
     }
     if (list === "wantToWatch") {
       dispatch({

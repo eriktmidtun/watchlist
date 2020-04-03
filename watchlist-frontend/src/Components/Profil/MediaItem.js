@@ -1,12 +1,20 @@
 import React from "react";
+
+/* Styling */
 import { Card, Image, Col, Row, Button } from "react-bootstrap/";
-import { getMovieInfo, getSeriesInfo } from "../../actions/TheMovieDB";
-import { deleteMediaFromList } from "../../actions/lists";
+
+/* Routing */
 import { Link } from "react-router-dom";
 
 /* Redux */
 import { connect } from "react-redux";
+import { getMovieInfo, getSeriesInfo } from "../../actions/TheMovieDB";
+import { deleteMediaFromList } from "../../actions/lists";
 
+/*** 
+ * Renders a single list item.
+ * Handles deletions of listitems.
+ */
 class MediaItem extends React.Component {
   removeBackend = () => {
     this.props.deleteMediaFromList(this.props.info.id, this.props.apiUrl);

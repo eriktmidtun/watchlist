@@ -6,6 +6,10 @@ import { LinkContainer } from "react-router-bootstrap";
 /* Routing */
 import { withRouter } from "react-router-dom";
 
+/*** 
+ * DropdownButton for navigation
+ * Should be in the navbar.
+ */
 class DropdownButton extends Component {
   render() {
     const OnCLickDropdown = () => {

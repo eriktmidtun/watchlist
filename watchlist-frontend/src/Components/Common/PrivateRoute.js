@@ -1,9 +1,15 @@
 import React from "react";
+/* Routing */
 import { Route, Redirect } from "react-router-dom";
+/* Redux */
 import { connect } from "react-redux";
-
+/* Components */
 import { Loader } from "./Loader";
 
+/*** 
+ * Wrapper Routing component.
+ * Redirects the user to login/register if not loged in
+ */
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   <Route
     {...rest}

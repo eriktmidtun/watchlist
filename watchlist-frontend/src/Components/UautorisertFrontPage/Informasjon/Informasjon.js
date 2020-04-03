@@ -1,6 +1,9 @@
 import React from "react";
+
+/* Styling */
 import { Card } from "react-bootstrap/";
 
+/* Static Information display for the unauthorized frontpage */
 const Informasjon = () => {
   return (
     <Card style={{ padding: "32px" }}>

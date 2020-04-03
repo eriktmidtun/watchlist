@@ -1,10 +1,16 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import { Row } from "react-bootstrap";
+
+/* Styling */
+import { Row, Container } from "react-bootstrap";
 import "./styles.css";
 
+/* Components */
 import DBlogo from "./DBlogo";
 
+/*** 
+ * Footer.
+ * Renders a footer in the bottom of the screen
+ */
 function Footer() {
   return (
     <footer className="footer">

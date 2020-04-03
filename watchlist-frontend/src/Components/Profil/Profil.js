@@ -9,7 +9,7 @@ import { Row, Col, Card } from "react-bootstrap";
 /* Redux */
 import { connect } from "react-redux";
 
-/* Shows a user profile and its lists. */
+/* Renders a user's profile and its lists. */
 class Profil extends Component {
   render() {
     const { user } = this.props.auth;

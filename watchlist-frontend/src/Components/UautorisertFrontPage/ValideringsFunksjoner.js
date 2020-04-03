@@ -1,13 +1,15 @@
-/* Check for empty string. */
+/* Frontend validation for login and registration. */
+
+/* Check if string is empty. */
 export const required = value => (value ? undefined : "Kan ikke være tom");
 
-/* Check for minimum string length. */
+/* Check for minimum length. */
 export const minLength = min => value =>
   value && value.length < min ? `Må være minst ${min} bokstaver` : undefined;
 
 export const minLength3 = minLength(3);
 
-/* Check for maximum string length. */
+/* Check for maximum length. */
 export const maxLength = max => value =>
   value && value.length > max
     ? `Maks lengde er ${max} bokstaver eller mindre`
@@ -15,11 +17,11 @@ export const maxLength = max => value =>
 
 export const maxLength100 = maxLength(100);
 
-/* Check that both password fields are equal. */
+/* Check if both password fields are equal. */
 export const passwordsMatch = (value, allValues) =>
   value !== allValues.password ? "Passordene må være like" : undefined;
 
-/* Check for valid email. */
+/* Check if the email is a valid email. */
 export const isEmail = value => {
   const emailPattern = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
   return emailPattern.test(value) ? undefined : "Ikke en gyldig epost-addresse";

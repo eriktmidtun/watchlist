@@ -1,6 +1,11 @@
 import React from "react";
+/* Styling */
 import { Card } from "react-bootstrap";
 
+/*** 
+ * Renders reviews of a movie/series
+ * This is not done
+ */
 const Anmeldelser = () => {
   return (
     <React.Fragment>

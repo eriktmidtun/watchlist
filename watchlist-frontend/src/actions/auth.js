@@ -45,7 +45,7 @@ export const loadUser = () => async (dispatch, getState) => {
   }
 };
 
-/* Register user. */
+/*** Registers user based on form data*/
 export const register = ({
   email,
   password,
@@ -88,7 +88,7 @@ export const register = ({
   }
 };
 
-/* Log in user. */
+/***  Login the user based on username and password. dispatches error massage if not correct */
 export const login = ({ username, password }) => async dispatch => {
   const body = JSON.stringify({ username, password });
 
@@ -136,7 +136,7 @@ export const logout = () => async (dispatch, getState) => {
   });
 };
 
-/* Helper function. */
+/*** returns the token, if it exists*/
 export const tokenConfig = getState => {
   const token = getState().auth.token;
   return token;
