@@ -1,10 +1,12 @@
 """
-    list models. Relates mediaItems to a user.
-    A user have 2 lists. HaveWatched and WantToWatch.
-    These models generate alot of redundancy and should be updated
+List models that relates mediaItems to a user.
+A user have two lists: HaveWatched and WantToWatch.
+These models generate a lot of redundancy and should be updated!
 """
+
 from django.db import models
 from django.contrib.auth.models import User  
+
 
 class HaveWatchedMediaItem(models.Model): 
     mdbID = models.IntegerField()
@@ -13,6 +15,7 @@ class HaveWatchedMediaItem(models.Model):
 
     def __str__(self):
         return str(self.mdbID)
+
 
 class WantToWatchMediaItem(models.Model):
     mdbID = models.IntegerField()
