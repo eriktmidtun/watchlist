@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-/* Komponeter */
+/* Components */
 import Liste from "./Liste";
 
 /* Styling */
@@ -9,12 +9,12 @@ import { Row, Col, Card } from "react-bootstrap";
 /* Redux */
 import { connect } from "react-redux";
 
-/* Viser en brukerprofil, samt dens lister */
+/* Shows a user profile and its lists. */
 class Profil extends Component {
   render() {
     const { user } = this.props.auth;
-    const følgere = "N/A"; //må kobles opp med backend etter hvert
-    const følger = "N/A";
+    const følgere = "N/A"; // Has to be hooked up to the backend at some point.
+    const følger = "N/A"; // Same as the above comment.
     return (
       <React.Fragment>
         <Row className="justify-content-center">

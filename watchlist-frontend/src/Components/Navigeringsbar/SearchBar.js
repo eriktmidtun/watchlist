@@ -14,10 +14,10 @@ class SearchBar extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
-  /* Søk med enter knappen */
+  /* Search with enter key. */
   handleKeyPress(target) {
     if (target.charCode === 13 && this.state.query !== "") {
-      /* oppdater URL og send til rett side */
+      /* Update URL and redirect to correct page. */
       this.props.history.push("/søk/filmer?q=" + this.state.query);
     }
   }

@@ -3,7 +3,7 @@ import React from "react";
 /* Styling */
 import { Row, Col, Card } from "react-bootstrap";
 
-/* Blir rendret om ingen av de andre pathene passer. feks watchlist.socail/eksempel skal komme hit */
+/* Is rendered if no other paths fit (e.g.: watchlist.social/example would trigger this). */
 const NotFound = ({ error }) => {
   return (
     <Row className="justify-content-center">

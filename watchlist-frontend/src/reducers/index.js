@@ -13,7 +13,7 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-  //sletter all data om bruker om bruker er logger ut
+  // Deletes all data if the user is logged out.
   if (action.type === LOGOUT_SUCCESS) {
     state = undefined;
   }

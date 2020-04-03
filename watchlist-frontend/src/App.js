@@ -10,7 +10,7 @@ import PrivateRoute from "./Components/Common/PrivateRoute";
 import NotFound from "./Components/Common/NotFound";
 import UautorisertFrontPage from "./Components/UautorisertFrontPage/UautorisertFrontPage";
 
-/* Komponenter */
+/* Components */
 import Registrering from "./Components/UautorisertFrontPage/Registrering/Registrering";
 import Logginn from "./Components/UautorisertFrontPage/Logginn/Logginn";
 import FrontPage from "./Components/FrontPage/FrontPage";

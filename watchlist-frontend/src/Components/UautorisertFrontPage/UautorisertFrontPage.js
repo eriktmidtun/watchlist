@@ -1,6 +1,6 @@
 import React from "react";
 
-/* Komponenter */
+/* Components */
 import Informasjon from "../UautorisertFrontPage/Informasjon/Informasjon";
 
 /* Styling */

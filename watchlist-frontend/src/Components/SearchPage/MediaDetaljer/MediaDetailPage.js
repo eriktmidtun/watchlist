@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { Container, Row, Col, Card, Image, Button } from "react-bootstrap";
 import "./MediaDetailPage.css";
 
-/* Komponenter */
+/* Components. */
 import { Loader } from "../../Common/Loader";
 import NotFound from "../../Common/NotFound";
 import Anmeldelser from "./Anmeldelser";
@@ -19,8 +19,7 @@ import {
   deleteMediaFromList
 } from "../../../actions/lists.js";
 
-/* rendrer en enkelt serieoversikt */
-
+/* Renders a simple series overview. */
 const serieDetails = mediumDetails => {
   return (
     <React.Fragment>
@@ -60,7 +59,7 @@ const serieDetails = mediumDetails => {
   );
 };
 
-/* rendrer en enkelt filmoversikt */
+/* Renders a simple film overview. */
 const filmDetails = mediumDetails => {
   return (
     <React.Fragment>
@@ -122,7 +121,7 @@ class MediaDetailPage extends Component {
     this.props.isMediaInHW(mediaID);
   }
 
-  /* utfører søking om query-del av URL oppdateres */
+  /* Commits a search if the query part of the URL is updated. */
   componentDidUpdate(prevProps) {
     const path = prevProps.location.pathname.split("/");
     const mediaType = path[1];
@@ -134,7 +133,6 @@ class MediaDetailPage extends Component {
   }
 
   render() {
-    // console.log("this.props.detailResultLoading " +this.props.detailResultLoading);
     if (this.props.detailResultLoading) {
       return <Loader />;
     } else if (!this.props.mediumDetails) {
@@ -166,7 +164,7 @@ class MediaDetailPage extends Component {
                     </Card.Title>
                   </Col>
                   <Col xs="3" style={{ marginLeft: "auto" }}>
-                    {//knapp for skal se
+                    {// Want To Watch button.
                     this.props.isInWantToWatch ? (
                       <Button
                         style={{ width: "50%" }}
@@ -195,7 +193,7 @@ class MediaDetailPage extends Component {
                         Skal se
                       </Button>
                     )}
-                    {//knapp for skal se
+                    {// Have Watched button.
                     this.props.isInHaveWatched ? (
                       <Button
                         className="btn-success"
