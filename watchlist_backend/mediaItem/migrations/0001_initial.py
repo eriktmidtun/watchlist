@@ -17,10 +17,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='WantToWatchMediaItem',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                                        serialize=False, verbose_name='ID')),
                 ('mdbID', models.IntegerField()),
                 ('mediumType', models.CharField(max_length=255)),
-                ('owner', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='wantToWatchMediaItem', to=settings.AUTH_USER_MODEL)),
+                ('owner', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
+                                            related_name='wantToWatchMediaItem', to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
