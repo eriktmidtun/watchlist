@@ -21,7 +21,7 @@ import {
 import { tokenConfig } from "./auth";
 import { backendBaseURL } from "./constants";
 
-/***  Spør server om alle filmer/serier i en av listene */
+/* Requests the films/series contained in a list from the server. */
 export const getBackendMediaID = list => async (dispatch, getState) => {
   dispatch({ type: LIST_LOADING });
 
@@ -58,7 +58,7 @@ export const getBackendMediaID = list => async (dispatch, getState) => {
   }
 };
 
-/***  Legger til en Film/serie i list */
+/* Adds a film/series to a list. */
 export const addMediaToList = (mdbID, mediaType, list) => async (
   dispatch,
   getState
@@ -100,7 +100,7 @@ export const addMediaToList = (mdbID, mediaType, list) => async (
   }
 };
 
-/***  Spør server om  filmen/serien er i want to watch listen */
+/* Requests films/series contained in the wantToWatch list from the server. */
 export const isMediaInWTW = mdbID => async (dispatch, getState) => {
   dispatch({ type: WTW_ITEM_LOADING });
   try {
@@ -129,7 +129,7 @@ export const isMediaInWTW = mdbID => async (dispatch, getState) => {
   }
 };
 
-/***  Spør server om  filmen/serien er i hav watched listen */
+/* Requests films/series contained in the haveWatched list from the server. */
 export const isMediaInHW = mdbID => async (dispatch, getState) => {
   dispatch({ type: HW_ITEM_LOADING });
   try {
@@ -147,20 +147,19 @@ export const isMediaInHW = mdbID => async (dispatch, getState) => {
       }
     );
     if (res.status !== 200) {
-      throw Error("Den er ikke i listen");
+      throw Error("It is not in the list.");
     }
     dispatch({
       type: HW_ITEM
     });
   } catch (err) {
-    //console.log(err)
     dispatch({
       type: HW_ITEM_FAILED
     });
   }
 };
 
-/***  Sletter film/serie fra list */
+/* Deletes a film/series from a list. */
 export const deleteMediaFromList = (mdbID, list) => async (
   dispatch,
   getState
@@ -183,7 +182,7 @@ export const deleteMediaFromList = (mdbID, list) => async (
     );
 
     if (res.status !== 204) {
-      throw Error("No gikk galt med deletefrom list");
+      throw Error("Something went wrong with the deletion.");
     }
     if (list === "wantToWatch") {
       dispatch({

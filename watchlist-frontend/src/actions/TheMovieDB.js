@@ -17,7 +17,7 @@ import {
 
 import { APIkey } from "./constants";
 
-/***  Søker etter en filmer fra input */
+/* Searches for movie titles matching the input. */
 export const searchForMovies = input => async dispatch => {
   console.log(APIkey);
   dispatch({
@@ -46,7 +46,7 @@ export const searchForMovies = input => async dispatch => {
   }
 };
 
-/***  Søker etter en seriefra input */
+/* Searches for series titles matching the input. */
 export const searchForSeries = input => async dispatch => {
   dispatch({
     type: SERIES_RESULTS_LOADING
@@ -74,7 +74,7 @@ export const searchForSeries = input => async dispatch => {
   }
 };
 
-/***  Spør etter mer informasjon om en film */
+/* Requests more information about a movie. */
 export const getMovieInfo = ID => async dispatch => {
   dispatch({
     type: MOVIE_LOADING
@@ -102,7 +102,7 @@ export const getMovieInfo = ID => async dispatch => {
   }
 };
 
-/***  Spør etter mer informasjon om en serie */
+/* Requests more information about a series. */
 export const getSeriesInfo = ID => async dispatch => {
   dispatch({
     type: SERIES_LOADING
@@ -130,7 +130,7 @@ export const getSeriesInfo = ID => async dispatch => {
   }
 };
 
-/***  Tar inn en liste med tupler(ID, mediaType) og spør etter info om hver film/serie */
+/* Takes a list of tupples (ID, mediaType) and requests information about each film/series. */
 export const getListToDetails = (mediums, list) => async dispatch => {
   dispatch({
     type: LIST_DETAILS_LOADING

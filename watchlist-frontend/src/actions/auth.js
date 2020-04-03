@@ -12,14 +12,14 @@ import {
 } from "./types";
 import { backendBaseURL } from "./constants";
 
-/* Spør server om brukerdata */
+/* Requests user data from server. */
 export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   try {
     const token = tokenConfig(getState);
     if (!token) {
-      throw Error("ingen token lagret");
+      throw Error("No saved token.");
     }
     const res = await fetch(backendBaseURL + `/api/auth/user`, {
       method: "GET",
@@ -45,7 +45,7 @@ export const loadUser = () => async (dispatch, getState) => {
   }
 };
 
-/* Registrer bruker */
+/* Register user. */
 export const register = ({
   email,
   password,
@@ -59,7 +59,7 @@ export const register = ({
     email: email,
     password: password
   };
-  // Request Body
+  // Request body.
   const body = JSON.stringify(formData);
 
   try {
@@ -71,7 +71,7 @@ export const register = ({
     });
 
     if (res.status !== 200) {
-      //noe gikk galt
+      // Something went wrong.
       throw res;
     }
     const data = await res.json();
@@ -80,7 +80,7 @@ export const register = ({
       payload: data
     });
   } catch (err) {
-    const response = await err.json(); //ta ut melding fra respons fra server
+    const response = await err.json(); // Extract the error messsage from the server response.
     dispatch({
       type: REGISTER_FAIL
     });
@@ -88,7 +88,7 @@ export const register = ({
   }
 };
 
-/* Logg inn bruker */
+/* Log in user. */
 export const login = ({ username, password }) => async dispatch => {
   const body = JSON.stringify({ username, password });
 
@@ -102,7 +102,7 @@ export const login = ({ username, password }) => async dispatch => {
     const data = await res.json();
 
     if (res.status !== 200) {
-      //ting gikk ikke som planlagt
+      // Things did not work as expected.
       throw data;
     }
     dispatch({
@@ -117,8 +117,7 @@ export const login = ({ username, password }) => async dispatch => {
   }
 };
 
-/* Logg ut bruker
- vi forventer ikke svar */
+/* Log out user. We are not expecting a response. */
 export const logout = () => async (dispatch, getState) => {
   const token = tokenConfig(getState);
 
@@ -137,7 +136,7 @@ export const logout = () => async (dispatch, getState) => {
   });
 };
 
-// helper function
+/* Helper function. */
 export const tokenConfig = getState => {
   const token = getState().auth.token;
   return token;
