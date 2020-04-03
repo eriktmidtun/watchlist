@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { searchForMovies, searchForSeries } from "../../actions/TheMovieDB";
 import { Loader } from "../Common/Loader";
 
-/* rendrer en enkelt serieoversikt i resultater */
+/* renders one series */
 const serier = (serie, imageUrl) => {
   return (
     <LinkContainer key={serie.id} to={"/serier/" + serie.id}>
@@ -30,7 +30,7 @@ const serier = (serie, imageUrl) => {
   );
 };
 
-/* rendrer en enkelt filmoversikt i resultater */
+/* renders one movie */
 const filmer = (film, imageUrl) => {
   return (
     <LinkContainer key={film.id} to={"/filmer/" + film.id}>
@@ -49,10 +49,12 @@ const filmer = (film, imageUrl) => {
   );
 };
 
-/* Respons fra filmer og serier fra MovieDB har ulike felter
-   Vi må derfor ha seperate koponeter for filmer og serier */
+/***
+ *  Renders the results from the search.
+ *  starts the searching proccess.
+ */
 class Results extends React.Component {
-  /* Spør movieDB om å hente de 20 første filmer/serier */
+  /* asks movieDB about fetching the first20 results */
   search = (mediaType, query) => {
     if (mediaType === "filmer") {
       this.props.searchForMovies(query);
@@ -64,8 +66,6 @@ class Results extends React.Component {
   componentDidMount() {
     this.search(this.props.mediaType, this.props.query);
   }
-
-  /* utfører søking om query-del av URL oppdateres */
   componentDidUpdate(prevProps) {
     if (this.props.query !== prevProps.query) {
       this.search(this.props.mediaType, this.props.query);
@@ -73,7 +73,6 @@ class Results extends React.Component {
   }
 
   render() {
-    //console.log("this.props.resultsLoading " + this.props.resultsLoading);
     if (this.props.resultsLoading) {
       return <Loader variant="dark" />;
     }

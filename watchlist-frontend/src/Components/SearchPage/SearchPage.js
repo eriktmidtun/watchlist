@@ -3,20 +3,22 @@ import React, { Component } from "react";
 /* Styling */
 import { Row, Col, Card, Nav } from "react-bootstrap";
 
-/* Komponenter */
+/* Components */
 import Results from "./Results";
 import NotFound from "../Common/NotFound.js";
 
-/* Routring */
+/* Routing */
 import { LinkContainer } from "react-router-bootstrap";
 import { Route } from "react-router-dom";
 import queryString from "query-string"; //for parsing av URL
 
-/* En blir flyttet hit om man skriver i søkebaren i Navbar.
-   Søkesiden med navigasjon mellom å søke på serier og filmer. */
+/***
+ * Parses the url for searching movies and series
+ * This is the landing page after searching something
+ */ 
 class SearchPage extends Component {
-  /* parser URL of får ut søkestreng og mediaType for deretter å rendre disse */
   render() {
+    /* parses url to get search results and mediatype */
     const query = queryString.parse(this.props.location.search).q;
     const mediaType = this.props.location.pathname.split("/")[2];
     if (
@@ -26,7 +28,7 @@ class SearchPage extends Component {
         mediaType === "brukere"
       )
     ) {
-      //feil path
+      //wrong path
       return <NotFound />;
     }
     return (

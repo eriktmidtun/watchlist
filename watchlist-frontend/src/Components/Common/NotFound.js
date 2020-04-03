@@ -3,7 +3,10 @@ import React from "react";
 /* Styling */
 import { Row, Col, Card } from "react-bootstrap";
 
-/* Blir rendret om ingen av de andre pathene passer. feks watchlist.socail/eksempel skal komme hit */
+/*** 
+ * Simple 404- page. Can take in a custom error massage.
+ * Should be renderd if the URL route does not have a component associated with it
+ */
 const NotFound = ({ error }) => {
   return (
     <Row className="justify-content-center">

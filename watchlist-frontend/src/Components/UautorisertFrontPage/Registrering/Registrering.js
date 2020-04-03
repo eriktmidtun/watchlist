@@ -15,7 +15,7 @@ import {
   BackendResponsMeldingsboks
 } from "../ReduxFormContainers";
 
-/* Valideringer */
+/* Validations */
 import {
   required,
   minLength3,
@@ -25,7 +25,10 @@ import {
   firstCharCapital
 } from "../ValideringsFunksjoner";
 
-/* Her bruker vi redux-form for å gjøre ting mye lettere sammen med react-redux */
+/*** 
+ * registrationform 
+ * Handles the registration process with validations and displaying validation errors
+*/
 class Registrering extends Component {
   onSubmit = formValues => {
     this.props.register(formValues);
@@ -99,7 +102,7 @@ class Registrering extends Component {
   }
 }
 
-/* Hvikle props vi vil ha fra redux store */
+/* Props we want from the redux store */
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });

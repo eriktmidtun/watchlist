@@ -21,7 +21,9 @@ import {
 import { tokenConfig } from "./auth";
 import { backendBaseURL } from "./constants";
 
-/***  Spør server om alle filmer/serier i en av listene */
+/***  
+ * Asks the servers about all the movies/series in one of the lists
+ */
 export const getBackendMediaID = list => async (dispatch, getState) => {
   dispatch({ type: LIST_LOADING });
 
@@ -58,7 +60,9 @@ export const getBackendMediaID = list => async (dispatch, getState) => {
   }
 };
 
-/***  Legger til en Film/serie i list */
+/***  
+ *  Adds a movie/series to the given list for a user
+ */
 export const addMediaToList = (mdbID, mediaType, list) => async (
   dispatch,
   getState
@@ -100,7 +104,9 @@ export const addMediaToList = (mdbID, mediaType, list) => async (
   }
 };
 
-/***  Spør server om  filmen/serien er i want to watch listen */
+/***  
+ *  Asks the server if the movie/series is in want to watch list
+ */
 export const isMediaInWTW = mdbID => async (dispatch, getState) => {
   dispatch({ type: WTW_ITEM_LOADING });
   try {
@@ -129,7 +135,9 @@ export const isMediaInWTW = mdbID => async (dispatch, getState) => {
   }
 };
 
-/***  Spør server om  filmen/serien er i hav watched listen */
+/***  
+ *   Asks the server if the movie/series is in have watched list
+ */
 export const isMediaInHW = mdbID => async (dispatch, getState) => {
   dispatch({ type: HW_ITEM_LOADING });
   try {
@@ -146,21 +154,22 @@ export const isMediaInHW = mdbID => async (dispatch, getState) => {
         body: null
       }
     );
-    if (res.status !== 200) {
+    if (res.status !== 200) { //not in the list
       throw Error("Den er ikke i listen");
     }
     dispatch({
       type: HW_ITEM
     });
   } catch (err) {
-    //console.log(err)
     dispatch({
       type: HW_ITEM_FAILED
     });
   }
 };
 
-/***  Sletter film/serie fra list */
+/*** 
+ *  Deletes the movie/series from the given list
+ */
 export const deleteMediaFromList = (mdbID, list) => async (
   dispatch,
   getState
@@ -183,7 +192,7 @@ export const deleteMediaFromList = (mdbID, list) => async (
     );
 
     if (res.status !== 204) {
-      throw Error("No gikk galt med deletefrom list");
+      throw Error("No gikk galt med delete from list");
     }
     if (list === "wantToWatch") {
       dispatch({

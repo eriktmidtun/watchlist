@@ -17,7 +17,10 @@ import {
 
 import { APIkey } from "./constants";
 
-/***  Søker etter en filmer fra input */
+/***  
+ *  Search for a movie based on the input
+ *  Gives back a list of max 20 movies
+ */
 export const searchForMovies = input => async dispatch => {
   console.log(APIkey);
   dispatch({
@@ -46,7 +49,10 @@ export const searchForMovies = input => async dispatch => {
   }
 };
 
-/***  Søker etter en seriefra input */
+/***  
+ *  Search for a series based on the input
+ *  Gives back a list of max 20 series
+ */
 export const searchForSeries = input => async dispatch => {
   dispatch({
     type: SERIES_RESULTS_LOADING
@@ -74,7 +80,9 @@ export const searchForSeries = input => async dispatch => {
   }
 };
 
-/***  Spør etter mer informasjon om en film */
+/***  
+ *  Ask for more details about a given movie
+ */
 export const getMovieInfo = ID => async dispatch => {
   dispatch({
     type: MOVIE_LOADING
@@ -102,7 +110,9 @@ export const getMovieInfo = ID => async dispatch => {
   }
 };
 
-/***  Spør etter mer informasjon om en serie */
+/***  
+ *  Ask for more details about a given series
+ */
 export const getSeriesInfo = ID => async dispatch => {
   dispatch({
     type: SERIES_LOADING
@@ -130,7 +140,10 @@ export const getSeriesInfo = ID => async dispatch => {
   }
 };
 
-/***  Tar inn en liste med tupler(ID, mediaType) og spør etter info om hver film/serie */
+/***  
+ *  Takes inn a list of mediaItem tuples(ID, mediaType) and then asks for more details about each movie/series
+ *  Nothing is returned if something goes wrong
+ */
 export const getListToDetails = (mediums, list) => async dispatch => {
   dispatch({
     type: LIST_DETAILS_LOADING

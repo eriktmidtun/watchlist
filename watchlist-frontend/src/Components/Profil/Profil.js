@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-/* Komponeter */
+/* Components */
 import Liste from "./Liste";
 
 /* Styling */
@@ -9,11 +9,14 @@ import { Row, Col, Card } from "react-bootstrap";
 /* Redux */
 import { connect } from "react-redux";
 
-/* Viser en brukerprofil, samt dens lister */
+/*** 
+ * Renders a user's profile with info about the user.
+ * Render the user's associated lists
+ */
 class Profil extends Component {
   render() {
     const { user } = this.props.auth;
-    const følgere = "N/A"; //må kobles opp med backend etter hvert
+    const følgere = "N/A"; //Needs to be connected to backend later.
     const følger = "N/A";
     return (
       <React.Fragment>

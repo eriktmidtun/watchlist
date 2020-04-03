@@ -1,13 +1,20 @@
 import React from "react";
-import { Card } from "react-bootstrap/";
-import MediaItem from "./MediaItem";
 
+/* Styling */
+import { Card } from "react-bootstrap/";
+
+/* Components */
+import MediaItem from "./MediaItem";
 import { Loader } from "../Common/Loader";
 
+/* Redux */
 import { connect } from "react-redux";
 import { getListToDetails } from "../../actions/TheMovieDB";
 import { getBackendMediaID } from "../../actions/lists";
 
+/*** 
+ * List starts the fetching of list data, and then renders them out.
+ */
 class Liste extends React.Component {
   componentDidMount() {
     this.props.getBackendMediaID(this.props.apiUrl);

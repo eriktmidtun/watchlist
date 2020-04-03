@@ -12,7 +12,7 @@ import {
 } from "./types";
 import { backendBaseURL } from "./constants";
 
-/* Spør server om brukerdata */
+/*** Asks the server for userdata */
 export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
@@ -45,7 +45,7 @@ export const loadUser = () => async (dispatch, getState) => {
   }
 };
 
-/* Registrer bruker */
+/*** Registers user based on form data*/
 export const register = ({
   email,
   password,
@@ -71,7 +71,7 @@ export const register = ({
     });
 
     if (res.status !== 200) {
-      //noe gikk galt
+      //something went wrong
       throw res;
     }
     const data = await res.json();
@@ -80,7 +80,7 @@ export const register = ({
       payload: data
     });
   } catch (err) {
-    const response = await err.json(); //ta ut melding fra respons fra server
+    const response = await err.json(); //extracts data from server data
     dispatch({
       type: REGISTER_FAIL
     });
@@ -88,7 +88,7 @@ export const register = ({
   }
 };
 
-/* Logg inn bruker */
+/***  Login the user based on username and password. dispatches error massage if not correct */
 export const login = ({ username, password }) => async dispatch => {
   const body = JSON.stringify({ username, password });
 
@@ -117,8 +117,7 @@ export const login = ({ username, password }) => async dispatch => {
   }
 };
 
-/* Logg ut bruker
- vi forventer ikke svar */
+/*** log the user out. We dont expact any respons from the server*/
 export const logout = () => async (dispatch, getState) => {
   const token = tokenConfig(getState);
 
@@ -137,7 +136,7 @@ export const logout = () => async (dispatch, getState) => {
   });
 };
 
-// helper function
+/*** returns the token, if it exists*/
 export const tokenConfig = getState => {
   const token = getState().auth.token;
   return token;

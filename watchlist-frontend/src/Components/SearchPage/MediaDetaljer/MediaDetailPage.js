@@ -19,8 +19,7 @@ import {
   deleteMediaFromList
 } from "../../../actions/lists.js";
 
-/* rendrer en enkelt serieoversikt */
-
+/* Renders a overview of the given series */
 const serieDetails = mediumDetails => {
   return (
     <React.Fragment>
@@ -60,7 +59,7 @@ const serieDetails = mediumDetails => {
   );
 };
 
-/* rendrer en enkelt filmoversikt */
+/* renders a overview of the given movie */
 const filmDetails = mediumDetails => {
   return (
     <React.Fragment>
@@ -96,6 +95,10 @@ const filmDetails = mediumDetails => {
   );
 };
 
+/*** 
+ * Renders a overview of a movie/series.
+ * Users can see details of the movie/series and add it to their lists.
+ */
 class MediaDetailPage extends Component {
   constructor(props) {
     super(props);
@@ -122,7 +125,7 @@ class MediaDetailPage extends Component {
     this.props.isMediaInHW(mediaID);
   }
 
-  /* utfører søking om query-del av URL oppdateres */
+  /* updates the movie/series based on the url */
   componentDidUpdate(prevProps) {
     const path = prevProps.location.pathname.split("/");
     const mediaType = path[1];
@@ -195,7 +198,7 @@ class MediaDetailPage extends Component {
                         Skal se
                       </Button>
                     )}
-                    {//knapp for skal se
+                    {//button for havewatched
                     this.props.isInHaveWatched ? (
                       <Button
                         className="btn-success"
@@ -231,7 +234,7 @@ class MediaDetailPage extends Component {
                       rounded
                     />
                   </Col>
-                  <Col>
+                  <Col> {/* movies and series have different object attributes. Need to be rendered differently */}
                     {this.state.mediaType === "filmer"
                       ? filmDetails(this.props.mediumDetails)
                       : serieDetails(this.props.mediumDetails)}

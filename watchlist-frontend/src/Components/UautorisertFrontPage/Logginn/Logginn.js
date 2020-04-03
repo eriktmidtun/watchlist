@@ -15,10 +15,13 @@ import {
   BackendResponsMeldingsboks
 } from "../ReduxFormContainers";
 
-/* Valideringer */
+/* Validations */
 import { required, minLength3 } from "../ValideringsFunksjoner";
 
-/* Her bruker vi redux-form for å gjøre ting mye lettere sammen med react-redux */
+/*** 
+ * Loginform 
+ * Handles the login process with validations and displaying validation errors
+*/
 class Logginn extends Component {
   onSubmit = formValues => {
     this.props.login(formValues);

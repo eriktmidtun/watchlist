@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-/* Komponenter */
+/* Components */
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import DropdownButton from "./DropdownButton";
@@ -15,10 +15,15 @@ import { LinkContainer } from "react-router-bootstrap";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 
+/*** 
+ * Navigationbar.
+ * Is always visible on top of the page.
+ * Changes depending on logged in or out
+ */
 class Navigeringsbar extends Component {
   render() {
     const { user, isAuthenticated } = this.props.auth;
-    /* Hva som vises om brukeren er logget inn */
+    /* Renders if not logged in */
     const unauthorizedLinks = () => {
       return (
         <Nav className="ml-auto">
