@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 /* Components */
-import Liste from "./Liste";
+import List from "./List";
 
 /* Styling */
 import { Row, Col, Card } from "react-bootstrap";
@@ -34,12 +34,12 @@ class Profil extends Component {
         </Row>
         <Row className="justify-content-center">
           <Col xs={{ order: 2, span: "12" }} lg={{ order: 1, span: "6" }}>
-            <Liste listeNavn={"Skal se"} apiUrl={"wantToWatch"}>
+            <List listeNavn={"Skal se"} apiUrl={"wantToWatch"}>
               {" "}
-            </Liste>
+            </List>
           </Col>
           <Col xs={{ order: 1, span: "12" }} lg={{ order: 2, span: "6" }}>
-            <Liste listeNavn={"Har sett"} apiUrl={"haveWatched"}></Liste>
+            <List listeNavn={"Har sett"} apiUrl={"haveWatched"}></List>
           </Col>
         </Row>
       </React.Fragment>

@@ -8,7 +8,7 @@ import { Link, Redirect } from "react-router-dom";
 
 /* Redux */
 import { connect } from "react-redux";
-import { login } from "../../../actions/auth";
+import { register } from "../../../actions/auth";
 import { Field, reduxForm } from "redux-form";
 import {
   RenderField,
@@ -16,15 +16,22 @@ import {
 } from "../ReduxFormContainers";
 
 /* Validations */
-import { required, minLength3 } from "../ValideringsFunksjoner";
+import {
+  required,
+  minLength3,
+  maxLength100,
+  passwordsMatch,
+  isEmail,
+  firstCharCapital
+} from "../ValidationFunctions";
 
 /*** 
- * Loginform 
- * Handles the login process with validations and displaying validation errors
+ * registrationform 
+ * Handles the registration process with validations and displaying validation errors
 */
-class Logginn extends Component {
+class Registrering extends Component {
   onSubmit = formValues => {
-    this.props.login(formValues);
+    this.props.register(formValues);
   };
 
   render() {
@@ -34,16 +41,33 @@ class Logginn extends Component {
     return (
       <Card style={{ padding: "32px" }}>
         <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
-          Logg inn
+          Registrering
         </Card.Title>
+
         <Form noValidate onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Field
-            label="Epost"
-            name="username"
+            label="Fornavn"
+            name="first_name"
             type="text"
             component={RenderField}
+            placeholder="John"
+            validate={[required, minLength3, firstCharCapital, maxLength100]}
+          />
+          <Field
+            label="Etternavn"
+            name="last_name"
+            type="text"
+            component={RenderField}
+            placeholder="Doe"
+            validate={[required, minLength3, firstCharCapital, maxLength100]}
+          />
+          <Field
+            label="Epost"
+            name="email"
+            type="email"
+            component={RenderField}
             placeholder="navn@domene.no"
-            validate={[required, minLength3]}
+            validate={[required, isEmail]}
           />
           <Field
             label="Passord"
@@ -54,30 +78,37 @@ class Logginn extends Component {
             validate={[required, minLength3]}
           />
           <Field
+            label="Gjenta passord"
+            name="password2"
+            type="password"
+            component={RenderField}
+            placeholder="Passord"
+            validate={[required, passwordsMatch]}
+          />
+          <Field
             name="non_field_errors"
             component={BackendResponsMeldingsboks}
           />
           <Button variant="primary" type="submit" block>
-            Logg inn
+            Registrer deg
           </Button>
         </Form>
         <p style={{ textAlign: "right", marginTop: "10px" }}>
-          Mangler du konto?
-          <Link to="/registrering"> Registrering</Link>
+          Allerede en konto?
+          <Link to="/logginn"> Logg inn</Link>
         </p>
       </Card>
     );
   }
 }
 
-/* The props we would like from Redux Store. */
+/* Props we would like from Redux Store. */
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-Logginn = connect(mapStateToProps, { login })(Logginn);
+Registrering = connect(mapStateToProps, { register })(Registrering);
 
-/* Connects the Redux Form library to our Redux Store. */
 export default reduxForm({
-  form: "loginForm"
-})(Logginn);
+  form: "registerForm"
+})(Registrering);

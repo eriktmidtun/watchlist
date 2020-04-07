@@ -8,17 +8,17 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./Components/Common/PrivateRoute";
 import NotFound from "./Components/Common/NotFound";
-import UautorisertFrontPage from "./Components/UautorisertFrontPage/UautorisertFrontPage";
+import UnauthorizedFrontPage from "./Components/UnauthorizedFrontPage/UnauthorizedFrontPage";
 
 /* Components */
-import Registrering from "./Components/UautorisertFrontPage/Registrering/Registrering";
-import Logginn from "./Components/UautorisertFrontPage/Logginn/Logginn";
+import Registration from "./Components/UnauthorizedFrontPage/Registration/Registration";
+import Login from "./Components/UnauthorizedFrontPage/Login/Login";
 import FrontPage from "./Components/FrontPage/FrontPage";
-import Navigeringsbar from "./Components/Navigeringsbar/Navigeringsbar";
-import Profil from "./Components/Profil/Profil";
+import NavigationBar from "./Components/NavigationBar/NavigationBar";
+import Profil from "./Components/Profile/Profile";
 import SearchPage from "./Components/SearchPage/SearchPage";
 import Footer from "./Components/Footer/Footer";
-import MediaDetailPage from "./Components/SearchPage/MediaDetaljer/MediaDetailPage";
+import MediaDetailPage from "./Components/SearchPage/MediaDetails/MediaDetailPage";
 
 /* Redux */
 import { Provider } from "react-redux";
@@ -36,7 +36,7 @@ class App extends Component {
       <Provider store={store}>
         <Router history={history}>
           <div className="App">
-            <Navigeringsbar />
+            <NavigationBar />
             <Container style={{ padding: "30px" }}>
               <Switch>
                 <PrivateRoute exact path="/" component={FrontPage} />
@@ -52,15 +52,15 @@ class App extends Component {
                   path="/serier/:id"
                   component={MediaDetailPage}
                 />
-                <UautorisertFrontPage
+                <UnauthorizedFrontPage
                   exact
                   path="/logginn"
-                  component={Logginn}
+                  component={Login}
                 />
-                <UautorisertFrontPage
+                <UnauthorizedFrontPage
                   exact
                   path="/registrering"
-                  component={Registrering}
+                  component={Registration}
                 />
                 <Route component={NotFound} />
               </Switch>

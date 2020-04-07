@@ -20,7 +20,7 @@ import { logout } from "../../actions/auth";
  * Is always visible on top of the page.
  * Changes depending on logged in or out
  */
-class Navigeringsbar extends Component {
+class NavigationBar extends Component {
   render() {
     const { user, isAuthenticated } = this.props.auth;
     /* Renders if not logged in */
@@ -65,4 +65,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { logout })(Navigeringsbar);
+export default connect(mapStateToProps, { logout })(NavigationBar);

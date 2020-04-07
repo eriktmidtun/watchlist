@@ -7,7 +7,7 @@ import "./MediaDetailPage.css";
 /* Components. */
 import { Loader } from "../../Common/Loader";
 import NotFound from "../../Common/NotFound";
-import Anmeldelser from "./Anmeldelser";
+import Anmeldelser from "./Reviews";
 
 /* Redux */
 import { connect } from "react-redux";

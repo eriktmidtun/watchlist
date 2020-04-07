@@ -6,7 +6,7 @@ import { Card } from "react-bootstrap";
  * Renders reviews of a movie/series
  * This is not done
  */
-const Anmeldelser = () => {
+const Reviews = () => {
   return (
     <React.Fragment>
       <Card style={{ marginBottom: "32px", padding: "32px" }}>
@@ -19,4 +19,4 @@ const Anmeldelser = () => {
   );
 };
 
-export default Anmeldelser;
+export default Reviews;
