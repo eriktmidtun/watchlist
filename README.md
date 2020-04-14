@@ -35,14 +35,14 @@ For å kjøre frontend trenger man: [Node.js og NPM](https://nodejs.org/en/downl
 
 #### *Installasjon*
 Naviger til mappen *watchlist-frontend*
-
-    cd watchlist-frontend
-
+```bash
+cd watchlist-frontend
+```
 #### *Kjøring*
 Man kan kjøre frontend med kommandoen
-
-    npm start
-
+```bash
+npm start
+```
 ### Backend
 
 #### *Forutsetninger*
@@ -50,39 +50,41 @@ For å kjøre backend trenger man: [Python 3 og pip](https://www.python.org/down
 
 #### *Installasjon*
 Naviger til mappen *watchlist_backend*
-
-    cd watchlist_backend
-    
+```bash
+cd watchlist_backend
+```
 Installer virtualenv med pip
 
-    pip3 install virtualenv
+```bash
+pip3 install virtualenv
+```
 
 Aktiver virtualenvironment
 
-```
+```shell
 #For Windows
 
     virtualenv venv                      #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøre første gang.
     venv\Scripts\activate                #Starter virtualenvironment. Må gjøres hver gang man skal bruke backend.
 ```
-```
+```bash
 #For Mac/Linux
 
     virtualenv -p python3 venv           #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøre første gang.
     . venv/bin/activate                  #Starter virtualenvironment. Må gjøres hver gang man skal bruke backend.
 ```
 Installer pip pakker i virtualenv
-
-    pip install -r requirements.txt
-
+```bash
+pip install -r requirements.txt
+```
 Sett opp databasemodeller
-
-    python manage.py migrate
-
+```bash
+python manage.py migrate
+```
 Lag superuser/admin bruker
-
-    python manage.py createsuperuser
-
+```zsh
+python manage.py createsuperuser
+```
 
 #### *Kjøring*
 Om virtualenvironment er aktivert
@@ -97,80 +99,97 @@ Man kan da teste nettsiden ved å gå til `localhost:8000` eller `127.0.0.1:8000
 Vi har manuell deployment, med bygging og pulling fra server.
 
 ### Deploye til Frontend
-
-    ssh root@watchlist.social
-
+Koble til serveren
+```bash
+ssh root@watchlist.social
+```
 Oppgi passord
 
-Naviger til watchlist_frontend og kjør følgende kommandoer:
-
-    git pull origin master
-
-Oppdatere eventuelle linker og API-nøkler
-
-    `npm run-script build`
-
-Vi må så skru av den kjørende prosessen.
-
-Finner den kjørende prosessen og den tilhørende PID
-
-    lsof -i :3000
-
-avslutter prosessen med 
-    `kill <PID>`
-
-    serve -s -l 3000 build &
-
-disconnect fra server med ctrl + d
-
-### Deploye til Backend
-
-    ssh root@admin.watchlist.social
-
-Oppgi passord
+Naviger til watchlist-frontend 
+```bash
+cd ~/45/watchlist-frontend
+```
 
 Pull fra Gitlab
+```bash
+git pull origin master
+```
 
-    git pull origin master
-
-Naviger til watchlist-backend 
-
-    cd 45/watchlist_backend
-
-og kjør virtualenvironment
-
-    . venv/bin/activate
+Oppdatere eventuelle linker og API-nøkler
+```bash
+npm run-script build
+```
 
 Vi må så skru av den kjørende prosessen.
-
 Finner den kjørende prosessen og den tilhørende PID
+```bash
+lsof -i :3000
+```
 
-    lsof -i :8000
+Avslutter prosessen med
+```bash
+kill <PID>
+```
 
-avslutt prosessen med
+Starter så serveren på nytt med
+```bash
+serve -s -l 3000 build &
+```
 
-    kill <PID>
+Disconnect fra server med `ctrl + d`
 
+### Deploye til Backend
+Koble til serveren
+```bash
+ssh root@admin.watchlist.social
+```
+Oppgi passord
+
+Naviger til watchlist-backend 
+```bash
+cd ~/45/watchlist_backend
+```
+Pull fra Gitlab
+```bash
+git pull origin master
+```
+
+og kjør virtualenvironment
+```bash
+. venv/bin/activate
+```
+Vi må så skru av den kjørende prosessen.
+Finner den kjørende prosessen og den tilhørende PID
+```bash
+lsof -i :8000
+```
+
+Avslutt prosessen med
+```bash
+kill <PID>
+```
 Oppdater databasemodellene
+```bash
+python manage.py migrate
+```
 
-    python manage.py migrate
+Kjør server
+```bash
+python manage.py runserver 8000 &
+```
 
-kjør server
-
-    python manage.py runserver 8000 &
-
-disconnect fra server med ctrl + d
+Disconnect fra server med `ctrl + d`
 
 ## API Reference
 Ekstern API:
 
 Prosjektet bruker et API fra The Movie Database for å hente informasjon om
-filmer og serier. En innføring til dette finnes *link*
+filmer og serier. En innføring til dette finnes [link]()
 
 
 Intern API:
 Frontend kommuniserer med Backend ved hjelp av en REST arkitektur. Dokumentasjon
-til API finnes *link*. 
+til API finnes [link](). 
 
 ## License
 Kan generere dette på GitLab
