@@ -1,5 +1,17 @@
 # Watchlist
 
+* [Motivasjon](#motivasjon)
+* [Screenshots](#screenshots)
+* [Brukt tech/frameworks](#brukt-tech/frameworks)
+* [Installasjon og kjøring lokalt](#installasjon-og-kjøring-lokalt)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+* [Deployment](#deployment)
+  - [Deploye til Frontend](#deploye-til-frontend)
+  - [Deploye til Backend](#deploye-til-backend)
+* [API referanse](#api-Reference)
+
+
 ## Motivasjon
 Motivasjonen bak produktet kommer som følge av WatchList AS og deres ønske om en nettapplikasjon for deres tjenester.
 Produktet kombinerer film og serier med et sosialt nettverk, og skaper en møteplass for mennesker med en lidenskap for film og tv.
