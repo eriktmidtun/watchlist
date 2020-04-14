@@ -69,6 +69,7 @@ disconnect fra server med ctrl + d
 
 ## API Reference
 Ekstern API:
+
 Prosjektet bruker et API fra The Movie Database for å hente informasjon om filmer og serier. En innføring til dette finnes <link>
 
 
