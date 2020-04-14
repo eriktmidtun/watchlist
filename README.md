@@ -32,24 +32,29 @@ Clone Gitlabs repository til egen PC og naviger inn i mappen 45.
 #### *Forutsetninger*
 For å kjøre frontend trenger man: [Node.js og NPM](https://nodejs.org/en/download/).
 
-
 #### *Installasjon*
-Naviger til mappen *watchlist-frontend*
+Naviger til mappen *45/watchlist-frontend*
 ```bash
 cd watchlist-frontend
+```
+Installer pakker.
+```bash
+npm install
 ```
 #### *Kjøring*
 Man kan kjøre frontend med kommandoen
 ```bash
 npm start
 ```
+
+
 ### __Backend__
 
 #### *Forutsetninger*
 For å kjøre backend trenger man: [Python 3 og pip](https://www.python.org/downloads/).
 
 #### *Installasjon*
-Naviger til mappen *watchlist_backend*
+Naviger til mappen *45/watchlist_backend*
 ```bash
 cd watchlist_backend
 ```
@@ -60,17 +65,16 @@ pip3 install virtualenv
 ```
 
 Aktiver virtualenvironment
-
-```shell
+```bash
 #For Windows
 
-    virtualenv venv                      #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøre første gang.
+    virtualenv venv                      #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøres første gang.
     venv\Scripts\activate                #Starter virtualenvironment. Må gjøres hver gang man skal bruke backend.
 ```
 ```bash
 #For Mac/Linux
 
-    virtualenv -p python3 venv           #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøre første gang.
+    virtualenv -p python3 venv           #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøres første gang.
     . venv/bin/activate                  #Starter virtualenvironment. Må gjøres hver gang man skal bruke backend.
 ```
 Installer pip pakker i virtualenv
@@ -82,12 +86,12 @@ Sett opp databasemodeller
 python manage.py migrate
 ```
 Lag superuser/admin bruker
-```zsh
+```bash
 python manage.py createsuperuser
 ```
 
 #### *Kjøring*
-Om virtualenvironment er aktivert
+Om virtualenvironment er aktivert og man er i mappen *45/watchlist_backend*
 
     python manage.py runserver
     
@@ -96,7 +100,7 @@ Man kan da teste nettsiden ved å gå til `localhost:8000` eller `127.0.0.1:8000
 
 
 ## Deployment
-Vi har manuell deployment, med bygging og pulling fra server.
+Vi har manuell deployment, med bygging og pulling fra server. Oppsett av servere er beskrevet på wiki: [link]()
 
 ### Deploye til Frontend
 Koble til serveren
@@ -115,7 +119,9 @@ Pull fra Gitlab
 git pull origin master
 ```
 
-Oppdatere eventuelle linker og API-nøkler
+Oppdater eventuelle linker og API-nøkler
+
+Bygg prosjektet på nytt
 ```bash
 npm run-script build
 ```
@@ -126,7 +132,7 @@ Finner den kjørende prosessen og den tilhørende PID
 lsof -i :3000
 ```
 
-Avslutter prosessen med
+Avslutt den kjørende prosessen med
 ```bash
 kill <PID>
 ```
