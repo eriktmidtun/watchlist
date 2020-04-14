@@ -54,16 +54,21 @@ Installer pakker.
 npm install
 ```
 #### *Kjøring*
-Man kan kjøre frontend med kommandoen
+Naviger til mappen `45/watchlist-frontend`
+
+Man kan da kjøre frontend med kommandoen
 ```bash
 npm start
 ```
+
+*For å kjøre frontend lokalt med remote backend kan man endre på backendBaseURL i `45/watchlist-frontend/src/actions/constants.js` til `https://admin.watchlist.social`.
+Her kan man også endre API-key.*
 
 
 ### __Backend__
 
 #### *Forutsetninger*
-For å kjøre backend trenger man: [Python 3 og pip](https://www.python.org/downloads/).
+For å kjøre backend lokalt trenger man: [Python 3 og pip](https://www.python.org/downloads/).
 
 #### *Installasjon*
 Naviger til mappen *45/watchlist_backend*
