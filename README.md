@@ -11,12 +11,18 @@ nettapplikasjon for deres tjenester. Produktet kombinerer...
 *bilder*
 
 ## Brukt tech/framework
-*liste*
+| Frontend        | Backend               | Database | Eksternt API       | Servere                               |
+|-----------------|-----------------------|----------|--------------------|---------------------------------------|
+| [ReactJS](https://reactjs.org/)         | [Django 3](https://docs.djangoproject.com/en/3.0/)       | SQLite3  | [The Movie Database](https://developers.themoviedb.org/3/) | [Digital Ocean Virtual Private Servers](https://www.digitalocean.com/products/droplets/) |
+| [React Redux](https://react-redux.js.org/)           | [Django Rest Framework](https://www.django-rest-framework.org/) |          |                    | Nginx                                 |
+| [Bootstrap-React](https://react-bootstrap.github.io/) |                       |          |                    |                                       |
+| [React-Router](https://reacttraining.com/react-router/web)    |                       |          |                    |                                       |
 
-Ytterligere pakker til frontend finnes i watchlist-frontend/package.json *link*
+Alle pakker og avhengighter for koden:
 
-Ytterligere pakker til backend finnes i watchlist_backend/requirements.txt
-*link*
+__Backend__ *[requirements.txt](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/blob/master/watchlist_backend/requirements.txt)*
+
+__Frontend__ *[package.json](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/blob/master/watchlist-frontend/package.json)*
 
 ## Installasjon og kjøring lokalt
 Denne seksjonen beskriver hvordan man kloner og setter opp produktet lokalt på
