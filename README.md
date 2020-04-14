@@ -35,7 +35,7 @@ __Frontend__ - *[package.json](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-
 
 ## Installasjon og kjøring lokalt
 Denne seksjonen beskriver hvordan man setter opp produktet lokalt på
-egen datamaskin. Produktet er delt opp i to hovedmoduler: en for frontend og en for backend.
+egen datamaskin. Produktet er delt opp i to hovedmoduler: én for frontend og én for backend.
 
 Clone Gitlabs repository til egen PC og naviger inn i mappen 45.
 
@@ -56,12 +56,12 @@ npm install
 #### *Kjøring*
 Naviger til mappen `45/watchlist-frontend`.
 
-Man kan da kjøre frontend med kommandoen
+Man kan da kjøre frontenden med kommandoen
 ```bash
 npm start
 ```
 
-*For å kjøre frontend lokalt med remote backend kan man endre på backendBaseURL i `45/watchlist-frontend/src/actions/constants.js` til `https://admin.watchlist.social`.
+*For å kjøre frontenden lokalt med remote backend kan man endre på backendBaseURL i `45/watchlist-frontend/src/actions/constants.js` til `https://admin.watchlist.social`.
 Her kan man også endre API-key.*
 
 
