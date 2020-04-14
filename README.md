@@ -17,7 +17,7 @@ Motivasjonen bak produktet kommer som følge av WatchList AS og deres ønske om 
 Produktet kombinerer film og serier med et sosialt nettverk, og skaper en møteplass for mennesker med en lidenskap for film og tv.
 
 ## Screenshots
-[bilder](/bilder)
+[bilder](/screenshots)
 
 ## Brukt tech/framework
 | Frontend (Javascript)        | Backend  (Python)             | Database | Eksternt API       | Servere                               |
