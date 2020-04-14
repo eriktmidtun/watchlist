@@ -100,7 +100,7 @@ Man kan da teste nettsiden ved å gå til `localhost:8000` eller `127.0.0.1:8000
 
 
 ## Deployment
-Vi har manuell deployment, med bygging og pulling fra server. Oppsett av servere er beskrevet på wiki: [link]()
+Vi har manuell deployment, med bygging og pulling fra server. Oppsett av servere er beskrevet på [wiki](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/wikis/Server/Oppsett-av-server)
 
 ### Deploye til Frontend
 Koble til serveren
@@ -187,15 +187,13 @@ python manage.py runserver 8000 &
 Disconnect fra server med `ctrl + d`
 
 ## API Reference
-Ekstern API:
-
+*Ekstern API:* 
 Prosjektet bruker et API fra The Movie Database for å hente informasjon om
-filmer og serier. En innføring til dette finnes [link]()
+filmer og serier. En innføring til dette finnes [på nettsiden deres](https://developers.themoviedb.org/3/)
 
-
-Intern API:
+*Intern API:* 
 Frontend kommuniserer med Backend ved hjelp av en REST arkitektur. Dokumentasjon
-til API finnes [link](). 
+til interne API finnes på [Wiki](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/wikis/API). 
 
 ## License
 Kan generere dette på GitLab
