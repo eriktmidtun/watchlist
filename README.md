@@ -18,7 +18,7 @@ git pull origin master
 
 Oppdatere eventuelle linker og API-nøkler
 
-'npm run-script build'
+`npm run-script build`
 
 Vi må så skru av den kjørende prosessen.
 
@@ -26,7 +26,7 @@ Finner den kjørende prosessen og den tilhørende PID
 
 lsof -i :3000
 
-avslutter prosessen med 'kill <PID>''
+avslutter prosessen med `kill <PID>`
 
 serve -s -l 3000 build &
 
