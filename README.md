@@ -1,11 +1,8 @@
 # Watchlist
-Watchlist.social er et produkt for alle som elsker filmer/serier, og som ønsker
-å formidle/dele sitt engasjement. En bruker oppretter en profil og kan danne et
-sosialt nettverk med andre brukere i form av deling og anmelding av filmer.
 
 ## Motivasjon
-Motivasjonen bak produktet kommer som følge av WatchList AS og deres ønske om en
-nettapplikasjon for deres tjenester. Produktet kombinerer...
+Motivasjonen bak produktet kommer som følge av WatchList AS og deres ønske om en nettapplikasjon for deres tjenester.
+Produktet kombinerer film og serier med et sosialt nettverk, og skaper en møteplass for mennesker med en lidenskap for film og tv.
 
 ## Screenshots
 *bilder*
