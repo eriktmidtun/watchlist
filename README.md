@@ -20,7 +20,7 @@ Produktet kombinerer film og serier med et sosialt nettverk, og skaper en møtep
 [screenshots](/screenshots)
 
 ## Brukt tech/framework
-| Frontend (Javascript)        | Backend  (Python)             | Database | Eksternt API       | Servere                               |
+| Frontend (JavaScript)        | Backend  (Python)             | Database | Eksternt API       | Servere                               |
 |-----------------|-----------------------|----------|--------------------|---------------------------------------|
 | [ReactJS](https://reactjs.org/)         | [Django 3](https://docs.djangoproject.com/en/3.0/)       | SQLite3  | [The Movie Database](https://developers.themoviedb.org/3/) | [Digital Ocean Virtual Private Servers](https://www.digitalocean.com/products/droplets/) |
 | [React Redux](https://react-redux.js.org/)           | [Django Rest Framework](https://www.django-rest-framework.org/) |          |                    | Nginx                                 |
@@ -29,9 +29,9 @@ Produktet kombinerer film og serier med et sosialt nettverk, og skaper en møtep
 
 Alle pakker og avhengighter for koden:
 
-__Backend__ *[requirements.txt](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/blob/master/watchlist_backend/requirements.txt)*
+__Backend__ - *[requirements.txt](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/blob/master/watchlist_backend/requirements.txt)*
 
-__Frontend__ *[package.json](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/blob/master/watchlist-frontend/package.json)*
+__Frontend__ - *[package.json](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/blob/master/watchlist-frontend/package.json)*
 
 ## Installasjon og kjøring lokalt
 Denne seksjonen beskriver hvordan man setter opp produktet lokalt på
@@ -42,19 +42,19 @@ Clone Gitlabs repository til egen PC og naviger inn i mappen 45.
 ### __Frontend__
 
 #### *Forutsetninger*
-For å kjøre frontend trenger man: [Node.js og NPM](https://nodejs.org/en/download/).
+For å kjøre frontenden trenger man: [Node.js og NPM](https://nodejs.org/en/download/).
 
 #### *Installasjon*
 Naviger til mappen *45/watchlist-frontend*
 ```bash
 cd watchlist-frontend
 ```
-Installer pakker.
+Installer pakker
 ```bash
 npm install
 ```
 #### *Kjøring*
-Naviger til mappen `45/watchlist-frontend`
+Naviger til mappen `45/watchlist-frontend`.
 
 Man kan da kjøre frontend med kommandoen
 ```bash
@@ -68,7 +68,7 @@ Her kan man også endre API-key.*
 ### __Backend__
 
 #### *Forutsetninger*
-For å kjøre backend lokalt trenger man: [Python 3 og pip](https://www.python.org/downloads/).
+For å kjøre backenden lokalt trenger man: [Python 3 og pip](https://www.python.org/downloads/).
 
 #### *Installasjon*
 Naviger til mappen *45/watchlist_backend*
@@ -81,7 +81,7 @@ Installer virtualenv med pip
 pip3 install virtualenv
 ```
 
-Aktiver virtualenvironment
+Aktiver virtual environment
 ```bash
 #For Windows
 
@@ -94,7 +94,7 @@ venv\Scripts\activate                #Starter virtualenvironment. Må gjøres hv
 virtualenv -p python3 venv           #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøres første gang.
 . venv/bin/activate                  #Starter virtualenvironment. Må gjøres hver gang man skal bruke backend.
 ```
-Installer pip pakker i virtualenv
+Installer pip-pakker i virtualenv
 ```bash
 pip install -r requirements.txt
 ```
@@ -102,7 +102,7 @@ Sett opp databasemodeller
 ```bash
 python manage.py migrate
 ```
-Lag superuser/admin bruker
+Lag superuser/admin-bruker
 ```bash
 python manage.py createsuperuser
 ```
@@ -112,19 +112,19 @@ Om virtualenvironment er aktivert og man er i mappen *45/watchlist_backend*
 
     python manage.py runserver
     
-serveren vil da starte på port 8000.
+Serveren vil da starte på port 8000.
 Man kan da teste nettsiden ved å gå til `localhost:8000` eller `127.0.0.1:8000` i nettleseren.
 
 
 ## Deployment
-Vi har manuell deployment, med bygging og pulling fra server. Oppsett av servere er beskrevet på [wiki](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/wikis/Server/Oppsett-av-server)
+Vi har manuell deployment, med bygging og pulling fra server. Oppsett av servere er beskrevet på [wikien](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/wikis/Server/Oppsett-av-server).
 
 ### Deploye til Frontend
 Koble til serveren
 ```bash
 ssh root@watchlist.social
 ```
-Oppgi passord
+Oppgi passord.
 
 Naviger til watchlist-frontend 
 ```bash
@@ -136,7 +136,7 @@ Pull fra Gitlab
 git pull origin master
 ```
 
-Oppdater eventuelle linker og API-nøkler
+Oppdater eventuelle linker og API-nøkler.
 
 Bygg prosjektet på nytt
 ```bash
@@ -159,14 +159,14 @@ Starter så serveren på nytt med
 serve -s -l 3000 build &
 ```
 
-Disconnect fra server med `ctrl + d`
+Disconnect fra server med `ctrl + d`.
 
 ### Deploye til Backend
 Koble til serveren
 ```bash
 ssh root@admin.watchlist.social
 ```
-Oppgi passord
+Oppgi passord.
 
 Naviger til watchlist-backend 
 ```bash
@@ -177,7 +177,7 @@ Pull fra Gitlab
 git pull origin master
 ```
 
-og kjør virtualenvironment
+Og kjør virtual environment
 ```bash
 . venv/bin/activate
 ```
@@ -201,16 +201,13 @@ Kjør server
 python manage.py runserver 8000 &
 ```
 
-Disconnect fra server med `ctrl + d`
+Disconnect fra server med `ctrl + d`.
 
 ## API Reference
 *Ekstern API:* 
 Prosjektet bruker et API fra The Movie Database for å hente informasjon om
-filmer og serier. En innføring til dette finnes [på nettsiden deres](https://developers.themoviedb.org/3/)
+filmer og serier. En innføring til dette finnes på [nettsiden deres](https://developers.themoviedb.org/3/).
 
 *Intern API:* 
-Frontend kommuniserer med Backend ved hjelp av en REST arkitektur. Dokumentasjon
-til interne API finnes på [Wiki](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/wikis/API). 
-
-## License
-Kan generere dette på GitLab
+Frontend kommuniserer med Backend ved hjelp av en REST-arkitektur. Dokumentasjon
+til det interne API finnes på [wikien](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/wikis/API).
