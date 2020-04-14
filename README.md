@@ -2,14 +2,14 @@
 
 * [Motivasjon](#motivasjon)
 * [Screenshots](#screenshots)
-* [Brukt tech/frameworks](#brukt-tech/frameworks)
+* [Brukt tech/framework](#brukt-techframework)
 * [Installasjon og kjøring lokalt](#installasjon-og-kjøring-lokalt)
   - [Frontend](#frontend)
   - [Backend](#backend)
 * [Deployment](#deployment)
   - [Deploye til Frontend](#deploye-til-frontend)
   - [Deploye til Backend](#deploye-til-backend)
-* [API referanse](#api-Reference)
+* [API referanse](#api-reference)
 
 
 ## Motivasjon
