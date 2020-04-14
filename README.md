@@ -19,12 +19,19 @@ git pull origin master
 Oppdatere eventuelle linker og API-nøkler
 
 npm run-script build
+
 Vi må så skru av den kjørende prosessen.
+
 Finner den kjørende prosessen og den tilhørende PID
+
 lsof -i :3000
+
 avslutter prosessen med
+
 kill <PID>
+
 serve -s -l 3000 build &
+
 disconnect fra server med ctrl + d
 
 ### Deploye til Backend
@@ -39,15 +46,25 @@ cd 45/watchlist_backend
 og kjør virtualenvironment
 
 . venv/bin/activate
+
 Vi må så skru av den kjørende prosessen.
+
 Finner den kjørende prosessen og den tilhørende PID
+
 lsof -i :8000
+
 avslutt prosessen med
+
 kill <PID>
+
 Oppdater databasemodellene
+
 python manage.py migrate
+
 kjør server
+
 python manage.py runserver 8000 &
+
 disconnect fra server med ctrl + d
 
 ## API Reference
