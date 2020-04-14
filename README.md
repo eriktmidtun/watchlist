@@ -27,7 +27,7 @@ egen datamaskin. Produktet er delt opp i to hovedmoduler: en for frontend og en 
 
 Clone Gitlabs repository til egen PC og naviger inn i mappen 45.
 
-### Frontend
+### __Frontend__
 
 #### *Forutsetninger*
 For å kjøre frontend trenger man: [Node.js og NPM](https://nodejs.org/en/download/).
@@ -43,7 +43,7 @@ Man kan kjøre frontend med kommandoen
 ```bash
 npm start
 ```
-### Backend
+### __Backend__
 
 #### *Forutsetninger*
 For å kjøre backend trenger man: [Python 3 og pip](https://www.python.org/downloads/).
