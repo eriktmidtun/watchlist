@@ -80,14 +80,14 @@ Aktiver virtualenvironment
 ```bash
 #For Windows
 
-    virtualenv venv                      #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøres første gang.
-    venv\Scripts\activate                #Starter virtualenvironment. Må gjøres hver gang man skal bruke backend.
+virtualenv venv                      #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøres første gang.
+venv\Scripts\activate                #Starter virtualenvironment. Må gjøres hver gang man skal bruke backend.
 ```
 ```bash
 #For Mac/Linux
 
-    virtualenv -p python3 venv           #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøres første gang.
-    . venv/bin/activate                  #Starter virtualenvironment. Må gjøres hver gang man skal bruke backend.
+virtualenv -p python3 venv           #Lager en mappe som inneholder virtualenvironment. Trengs bare å gjøres første gang.
+. venv/bin/activate                  #Starter virtualenvironment. Må gjøres hver gang man skal bruke backend.
 ```
 Installer pip pakker i virtualenv
 ```bash
