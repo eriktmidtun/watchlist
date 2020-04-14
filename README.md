@@ -18,6 +18,7 @@ Produktet kombinerer film og serier med et sosialt nettverk, og skaper en møtep
 
 ## Screenshots
 *bilder*
+[WL](/watchlist-frontend)
 
 ## Brukt tech/framework
 | Frontend (Javascript)        | Backend  (Python)             | Database | Eksternt API       | Servere                               |
