@@ -93,7 +93,7 @@ Installer virtualenv med pip
 pip3 install virtualenv
 ```
 
-Aktiver virtual environment
+Aktiver virtual environment (gjøres ulikt på windows og Mac/linux)
 ```bash
 #For Windows
 
