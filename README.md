@@ -18,7 +18,8 @@ Produktet kombinerer film og serier med et sosialt nettverk, og skaper en møtep
 
 ## Screenshots
 
-![image](/uploads/9cd615e86f533740afe7f20adce9bbdf/image.png)
+![image](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/wikis/uploads/9cd615e86f533740afe7f20adce9bbdf/image.png)
+
 *Watchlist Logo*
 
 ![image](/uploads/352796ed6826b03edcda4141ea2abbda/Skjermbilde_2020-03-31_kl._13.34.25.png)
