@@ -17,7 +17,18 @@ Motivasjonen bak produktet kommer som følge av WatchList AS og deres ønske om 
 Produktet kombinerer film og serier med et sosialt nettverk, og skaper en møteplass for mennesker med en lidenskap for film og tv.
 
 ## Screenshots
-[screenshots](/screenshots)
+
+![image](/uploads/9cd615e86f533740afe7f20adce9bbdf/image.png)
+*Watchlist Logo*
+
+![image](/uploads/352796ed6826b03edcda4141ea2abbda/Skjermbilde_2020-03-31_kl._13.34.25.png)
+*Forside når en ikke er logget inn*
+
+![image](/uploads/67bcb29d9566169292f64a0e48b7518c/Skjermbilde_2020-04-01_kl._13.28.25.png)
+*Søkeside etter bruker har brukt søkebaren*
+
+![image](/uploads/e1f775b968b35788c0ce646198befd88/Skjermbilde_2020-04-01_kl._20.16.30.png)
+*Profilside*
 
 ## Brukt tech/framework
 | Frontend (JavaScript)        | Backend  (Python)             | Database | Eksternt API       | Servere                               |
