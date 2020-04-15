@@ -36,7 +36,7 @@ Produktet kombinerer film og serier med et sosialt nettverk, og skaper en møtep
 |-----------------|-----------------------|----------|--------------------|---------------------------------------|
 | [ReactJS](https://reactjs.org/)         | [Django 3](https://docs.djangoproject.com/en/3.0/)       | SQLite3  | [The Movie Database](https://developers.themoviedb.org/3/) | [Digital Ocean Virtual Private Servers](https://www.digitalocean.com/products/droplets/) |
 | [React Redux](https://react-redux.js.org/)           | [Django Rest Framework](https://www.django-rest-framework.org/) |          |                    | Nginx                                 |
-| [Bootstrap-React](https://react-bootstrap.github.io/) |                       |          |                    |                                       |
+| [Bootstrap-React](https://react-bootstrap.github.io/) |                       |          |                    | Let's Encrypt og Certbot (SSL)                       |
 | [React-Router](https://reacttraining.com/react-router/web)    |                       |          |                    |                                       |
 
 Alle pakker og avhengighter for koden:
