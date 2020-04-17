@@ -220,6 +220,7 @@ Disconnect fra server med `ctrl + d`.
 *Ekstern API:* 
 Prosjektet bruker et API fra The Movie Database for å hente informasjon om
 filmer og serier. En innføring til dette finnes på [nettsiden deres](https://developers.themoviedb.org/3/).
+Vi bruker en utviklings API-key som er åpen for bruk i utvikling. Denne ligger i [Constants.js](watchlist-frontend/src/actions/constants.js).
 
 *Intern API:* 
 Frontend kommuniserer med Backend ved hjelp av en REST-arkitektur. Dokumentasjon
