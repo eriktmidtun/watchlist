@@ -223,3 +223,9 @@ filmer og serier. En innføring til dette finnes på [nettsiden deres](https://d
 *Intern API:* 
 Frontend kommuniserer med Backend ved hjelp av en REST-arkitektur. Dokumentasjon
 til det interne API finnes på [wikien](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/45/-/wikis/API).
+
+## Lisens
+
+Vi bruker MITs Open Source lisens
+
+[MIT Lisens](LICENSE)
