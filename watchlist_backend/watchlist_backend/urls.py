@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 
@@ -20,6 +21,5 @@ urlpatterns = [
     path('', admin.site.urls),
     path('api/lists/', include('mediaItem.api.urls')),
     path('api/auth/', include('accounts.api.urls')),
-    
-    #Trengs det en Path til movieItems???
+    # TODO: Determine wether or not a path is required for movieItems.
 ]

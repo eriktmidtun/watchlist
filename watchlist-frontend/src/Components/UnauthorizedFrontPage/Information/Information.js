@@ -1,9 +1,12 @@
 import React from "react";
+
+/* Styling */
 import { Card } from "react-bootstrap/";
 
-const Informasjon = () => {
+/* Static Information display for the unauthorized frontpage */
+const Information = () => {
   return (
-    <Card style={{padding: "32px" }}>
+    <Card style={{ padding: "32px" }}>
       <Card.Title style={{ textAlign: "center", fontSize: "2em" }}>
         Om WatchList
       </Card.Title>
@@ -12,4 +15,4 @@ const Informasjon = () => {
   );
 };
 
-export default Informasjon;
+export default Information;
