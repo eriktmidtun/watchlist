@@ -10,6 +10,7 @@
   - [Deploye til Frontend](#deploye-til-frontend)
   - [Deploye til Backend](#deploye-til-backend)
 * [API referanse](#api-reference)
+* [Lisens](#lisens)
 
 
 ## Motivasjon
