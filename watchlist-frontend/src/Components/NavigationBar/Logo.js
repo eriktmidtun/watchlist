@@ -1,11 +1,17 @@
 import React from "react";
+/* Images */
 import logo from "../../logo.svg";
+/* Styling */
 import "./Logo.css";
 import { Navbar } from "react-bootstrap";
 
 /* Routing */
 import { Link } from "react-router-dom";
 
+/*** 
+ * Renders the Watchlist logo and name
+ * Also functions as a link to "/"
+ */
 const Logo = () => {
   return (
     <Link to="/">

@@ -15,11 +15,14 @@ import {
   BackendResponsMeldingsboks
 } from "../ReduxFormContainers";
 
-/* Valideringer */
-import { required, minLength3 } from "../ValideringsFunksjoner";
+/* Validations */
+import { required, minLength3 } from "../ValidationFunctions";
 
-/* Her bruker vi redux-form for å gjøre ting mye lettere sammen med react-redux */
-class Logginn extends Component {
+/*** 
+ * Loginform 
+ * Handles the login process with validations and displaying validation errors
+*/
+class Login extends Component {
   onSubmit = formValues => {
     this.props.login(formValues);
   };
@@ -67,14 +70,14 @@ class Logginn extends Component {
   }
 }
 
-/* Hvikle props vi vil ha fra redux store */
+/* The props we would like from Redux Store. */
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-Logginn = connect(mapStateToProps, { login })(Logginn);
+Login = connect(mapStateToProps, { login })(Login);
 
-/* Kobler til biblioteket reduxform til vår reduxstore */
+/* Connects the Redux Form library to our Redux Store. */
 export default reduxForm({
   form: "loginForm"
-})(Logginn);
+})(Login);

@@ -1,3 +1,5 @@
-from django.shortcuts import render
+"""
+Mostly empty but necessary Django file.
+"""
 
-# Create your views here.
+from django.shortcuts import render

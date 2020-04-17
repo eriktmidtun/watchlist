@@ -3,7 +3,7 @@ import React from "react";
 /* Styling */
 import { Form, Alert } from "react-bootstrap/";
 
-/* En container-komponent for validering med redux-form */
+/* A container component for validation with Redux Form. */
 export const RenderField = ({
   input,
   label,
@@ -28,7 +28,7 @@ export const RenderField = ({
   );
 };
 
-/* Komponent for å vise ffeilmeldinger fra server til brukeren */
+/* Component for showing error messages from the server to the user. */
 export const BackendResponsMeldingsboks = ({ meta: { error } }) => {
   return (
     <Alert variant={"danger"} style={{ display: error ? "Block" : "None" }}>

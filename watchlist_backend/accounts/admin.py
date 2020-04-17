@@ -1,3 +1,5 @@
-from django.contrib import admin
+"""
+Mostly empty but necessary Django file.
+"""
 
-# Register your models here.
+from django.contrib import admin

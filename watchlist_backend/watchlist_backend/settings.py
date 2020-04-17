@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,13 +40,9 @@ INSTALLED_APPS = [
     'knox',
     'accounts.apps.AccountsConfig',
     'mediaItem.apps.MediaitemConfig'
-    #trengs 'rest_framework',?
 ]
 
 REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': [  # remove
-    #     'rest_framework.permissions.AllowAny'
-    # ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'knox.auth.TokenAuthentication',
     ),

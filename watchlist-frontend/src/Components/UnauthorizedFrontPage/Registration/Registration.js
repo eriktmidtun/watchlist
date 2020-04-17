@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-/* styling */
+/* Styling */
 import { Card, Button, Form } from "react-bootstrap/";
 
 /* Routing */
@@ -15,7 +15,7 @@ import {
   BackendResponsMeldingsboks
 } from "../ReduxFormContainers";
 
-/* Valideringer */
+/* Validations */
 import {
   required,
   minLength3,
@@ -23,9 +23,12 @@ import {
   passwordsMatch,
   isEmail,
   firstCharCapital
-} from "../ValideringsFunksjoner";
+} from "../ValidationFunctions";
 
-/* Her bruker vi redux-form for å gjøre ting mye lettere sammen med react-redux */
+/*** 
+ * registrationform 
+ * Handles the registration process with validations and displaying validation errors
+*/
 class Registrering extends Component {
   onSubmit = formValues => {
     this.props.register(formValues);
@@ -99,7 +102,7 @@ class Registrering extends Component {
   }
 }
 
-/* Hvikle props vi vil ha fra redux store */
+/* Props we would like from Redux Store. */
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-/* Komponenter */
+/* Components */
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import DropdownButton from "./DropdownButton";
@@ -15,11 +15,15 @@ import { LinkContainer } from "react-router-bootstrap";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 
-class Navigeringsbar extends Component {
-
+/*** 
+ * Navigationbar.
+ * Is always visible on top of the page.
+ * Changes depending on logged in or out
+ */
+class NavigationBar extends Component {
   render() {
     const { user, isAuthenticated } = this.props.auth;
-    /* Hva som vises om brukeren er logget inn */
+    /* Renders if not logged in */
     const unauthorizedLinks = () => {
       return (
         <Nav className="ml-auto">
@@ -42,7 +46,7 @@ class Navigeringsbar extends Component {
         sticky="top"
         style={{ height: "60px" }}
       >
-        <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Logo />
         {isAuthenticated ? (
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -61,4 +65,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { logout })(Navigeringsbar);
+export default connect(mapStateToProps, { logout })(NavigationBar);

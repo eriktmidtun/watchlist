@@ -10,20 +10,18 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS
 } from "./types";
+import { backendBaseURL } from "./constants";
 
-/* Bytt denne addressen til http://admin.watchlist.social for å kjøre mot backend serveren vår */
-const baseURL = `http://localhost:8000`;
-
-/* Spør server om brukerdata */
+/* Requests user data from server. */
 export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   try {
     const token = tokenConfig(getState);
-    if(!token) {
-      throw Error("ingen token lagret");
+    if (!token) {
+      throw Error("No saved token.");
     }
-    const res = await fetch(baseURL + `/api/auth/user`, {
+    const res = await fetch(backendBaseURL + `/api/auth/user`, {
       method: "GET",
       mode: "cors",
       headers: {
@@ -47,7 +45,7 @@ export const loadUser = () => async (dispatch, getState) => {
   }
 };
 
-/* Registrer bruker */
+/*** Registers user based on form data*/
 export const register = ({
   email,
   password,
@@ -61,11 +59,11 @@ export const register = ({
     email: email,
     password: password
   };
-  // Request Body
+  // Request body.
   const body = JSON.stringify(formData);
 
   try {
-    const res = await fetch(baseURL + `/api/auth/register`, {
+    const res = await fetch(backendBaseURL + `/api/auth/register`, {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -73,7 +71,7 @@ export const register = ({
     });
 
     if (res.status !== 200) {
-      //noe gikk galt
+      // Something went wrong.
       throw res;
     }
     const data = await res.json();
@@ -82,7 +80,7 @@ export const register = ({
       payload: data
     });
   } catch (err) {
-    const response = await err.json(); //ta ut melding fra respons fra server
+    const response = await err.json(); // Extract the error messsage from the server response.
     dispatch({
       type: REGISTER_FAIL
     });
@@ -90,12 +88,12 @@ export const register = ({
   }
 };
 
-/* Logg inn bruker */
+/***  Login the user based on username and password. dispatches error massage if not correct */
 export const login = ({ username, password }) => async dispatch => {
   const body = JSON.stringify({ username, password });
 
   try {
-    const res = await fetch(baseURL +`/api/auth/login`, {
+    const res = await fetch(backendBaseURL + `/api/auth/login`, {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -104,7 +102,7 @@ export const login = ({ username, password }) => async dispatch => {
     const data = await res.json();
 
     if (res.status !== 200) {
-      //ting gikk ikke som planlagt
+      // Things did not work as expected.
       throw data;
     }
     dispatch({
@@ -119,12 +117,11 @@ export const login = ({ username, password }) => async dispatch => {
   }
 };
 
-/* Logg ut bruker
- vi forventer ikke svar */
+/* Log out user. We are not expecting a response. */
 export const logout = () => async (dispatch, getState) => {
   const token = tokenConfig(getState);
 
-  await fetch(baseURL +`/api/auth/logout`, {
+  await fetch(backendBaseURL + `/api/auth/logout`, {
     method: "POST",
     mode: "cors",
     headers: {
@@ -139,7 +136,7 @@ export const logout = () => async (dispatch, getState) => {
   });
 };
 
-// helper function
+/*** returns the token, if it exists*/
 export const tokenConfig = getState => {
   const token = getState().auth.token;
   return token;
